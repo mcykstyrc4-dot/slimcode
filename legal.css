@@ -90,6 +90,12 @@ p,ul,ol{margin:0}
   padding-top:1.25rem;border-top:1px solid var(--line-light);
 }
 .doc section h2 .n{color:var(--accent);margin-right:.45rem}
+/* Подзаголовок внутри раздела: «Пользователь имеет право» и подобные */
+.doc__sub{
+  font-size:.98rem;font-weight:700;margin-top:1.4rem;
+  color:var(--ink);letter-spacing:-.01em;
+}
+.doc section > .doc__sub:first-of-type{margin-top:.6rem}
 .doc section > * + *{margin-top:.75rem}   /* ровные отбивки между абзацами и списками */
 .doc section ul{padding-left:1.15rem;list-style:disc}
 .doc section ol{padding-left:1.3rem}
