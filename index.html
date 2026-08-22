@@ -1684,13 +1684,18 @@ section[id]{scroll-margin-top:80px}
 <script>
 /* =========================================================================
    JS — всё на нативных API, без библиотек.
-     1. Год в футере и звёзды в отзывах
+     1. Мелочи: год в футере
      2. Фон шапки при скролле + плавающая кнопка WhatsApp
      3. Мобильное меню
      4. Появление блоков при скролле (IntersectionObserver)
-     5. Анимация счётчиков в блоке цифр
+     5. Анимация цифр в блоке статистики
      6. Модальное окно записи (открытие с подстановкой услуги, фокус-ловушка)
-     7. Маска телефона и отправка заявки
+     7. Маска телефона
+     8. Отзывы звёздных клиентов и окно с роликом
+     9. Бизнес-мессенджер Jivo
+    10. Счётчики статистики и цели
+    11. Плавное раскрытие прайса
+    12. Проверка и отправка заявки
    ========================================================================= */
 (function () {
   'use strict';
@@ -1724,6 +1729,8 @@ section[id]{scroll-margin-top:80px}
      придётся отзывать. Используйте только как временное решение.
      ======================================================================= */
   var CONFIG = {
+    metrika: '',                  // номер счётчика Яндекс Метрики; пусто — не подключаем
+    ga: '',                       // идентификатор Google Analytics 4 (G-XXXXXXX); пусто — не подключаем
     jivoId: '',                   // идентификатор виджета Jivo; пусто — не подключаем
     whatsapp: '79112979428',      // номер WhatsApp для режима без сервера
     endpoint: '',                 // адрес обработчика; пусто — уходим в WhatsApp
@@ -2102,7 +2109,73 @@ section[id]{scroll-margin-top:80px}
     window.setTimeout(loadJivo, 8000);
   }
 
-  /* ---------- 10. Плавное раскрытие прайса --------------------------------
+  /* ---------- 10. Счётчики статистики --------------------------------------
+     Яндекс Метрика и Google Analytics подключаются только если в CONFIG выше
+     указаны номера. Оба тега грузим после события load: они не должны
+     соперничать за канал с первым экраном, а до конца загрузки уйти со
+     страницы посетитель практически не успевает.
+
+     ЗАМЕНИТЬ: CONFIG.metrika — номер счётчика из Метрики,
+               CONFIG.ga      — идентификатор ресурса GA4 вида G-XXXXXXX.
+     Политика конфиденциальности (п. 5.3) оба сервиса уже называет. */
+  function loadCounters() {
+    if (CONFIG.metrika) {
+      // Очередь вызовов и метка времени: их читает tag.js, когда загрузится
+      window.ym = window.ym || function () {
+        (window.ym.a = window.ym.a || []).push(arguments);
+      };
+      window.ym.l = 1 * new Date();
+      var m = document.createElement('script');
+      m.src = 'https://mc.yandex.ru/metrika/tag.js';
+      m.async = true;
+      document.head.appendChild(m);
+      window.ym(CONFIG.metrika, 'init', {
+        clickmap: true,             // карта кликов
+        trackLinks: true,           // переходы по внешним ссылкам
+        accurateTrackBounce: true,  // отказом считается уход раньше 15 секунд
+        webvisor: true              // запись действий на странице
+      });
+    }
+
+    if (CONFIG.ga) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      var g = document.createElement('script');
+      g.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(CONFIG.ga);
+      g.async = true;
+      document.head.appendChild(g);
+      window.gtag('js', new Date());
+      window.gtag('config', CONFIG.ga);
+    }
+  }
+
+  if (CONFIG.metrika || CONFIG.ga) {
+    if (document.readyState === 'complete') window.setTimeout(loadCounters, 0);
+    else window.addEventListener('load', function () { window.setTimeout(loadCounters, 0); });
+  }
+
+  /* Цель — событие в отчётах: заявка, звонок, переход в чат или в Dikidi.
+     Пока счётчиков нет, вызов просто ничего не делает. */
+  function goal(name) {
+    if (CONFIG.metrika && window.ym) window.ym(CONFIG.metrika, 'reachGoal', name);
+    if (CONFIG.ga && window.gtag) window.gtag('event', name);
+  }
+
+  /* Один обработчик на всю страницу: разбираем адрес ссылки и понимаем,
+     какое действие совершил посетитель. Отдельные обработчики на каждую
+     кнопку не нужны — ссылок с одним и тем же адресом на странице много. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('tel:') === 0) goal('call');
+    else if (/wa\.me|wa\.clck\.bar|whatsapp/.test(href)) goal('whatsapp');
+    else if (href.indexOf('t.me') > -1) goal('telegram');
+    else if (href.indexOf('dikidi') > -1) goal('booking');
+    else if (href.indexOf('yandex.ru/maps') > -1) goal('maps');
+  });
+
+  /* ---------- 11. Плавное раскрытие прайса --------------------------------
      Родной <details> открывается рывком. Анимируем высоту и внутренние
      отступы: открытие чуть медленнее закрытия — так ощущается естественнее.
      Без JS и при отключённых анимациях остаётся обычное поведение. */
@@ -2154,7 +2227,7 @@ section[id]{scroll-margin-top:80px}
     });
   });
 
-  /* ---------- 11. Валидация и отправка заявки ----------------------------- */
+  /* ---------- 12. Проверка и отправка заявки ----------------------------- */
   var submitBtn = document.getElementById('submitBtn');
   var formErr = document.getElementById('formErr');
   var openedAt = 0;                 // когда открыли форму — быстрая отправка = бот
@@ -2268,6 +2341,7 @@ section[id]{scroll-margin-top:80px}
     if (!CONFIG.endpoint && !CONFIG.telegram.token) {
       window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' +
                   encodeURIComponent(clientText(data)), '_blank', 'noopener');
+      goal('lead');
       modal.classList.add('is-done');
       document.getElementById('formOk').focus();
       return;
@@ -2278,6 +2352,7 @@ section[id]{scroll-margin-top:80px}
     submitBtn.setAttribute('aria-busy', 'true');
 
     send(data).then(function () {
+      goal('lead');
       modal.classList.add('is-done');
       document.getElementById('formOk').focus();
     }).catch(function (err) {
