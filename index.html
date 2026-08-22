@@ -525,7 +525,9 @@ section[id]{scroll-margin-top:80px}
 }
 .price[open] > summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
 .price[open] > summary{border-bottom:1px solid var(--line-light)}
-.price__body{padding:.25rem 1.25rem 1.1rem}
+.price__body{padding:.25rem 1.25rem 1.1rem;overflow:hidden}
+/* При закрытии блок ещё раскрыт, но стрелка должна повернуться сразу */
+.price.is-closing > summary::after{transform:rotate(45deg) translate(-2px,-2px)}
 
 /* Таблица цен: на узком экране прокручивается внутри себя */
 .ptable-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -1894,7 +1896,59 @@ section[id]{scroll-margin-top:80px}
     if (onlyDigits(phoneField.value).length <= 1) phoneField.value = '';
   });
 
-  /* ---------- 8. Валидация и отправка заявки ------------------------------ */
+  /* ---------- 8. Плавное раскрытие прайса ---------------------------------
+     Родной <details> открывается рывком. Анимируем высоту и внутренние
+     отступы: открытие чуть медленнее закрытия — так ощущается естественнее.
+     Без JS и при отключённых анимациях остаётся обычное поведение. */
+  var EASING = 'cubic-bezier(.2,.7,.25,1)';
+
+  Array.prototype.forEach.call(document.querySelectorAll('.price'), function (block) {
+    var body = block.querySelector('.price__body');
+    var summary = block.querySelector('summary');
+    if (!body || !summary || !body.animate) return;
+    var running = null;
+
+    function play(opening) {
+      var cs = window.getComputedStyle(body);
+      var pt = cs.paddingTop, pb = cs.paddingBottom;
+      // scrollHeight уже включает внутренние отступы, второй раз их не добавляем:
+      // иначе блок в конце анимации «отскакивает» на высоту отступов
+      var full = body.scrollHeight + 'px';
+      var from = opening ? ['0px', '0px', '0px', 0] : [full, pt, pb, 1];
+      var to   = opening ? [full, pt, pb, 1] : ['0px', '0px', '0px', 0];
+      return body.animate(
+        {
+          height:        [from[0], to[0]],
+          paddingTop:    [from[1], to[1]],
+          paddingBottom: [from[2], to[2]],
+          opacity:       [from[3], to[3]]
+        },
+        { duration: opening ? 300 : 240, easing: EASING }
+      );
+    }
+
+    summary.addEventListener('click', function (e) {
+      if (reduced) return;                     // системная настройка «меньше движения»
+      e.preventDefault();
+      if (running) running.cancel();
+
+      if (!block.open) {
+        block.open = true;                     // сначала показать, потом измерить высоту
+        block.classList.remove('is-closing');
+        running = play(true);
+      } else {
+        block.classList.add('is-closing');      // стрелка поворачивается сразу
+        running = play(false);
+        running.onfinish = function () {
+          block.open = false;
+          block.classList.remove('is-closing');
+        };
+      }
+      running.addEventListener('finish', function () { running = null; });
+    });
+  });
+
+  /* ---------- 9. Валидация и отправка заявки ------------------------------ */
   var submitBtn = document.getElementById('submitBtn');
   var formErr = document.getElementById('formErr');
   var openedAt = 0;                 // когда открыли форму — быстрая отправка = бот
