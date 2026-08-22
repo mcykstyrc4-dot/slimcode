@@ -1,0 +1,116 @@
+/* =========================================================================
+   Slim Code Lab — стили внутренних (юридических) страниц.
+   Общий файл для privacy.html, terms.html, consent.html.
+   Палитра и типографика те же, что на лендинге (index.html), но набор
+   правил минимальный: это страницы для чтения длинного текста.
+   ========================================================================= */
+
+:root{
+  --wine-950:#150609;
+  --wine-900:#24090f;
+  --wine-800:#33101a;
+  --cream:#f8f2ec;
+  --ink:#1c0a0e;
+  --ink-soft:#6b5257;
+  --accent:#e0393f;
+  --gold:#c9a15c;
+  --line-dark:rgba(248,242,236,.14);
+  --line-light:rgba(28,10,14,.12);
+  --sans:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --pad:clamp(1.25rem,5vw,2rem);
+  --radius:18px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font:400 clamp(.975rem,2.6vw,1.0625rem)/1.7 var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+h1,h2,h3{margin:0;line-height:1.15;letter-spacing:-.02em;font-weight:700}
+p,ul,ol{margin:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+::selection{background:var(--accent);color:#fff}
+
+.wrap{width:100%;max-width:760px;margin-inline:auto;padding-inline:var(--pad)}
+
+/* --- Шапка --- */
+.top{background:var(--wine-950);color:var(--cream);padding-block:1.1rem}
+.top__in{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{display:inline-flex;align-items:baseline;gap:.55rem;font-weight:800;font-size:1.02rem;letter-spacing:-.02em;text-decoration:none}
+.logo span{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold);font-size:1.15rem;letter-spacing:0}
+.back{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.86rem;font-weight:600;color:rgba(248,242,236,.72);text-decoration:none;
+  transition:color .2s;
+}
+.back:hover{color:var(--cream)}
+.back .arw{transition:transform .3s cubic-bezier(.2,.7,.25,1)}
+.back:hover .arw{transform:translateX(-4px)}
+
+/* --- Заголовок документа --- */
+.head{padding-block:clamp(2.25rem,8vw,3.5rem) clamp(1.5rem,5vw,2rem)}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.6em;margin-bottom:1rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+.head h1{font-size:clamp(1.75rem,6vw,2.6rem)}
+.head h1 em{font-family:var(--serif);font-style:italic;font-weight:500}
+.updated{margin-top:1rem;font-size:.86rem;color:var(--ink-soft)}
+
+/* Памятка для владельца сайта — УДАЛИТЬ ПЕРЕД ПУБЛИКАЦИЕЙ */
+.notice{
+  margin-top:1.5rem;padding:1rem 1.15rem;border-radius:var(--radius);
+  background:rgba(224,57,63,.07);border:1px solid rgba(224,57,63,.25);
+  font-size:.88rem;line-height:1.6;
+}
+.notice b{color:var(--accent)}
+
+/* --- Оглавление --- */
+.toc{
+  margin-bottom:clamp(2rem,6vw,2.75rem);padding:1.25rem 1.35rem;
+  background:#fff;border:1px solid var(--line-light);border-radius:var(--radius);
+}
+.toc h2{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.85rem}
+.toc ol{padding-left:1.2rem;display:grid;gap:.4rem}
+.toc a{font-size:.92rem;color:var(--ink);text-decoration-color:var(--line-light);text-underline-offset:3px}
+.toc a:hover{text-decoration-color:var(--accent)}
+
+/* --- Текст документа --- */
+.doc{padding-bottom:clamp(3rem,9vw,4.5rem)}
+.doc section{scroll-margin-top:1.5rem}
+.doc section + section{margin-top:clamp(1.75rem,5vw,2.5rem)}
+.doc section h2{
+  font-size:clamp(1.1rem,3.4vw,1.35rem);margin-bottom:.75rem;
+  padding-top:1.25rem;border-top:1px solid var(--line-light);
+}
+.doc section h2 .n{color:var(--accent);margin-right:.45rem}
+.doc section > * + *{margin-top:.75rem}   /* ровные отбивки между абзацами и списками */
+.doc section ul{padding-left:1.15rem;list-style:disc}
+.doc section ol{padding-left:1.3rem}
+.doc section li + li{margin-top:.35rem}
+.doc section a{color:var(--accent);text-underline-offset:3px}
+
+/* Подстановки, которые нужно заменить реальными данными */
+.fill{
+  background:rgba(201,161,92,.18);border-bottom:1px dashed rgba(201,161,92,.8);
+  padding:0 .2em;border-radius:3px;
+}
+
+/* --- Футер --- */
+.foot{background:var(--wine-950);color:rgba(248,242,236,.55);padding-block:2rem;font-size:.82rem}
+.foot__in{display:grid;gap:.7rem}
+.foot a{color:rgba(248,242,236,.72);text-decoration:none}
+.foot a:hover{color:var(--cream)}
+.foot__links{display:flex;flex-wrap:wrap;gap:.4rem 1.25rem}
+
+@media (min-width:600px){
+  .foot__in{grid-template-columns:1fr auto;align-items:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms!important}
+}

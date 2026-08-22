@@ -8,6 +8,10 @@
 <meta name="theme-color" content="#24090F">
 
 <!-- Open Graph (заменить URL и og:image на реальные) -->
+<link rel="canonical" href="https://slimcodelab.ru/">
+<meta property="og:url" content="https://slimcodelab.ru/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Slim Code Lab">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Slim Code Lab — аппаратная коррекция фигуры">
 <meta property="og:description" content="Сеть салонов с 2001 года. Программы коррекции фигуры на сертифицированном оборудовании.">
@@ -20,6 +24,124 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+<!-- Микроразметка Schema.org для поисковиков и карточек в выдаче.
+     ЗАМЕНИТЬ: реквизиты, адреса, телефоны, координаты, часы, соцсети. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HealthAndBeautyBusiness",
+      "@id": "https://slimcodelab.ru/#organization",
+      "name": "Slim Code Lab",
+      "alternateName": "Слим Код Лаб",
+      "description": "Сеть салонов аппаратной коррекции фигуры в Санкт-Петербурге: RSL-скульптурирование, LPG-массаж, миостимуляция, прессомассаж, кавитация.",
+      "url": "https://slimcodelab.ru/",
+      "logo": "https://slimcodelab.ru/assets/logo.png",
+      "image": "https://slimcodelab.ru/assets/og-cover.jpg",
+      "telephone": "+7-812-000-00-00",
+      "email": "info@slimcodelab.ru",
+      "foundingDate": "2001",
+      "priceRange": "1600-24000 RUB",
+      "currenciesAccepted": "RUB",
+      "areaServed": { "@type": "City", "name": "Санкт-Петербург" },
+      "sameAs": [
+        "https://vk.com/slimcodelab",
+        "https://instagram.com/slimcodelab"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Услуги аппаратной коррекции фигуры",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "RSL-скульптурирование" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "LPG-массаж" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Миостимуляция" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Прессомассаж" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Кавитация" } }
+        ]
+      },
+      "department": [
+        { "@id": "https://slimcodelab.ru/#salon-petrogradskaya" },
+        { "@id": "https://slimcodelab.ru/#salon-moskovskaya" },
+        { "@id": "https://slimcodelab.ru/#salon-prosvescheniya" }
+      ]
+    },
+    {
+      "@type": "BeautySalon",
+      "@id": "https://slimcodelab.ru/#salon-petrogradskaya",
+      "name": "Slim Code Lab — Петроградская",
+      "parentOrganization": { "@id": "https://slimcodelab.ru/#organization" },
+      "telephone": "+7-812-000-00-01",
+      "priceRange": "1600-24000 RUB",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Большой пр. П.С., 00, лит. А",
+        "addressLocality": "Санкт-Петербург",
+        "postalCode": "197000",
+        "addressCountry": "RU"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": "59.9660", "longitude": "30.3110" },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "09:00", "closes": "21:00"
+      }]
+    },
+    {
+      "@type": "BeautySalon",
+      "@id": "https://slimcodelab.ru/#salon-moskovskaya",
+      "name": "Slim Code Lab — Московская",
+      "parentOrganization": { "@id": "https://slimcodelab.ru/#organization" },
+      "telephone": "+7-812-000-00-02",
+      "priceRange": "1600-24000 RUB",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Московский пр., 000, пом. 1-Н",
+        "addressLocality": "Санкт-Петербург",
+        "postalCode": "196000",
+        "addressCountry": "RU"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": "59.8510", "longitude": "30.3210" },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "10:00", "closes": "22:00"
+      }]
+    },
+    {
+      "@type": "BeautySalon",
+      "@id": "https://slimcodelab.ru/#salon-prosvescheniya",
+      "name": "Slim Code Lab — Проспект Просвещения",
+      "parentOrganization": { "@id": "https://slimcodelab.ru/#organization" },
+      "telephone": "+7-812-000-00-03",
+      "priceRange": "1600-24000 RUB",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "пр. Просвещения, 00, корп. 1",
+        "addressLocality": "Санкт-Петербург",
+        "postalCode": "194000",
+        "addressCountry": "RU"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": "60.0510", "longitude": "30.3330" },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "10:00", "closes": "21:00"
+      }]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://slimcodelab.ru/#website",
+      "url": "https://slimcodelab.ru/",
+      "name": "Slim Code Lab",
+      "inLanguage": "ru-RU",
+      "publisher": { "@id": "https://slimcodelab.ru/#organization" }
+    }
+  ]
+}
+</script>
 
 <style>
 /* =========================================================================
