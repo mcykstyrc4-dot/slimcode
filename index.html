@@ -588,10 +588,18 @@ section[id]{scroll-margin-top:80px}
 
 /* ---------- 10. Адреса и контакты ---------------------------------------- */
 .contacts{background:var(--cream);color:var(--ink)}
-/* Строка со ссылками на карточки в картах — там живут настоящие отзывы.
-   Когда пришлют оценки, рядом с названием добавится цифра: <b>4,9</b> */
-.maps{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem 1.5rem;margin-bottom:1.6rem}
-.maps__label{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+/* Оценка и ссылки на карточки в картах — там живут настоящие отзывы.
+   ЗАМЕНИТЬ: ссылки на карточки организации (сейчас ведут на поиск по названию)
+   и оценку 2ГИС, когда пришлёте. */
+.maps{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.75rem;margin-bottom:1.75rem}
+.maps__rating{display:inline-flex;align-items:center;gap:.65rem}
+.maps__stars{display:inline-flex;gap:.12rem;color:var(--gold)}
+.maps__stars svg{width:16px;height:16px}
+.maps__score{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.maps__src{font-size:.86rem;font-weight:600;color:var(--ink-soft);display:inline-flex;align-items:center;gap:.35rem}
+.maps__rating:hover .maps__src{color:var(--accent)}
+.maps__rating .arw,.maps__item .arw{transition:transform .3s var(--ease)}
+.maps__rating:hover .arw{transform:translateX(4px)}
 .maps__item{
   display:inline-flex;align-items:center;gap:.45rem;
   font-size:.95rem;font-weight:700;color:var(--accent);
@@ -1337,14 +1345,21 @@ section[id]{scroll-margin-top:80px}
          ЗАМЕНИТЬ: ссылки на ваши карточки (сейчас ведут на поиск по названию)
          и оценки, когда пришлёте — покажем цифру рядом с названием. -->
     <div class="maps reveal">
-      <p class="maps__label">Отзывы и оценки — на картах</p>
-      <a class="maps__item" href="https://yandex.ru/maps/?text=Slim%20Code%20Lab%20%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3"
-         target="_blank" rel="noopener">
-        Яндекс.Карты <span class="arw" aria-hidden="true">→</span>
+      <a class="maps__rating" href="https://yandex.ru/maps/?text=Slim%20Code%20Lab%20%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3" target="_blank" rel="noopener"
+         aria-label="Рейтинг 5,0 из 5 на Яндекс.Картах — открыть отзывы">
+        <span class="maps__stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+        </span>
+        <span class="maps__score">5,0</span>
+        <span class="maps__src">на Яндекс.Картах <span class="arw" aria-hidden="true">→</span></span>
       </a>
       <a class="maps__item" href="https://2gis.ru/spb/search/Slim%20Code%20Lab"
          target="_blank" rel="noopener">
-        2ГИС <span class="arw" aria-hidden="true">→</span>
+        Отзывы в 2ГИС <span class="arw" aria-hidden="true">→</span>
       </a>
     </div>
 
