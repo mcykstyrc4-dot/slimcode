@@ -271,8 +271,9 @@ def promos_section():
         <div class="promo__foot">
           <span class="promo__price">%s</span>
           <span class="promo__old">%s</span>
+          <span class="promo__save">выгода %s</span>
         </div>
-      </article>""" % (delay, off, name, text, comp, rub(new), rub(old)))
+      </article>""" % (delay, off, name, text, comp, rub(new), rub(old), rub(old - new)))
 
     return """<!-- ======================= 4. АКЦИИ ======================= -->
 <section class="section section--dark promos" id="promos">
