@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Готовит фотографии команды для сайта.
+Готовит фотографии для сайта: команду и первый экран.
 
 Исходники — карточки из соцсетей в assets/source/team/: фотография на фирменной
 красной плашке с подписью внизу. Скрипт находит саму фотографию (плашка и
@@ -24,6 +24,9 @@ SRC = os.path.join(ROOT, 'assets', 'source', 'team')
 OUT = os.path.join(ROOT, 'assets', 'team')
 
 WIDTHS = [320, 640]           # карточка занимает максимум ~280 CSS-пикселей
+HERO_WIDTHS = [480, 960]      # блок первого экрана — примерно 460 CSS-пикселей
+HERO_RATIO = 4 / 5            # вертикальный кадр под колонку справа
+HERO_FOCUS = 0.65             # сдвиг кадра вправо: так в кадр попадает рука мастера
 QUALITY = {'avif': 55, 'webp': 78, 'jpg': 82}
 
 
@@ -40,6 +43,40 @@ def photo_box(path):
     return int(cols.min()), int(y0), int(cols.max()) + 1, int(y1) + 1
 
 
+def save_variants(img, prefix, widths):
+    total = 0
+    for w in widths:
+        h = round(img.height * w / img.width)
+        small = img.resize((w, h), Image.LANCZOS)
+        for ext in ('avif', 'webp', 'jpg'):
+            out = '%s-%d.%s' % (prefix, w, ext)
+            fmt = {'jpg': 'JPEG', 'webp': 'WEBP', 'avif': 'AVIF'}[ext]
+            params = {'quality': QUALITY[ext]}
+            if ext == 'jpg':
+                params.update(optimize=True, progressive=True)
+            small.save(out, fmt, **params)
+            total += os.path.getsize(out)
+    return total
+
+
+def make_hero():
+    """Кадр для первого экрана: обрезаем горизонтальный снимок под вертикальный блок."""
+    src = os.path.join(ROOT, 'assets', 'source', 'hero.jpg')
+    if not os.path.isfile(src):
+        return 0
+    img = Image.open(src).convert('RGB')
+    w, h = img.size
+    if w / h > HERO_RATIO:
+        nw, nh = round(h * HERO_RATIO), h
+    else:
+        nw, nh = w, round(w / HERO_RATIO)
+    x = round((w - nw) * HERO_FOCUS)
+    y = round((h - nh) * 0.5)
+    img = img.crop((x, y, x + nw, y + nh))
+    print('%-12s кадр %dx%d → %d вариантов' % ('hero', img.width, img.height, len(HERO_WIDTHS) * 3))
+    return save_variants(img, os.path.join(os.path.dirname(OUT), 'hero'), HERO_WIDTHS)
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     total = 0
@@ -49,20 +86,11 @@ def main():
         name = os.path.splitext(f)[0]
         src = os.path.join(SRC, f)
         img = Image.open(src).convert('RGB').crop(photo_box(src))
-        for w in WIDTHS:
-            h = round(img.height * w / img.width)
-            small = img.resize((w, h), Image.LANCZOS)
-            for ext in ('avif', 'webp', 'jpg'):
-                out = os.path.join(OUT, '%s-%d.%s' % (name, w, ext))
-                fmt = {'jpg': 'JPEG', 'webp': 'WEBP', 'avif': 'AVIF'}[ext]
-                params = {'quality': QUALITY[ext]}
-                if ext == 'jpg':
-                    params.update(optimize=True, progressive=True)
-                small.save(out, fmt, **params)
-                total += os.path.getsize(out)
+        total += save_variants(img, os.path.join(OUT, name), WIDTHS)
         print('%-12s исходник %dx%d → %d вариантов' % (name, img.width, img.height, len(WIDTHS) * 3))
 
-    print('\nВсего в assets/team: %.0f КБ' % (total / 1024))
+    total += make_hero()
+    print('\nВсего фотографий: %.0f КБ' % (total / 1024))
     for f in sorted(os.listdir(OUT)):
         print('  %-22s %5.1f КБ' % (f, os.path.getsize(os.path.join(OUT, f)) / 1024))
 

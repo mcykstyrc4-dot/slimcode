@@ -292,26 +292,6 @@ section[id]{scroll-margin-top:80px}
 
 .btn-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.15rem 1.75rem;margin-top:2rem}
 
-/* --- Плейсхолдеры изображений ---------------------------------------------
-   Заменить на <img src="assets/…" alt="…" loading="lazy"> — сетка не изменится. */
-.ph{
-  position:relative;overflow:hidden;background:
-    radial-gradient(120% 90% at 25% 10%,rgba(224,57,63,.20),transparent 60%),
-    linear-gradient(150deg,var(--wine-700),var(--wine-950));
-  display:grid;place-items:center;
-}
-.ph::after{ /* деликатная зернистая штриховка, чтобы блок не читался «дырой» */
-  content:"";position:absolute;inset:0;opacity:.5;
-  background-image:repeating-linear-gradient(115deg,rgba(248,242,236,.05) 0 1px,transparent 1px 7px);
-}
-.ph svg{width:38%;max-width:88px;opacity:.35;position:relative;z-index:1}
-.ph__tag{
-  position:absolute;z-index:2;left:12px;bottom:12px;
-  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(248,242,236,.5);border:1px solid rgba(248,242,236,.2);
-  padding:.3em .6em;border-radius:100px;
-}
-
 /* --- Аккуратные анимации появления при скролле --- */
 .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .js .reveal.is-in{opacity:1;transform:none}
@@ -406,26 +386,25 @@ section[id]{scroll-margin-top:80px}
 }
 .hero__in{position:relative;width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
 
-/* Медиа-блок хиро: на мобильных скрыт (важен только текст и CTA),
-   на десктопе балансирует композицию. ЗАМЕНИТЬ .ph на <img>. */
-.hero__media{display:none;position:relative}
-.hero__media .ph{
-  aspect-ratio:4/5;border-radius:calc(var(--radius-lg) + 6px);
+/* Медиа-блок хиро. На телефоне идёт под кнопками и кадрируется шире,
+   чтобы не выталкивать призыв к действию за пределы экрана. */
+.hero__media{position:relative;margin-top:1.75rem}
+.hero__media img{
+  display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;
+  border-radius:calc(var(--radius-lg) + 6px);
   box-shadow:var(--shadow-card);border:1px solid rgba(248,242,236,.16);
-  background:
-    radial-gradient(115% 85% at 30% 12%,rgba(224,57,63,.32),transparent 62%),
-    linear-gradient(155deg,var(--wine-600),var(--wine-800) 70%);
 }
-.hero__media .ph svg{opacity:.45}
-.hero__media .ph__tag{left:auto;right:14px}   /* не пересекается с плашкой результата */
 .hero__badge{
-  position:absolute;left:-24px;bottom:34px;z-index:2;
+  position:absolute;left:14px;bottom:14px;z-index:2;
   padding:1rem 1.25rem;border-radius:var(--radius);
   background:rgba(21,6,9,.82);backdrop-filter:blur(10px);
   border:1px solid var(--line-dark);box-shadow:var(--shadow-card);
 }
-.hero__badge b{display:block;font-size:1.6rem;letter-spacing:-.03em;line-height:1}
-.hero__badge span{font-size:.76rem;color:var(--on-dark)}
+.hero__badge{display:flex;flex-direction:column;gap:.15rem}
+.hero__badge-stars{display:flex;gap:.1rem;color:var(--gold)}
+.hero__badge-stars svg{width:13px;height:13px}
+.hero__badge b{font-size:1.5rem;letter-spacing:-.03em;line-height:1.1}
+.hero__badge span{font-size:.74rem;color:var(--on-dark)}
 
 .hero__since{
   display:inline-flex;align-items:center;gap:.7rem;margin-bottom:clamp(1.25rem,4vw,1.75rem);
@@ -590,8 +569,7 @@ section[id]{scroll-margin-top:80px}
 /* ---------- 10. Адреса и контакты ---------------------------------------- */
 .contacts{background:var(--cream);color:var(--ink)}
 /* Оценка и ссылки на карточки в картах — там живут настоящие отзывы.
-   Яндекс ведёт на карточку организации, 2ГИС пока на поиск по названию.
-   ЗАМЕНИТЬ: ссылку 2ГИС и оценку, когда пришлёте. */
+   Оценка ведёт на карточку организации в Яндекс.Картах. */
 .maps{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem 1rem;margin-bottom:1.75rem}
 .maps__rating{display:inline-flex;align-items:center;gap:.65rem}
 .maps__stars{display:inline-flex;gap:.12rem;color:var(--gold)}
@@ -780,7 +758,9 @@ section[id]{scroll-margin-top:80px}
   .logo--full img{height:80px}
   .hero{align-items:center;padding-top:104px;padding-bottom:clamp(2rem,5vh,3.5rem)}
   .hero__grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:3.5rem}
-  .hero__media{display:block}
+  .hero__media{margin-top:0}
+  .hero__media img{aspect-ratio:4/5}
+  .hero__badge{left:-24px;bottom:34px}
   .hero__scroll{display:flex}
   .section-head--split{grid-template-columns:1.05fr .95fr;align-items:end;gap:2.5rem}
   .cards{grid-template-columns:repeat(4,1fr);gap:1.15rem}
@@ -873,15 +853,27 @@ section[id]{scroll-margin-top:80px}
     <p class="hero__scroll" aria-hidden="true"><i></i> Листайте вниз</p>
     </div>
 
-    <!-- ЗАМЕНИТЬ: <img src="assets/hero.jpg" alt="Процедура в салоне Slim Code Lab"> -->
-    <div class="hero__media reveal" data-d="2" aria-hidden="true">
-      <div class="ph">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1zm1 12h14l-4.5-6-3.5 4.5-2.5-3L5 17zm3.5-7a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
-        <span class="ph__tag">фото 4:5</span>
-      </div>
+    <div class="hero__media reveal" data-d="2">
+      <picture>
+        <source type="image/avif" sizes="(min-width:900px) 460px, 90vw"
+                srcset="assets/hero-480.avif 480w, assets/hero-960.avif 960w">
+        <source type="image/webp" sizes="(min-width:900px) 460px, 90vw"
+                srcset="assets/hero-480.webp 480w, assets/hero-960.webp 960w">
+        <img src="assets/hero-960.jpg" sizes="(min-width:900px) 460px, 90vw"
+             srcset="assets/hero-480.jpg 480w, assets/hero-960.jpg 960w"
+             width="502" height="628" fetchpriority="high" decoding="async"
+             alt="Аппаратная коррекция фигуры на RSL Beautylizer в салоне Slim Code Lab">
+      </picture>
       <div class="hero__badge">
-        <b>−6 см</b>
-        <span>средний результат за курс</span>
+        <span class="hero__badge-stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+        </span>
+        <b>5,0</b>
+        <span>оценка на Яндекс.Картах</span>
       </div>
     </div>
    </div>
@@ -1380,10 +1372,6 @@ section[id]{scroll-margin-top:80px}
         <span class="maps__score">5,0</span>
         <span class="maps__src">на Яндекс.Картах <span class="arw" aria-hidden="true">→</span></span>
       </a>
-      <a class="maps__item" href="https://2gis.ru/spb/search/Slim%20Code%20Lab"
-         target="_blank" rel="noopener">
-        Отзывы в 2ГИС <span class="arw" aria-hidden="true">→</span>
-      </a>
     </div>
 
     <!-- Онлайн-запись ведёт в Dikidi — у каждого салона своя страница.
@@ -1446,7 +1434,6 @@ section[id]{scroll-margin-top:80px}
         </a>
         <p class="footer__desc">Сеть салонов аппаратной коррекции фигуры в Санкт-Петербурге. Работаем с 2001 года.</p>
         <div class="socials">
-          <!-- ЗАМЕНИТЬ: сюда же вернётся ВКонтакте, когда пришлёте ссылку -->
           <a href="https://t.me/+79112979428" target="_blank" rel="noopener" aria-label="Telegram">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 4.3 2.9 11.5c-1 .4-1 1.8.1 2.1l4.6 1.4 1.8 5.4c.3.8 1.3 1 1.9.4l2.5-2.4 4.6 3.4c.7.5 1.7.1 1.9-.7l3.1-14.6c.2-1-.8-1.8-1.7-1.2zM9.6 14.3l8.1-5-6.6 6.4-.3 3.1-1.2-4.5z"/></svg>
           </a>
