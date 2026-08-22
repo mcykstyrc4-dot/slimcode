@@ -98,6 +98,11 @@ p,ul,ol{margin:0}
 .doc section > .doc__sub:first-of-type{margin-top:.6rem}
 .doc section > * + *{margin-top:.75rem}   /* ровные отбивки между абзацами и списками */
 .doc section ul{padding-left:1.15rem;list-style:disc}
+/* В политике пункты идут через тире — сохраняем вид исходного документа.
+   Селектор с .doc section, иначе общее правило списка вернёт точку. */
+.doc section ul.doc__dash{list-style:none;padding-left:0}
+.doc section ul.doc__dash li{position:relative;padding-left:1.15rem}
+.doc section ul.doc__dash li::before{content:"—";position:absolute;left:0;color:var(--accent)}
 .doc section ol{padding-left:1.3rem}
 .doc section li + li{margin-top:.35rem}
 .doc section a{color:var(--accent);text-underline-offset:3px}
