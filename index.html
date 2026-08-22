@@ -591,7 +591,7 @@ section[id]{scroll-margin-top:80px}
 /* Оценка и ссылки на карточки в картах — там живут настоящие отзывы.
    ЗАМЕНИТЬ: ссылки на карточки организации (сейчас ведут на поиск по названию)
    и оценку 2ГИС, когда пришлёте. */
-.maps{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.75rem;margin-bottom:1.75rem}
+.maps{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem 1rem;margin-bottom:1.75rem}
 .maps__rating{display:inline-flex;align-items:center;gap:.65rem}
 .maps__stars{display:inline-flex;gap:.12rem;color:var(--gold)}
 .maps__stars svg{width:16px;height:16px}
@@ -601,11 +601,15 @@ section[id]{scroll-margin-top:80px}
 .maps__rating .arw,.maps__item .arw{transition:transform .3s var(--ease)}
 .maps__rating:hover .arw{transform:translateX(4px)}
 .maps__item{
-  display:inline-flex;align-items:center;gap:.45rem;
-  font-size:.95rem;font-weight:700;color:var(--accent);
-  border-bottom:1px solid transparent;transition:border-color .2s;
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.86rem;font-weight:600;color:var(--ink-soft);
+  transition:color .2s;
 }
-.maps__item:hover{border-bottom-color:currentColor}
+.maps__item:hover{color:var(--accent)}
+/* Точка-разделитель между источниками — только когда они в одну строку */
+@media (min-width:520px){
+  .maps__item::before{content:"·";margin-right:1rem;color:var(--line-light);font-weight:700}
+}
 .maps__item .arw{transition:transform .3s var(--ease)}
 .maps__item:hover .arw{transform:translateX(4px)}
 
