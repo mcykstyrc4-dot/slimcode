@@ -21,10 +21,7 @@
 
 <!-- Шрифты: заголовки — гротеск с характером, текст — нейтральный гротеск.
      Есть системные фолбэки, страница не «прыгает» если шрифты не загрузились. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
 
 <!-- Микроразметка Schema.org для поисковиков и карточек в выдаче.
@@ -125,6 +122,10 @@
 }
 </script>
 
+<!-- Шрифты лежат на своём домене: к сторонним серверам страница
+     не обращается, IP посетителя никуда не уходит. Файлы собирает
+     tools/fetch-fonts.py. -->
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
 /* =========================================================================
    SLIM CODE LAB — одностраничный лендинг
@@ -832,6 +833,19 @@ section[id]{scroll-margin-top:80px}
 }
 .form__err a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .form .btn--primary{width:100%;margin-top:.35rem}
+/* Отметка о согласии: крупная зона нажатия, на телефоне это важно */
+.consent{
+  display:flex;gap:.65rem;align-items:flex-start;cursor:pointer;
+  font-size:.84rem;line-height:1.5;color:var(--ink-soft);
+}
+.consent input{
+  flex:none;width:20px;height:20px;margin:.1rem 0 0;
+  accent-color:var(--accent);cursor:pointer;
+}
+.consent a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.consent a:hover{color:var(--accent)}
+.consent.is-invalid span{color:var(--accent)}
+
 .form__note{font-size:.72rem;color:var(--ink-soft);line-height:1.5}
 .form__note a{text-decoration:underline;text-underline-offset:2px}
 .btn__wa{flex:0 0 auto}
@@ -1811,6 +1825,14 @@ section[id]{scroll-margin-top:80px}
         <label>Компания<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
       </div>
 
+      <!-- Согласие даётся активным действием: отметка не проставлена заранее,
+           без неё форма не отправляется. Это требование к сбору персональных данных. -->
+      <label class="consent" for="fAgree">
+        <input type="checkbox" id="fAgree" name="agree" required aria-describedby="errAgree">
+        <span>Согласен на обработку персональных данных в соответствии с
+          <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a></span>
+      </label>
+      <p class="field__err" id="errAgree" aria-live="polite"></p>
       <button class="btn btn--primary" id="submitBtn" type="submit">
         <span class="btn__spin" aria-hidden="true"></span>
         <svg class="btn__wa" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg>
@@ -1823,7 +1845,6 @@ section[id]{scroll-margin-top:80px}
         <a href="https://wa.clck.bar/79112979428" target="_blank" rel="noopener">WhatsApp</a>.
       </p>
 
-      <p class="form__note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a> и обработкой персональных данных.</p>
 
       <div class="form__alt">
         <p class="form__alt-label">Или выберите время сами</p>
@@ -2393,17 +2414,25 @@ section[id]{scroll-margin-top:80px}
   var formErr = document.getElementById('formErr');
   var openedAt = 0;                 // когда открыли форму — быстрая отправка = бот
 
+  var agreeField = form.elements.agree;
+  var errBox = {};                  // поле → куда писать сообщение об ошибке
+  errBox[nameField.name] = 'errName';
+  errBox[phoneField.name] = 'errPhone';
+  errBox[agreeField.name] = 'errAgree';
+
   function setError(field, msg) {
-    field.classList.add('is-invalid');
-    var box = document.getElementById(field === nameField ? 'errName' : 'errPhone');
+    // у отметки подсвечиваем подпись целиком, сама коробочка слишком мелкая
+    (field === agreeField ? field.closest('.consent') : field).classList.add('is-invalid');
+    var box = document.getElementById(errBox[field.name]);
     if (box) box.textContent = msg;
   }
   function clearError(field) {
-    field.classList.remove('is-invalid');
-    var box = document.getElementById(field === nameField ? 'errName' : 'errPhone');
+    (field === agreeField ? field.closest('.consent') : field).classList.remove('is-invalid');
+    var box = document.getElementById(errBox[field.name]);
     if (box) box.textContent = '';
   }
   nameField.addEventListener('input', function () { clearError(nameField); });
+  agreeField.addEventListener('change', function () { clearError(agreeField); });
 
   function validate() {
     var ok = true;
@@ -2413,7 +2442,14 @@ section[id]{scroll-margin-top:80px}
     if (onlyDigits(phoneField.value).length !== 11) {
       setError(phoneField, 'Введите номер полностью'); ok = false;
     }
-    if (!ok) (nameField.classList.contains('is-invalid') ? nameField : phoneField).focus();
+    if (!agreeField.checked) {
+      setError(agreeField, 'Без согласия мы не можем принять заявку'); ok = false;
+    }
+    if (!ok) {
+      if (nameField.classList.contains('is-invalid')) nameField.focus();
+      else if (phoneField.classList.contains('is-invalid')) phoneField.focus();
+      else agreeField.focus();
+    }
     return ok;
   }
 
