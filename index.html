@@ -404,7 +404,7 @@ section[id]{scroll-margin-top:80px}
 .hero__badge-stars{display:flex;gap:.1rem;color:var(--gold)}
 .hero__badge-stars svg{width:13px;height:13px}
 .hero__badge b{font-size:1.5rem;letter-spacing:-.03em;line-height:1.1}
-.hero__badge span{font-size:.74rem;color:var(--on-dark)}
+.hero__badge-src{font-size:.74rem;color:var(--on-dark)}
 
 .hero__since{
   display:inline-flex;align-items:center;gap:.7rem;margin-bottom:clamp(1.25rem,4vw,1.75rem);
@@ -585,9 +585,16 @@ section[id]{scroll-margin-top:80px}
   transition:color .2s;
 }
 .maps__item:hover{color:var(--accent)}
-/* Точка-разделитель между источниками — только когда они в одну строку */
-@media (min-width:520px){
-  .maps__item::before{content:"·";margin-right:1rem;color:var(--line-light);font-weight:700}
+/* Знак «Хорошее место» от Яндекса — рядом с оценкой, это один источник */
+.maps__award{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.86rem;font-weight:700;color:var(--ink);
+}
+.maps__award img{height:26px;width:auto;display:block}
+
+/* Точка-разделитель — только когда оценка и знак стоят в одну строку */
+@media (min-width:600px){
+  .maps__award::before{content:"·";margin-right:.9rem;color:var(--line-light);font-weight:700}
 }
 .maps__item .arw{transition:transform .3s var(--ease)}
 .maps__item:hover .arw{transform:translateX(4px)}
@@ -873,7 +880,7 @@ section[id]{scroll-margin-top:80px}
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
         </span>
         <b>5,0</b>
-        <span>оценка на Яндекс.Картах</span>
+        <span class="hero__badge-src">оценка на Яндекс.Картах</span>
       </div>
     </div>
    </div>
@@ -1372,6 +1379,10 @@ section[id]{scroll-margin-top:80px}
         <span class="maps__score">5,0</span>
         <span class="maps__src">на Яндекс.Картах <span class="arw" aria-hidden="true">→</span></span>
       </a>
+      <span class="maps__award">
+        <img src="assets/good-place.png" alt="" width="88" height="52" loading="lazy" decoding="async">
+        Хорошее место 2026
+      </span>
     </div>
 
     <!-- Онлайн-запись ведёт в Dikidi — у каждого салона своя страница.
