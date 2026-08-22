@@ -40,8 +40,9 @@ p,ul,ol{margin:0}
 /* --- Шапка --- */
 .top{background:var(--wine-950);color:var(--cream);padding-block:1.1rem}
 .top__in{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.logo{display:inline-flex;align-items:baseline;gap:.55rem;font-weight:800;font-size:1.02rem;letter-spacing:-.02em;text-decoration:none}
-.logo span{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold);font-size:1.15rem;letter-spacing:0}
+/* Фирменный логотип — тот же файл, что на лендинге */
+.logo{display:inline-flex;align-items:center;text-decoration:none}
+.logo img{height:30px;width:auto;display:block}
 .back{
   display:inline-flex;align-items:center;gap:.5rem;
   font-size:.86rem;font-weight:600;color:rgba(248,242,236,.72);text-decoration:none;

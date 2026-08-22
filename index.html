@@ -16,7 +16,8 @@
 <meta property="og:title" content="Slim Code Lab — аппаратная коррекция фигуры">
 <meta property="og:description" content="Сеть салонов с 2001 года. Программы коррекции фигуры на сертифицированном оборудовании.">
 <meta property="og:image" content="assets/og-cover.jpg">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2324090F'/><text x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%23E7C98A' text-anchor='middle'>S</text></svg>">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <!-- Шрифты: заголовки — гротеск с характером, текст — нейтральный гротеск.
      Есть системные фолбэки, страница не «прыгает» если шрифты не загрузились. -->
@@ -193,6 +194,8 @@
 
   --sans:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  /* Фирменный шрифт логотипа. Пока не подключён — см. блок @font-face ниже. */
+  --brand:var(--sans);
 
   --radius:18px;
   --radius-lg:26px;
@@ -204,6 +207,27 @@
   --shadow-card:0 24px 60px -30px rgba(21,6,9,.75);
   --ease:cubic-bezier(.2,.7,.25,1);
 }
+
+/* ------------------------------------------------------------------------
+   ФИРМЕННЫЙ ШРИФТ
+   Логотип набран геометрическим гротеском. Чтобы сайт совпал с ним:
+     1. положите файлы шрифта в assets/fonts/ (лучше всего .woff2);
+     2. раскомментируйте блок ниже и поправьте имена файлов;
+     3. в токенах выше замените  --brand:var(--sans)  на  --brand:"SlimCode",var(--sans)
+        — и, если нужно, --sans на то же значение, чтобы шрифт стал основным.
+   До этого момента --brand равен основному гротеску, вёрстка не ломается.
+
+@font-face{
+  font-family:"SlimCode";
+  src:url("assets/fonts/slimcode-regular.woff2") format("woff2");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"SlimCode";
+  src:url("assets/fonts/slimcode-medium.woff2") format("woff2");
+  font-weight:500 700; font-style:normal; font-display:swap;
+}
+   ------------------------------------------------------------------------ */
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -342,9 +366,13 @@ section[id]{scroll-margin-top:80px}
 }
 .header__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:70px}
 
-.logo{display:inline-flex;align-items:baseline;gap:.55rem;font-weight:800;letter-spacing:-.02em;font-size:1.05rem}
-.logo b{font-weight:800}
-.logo span{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold);font-size:1.15rem;letter-spacing:0}
+/* Фирменный логотип. Файлы в assets/:
+     logo.png      — знак + «Slim Code» (шапка, компактный);
+     logo-full.png — то же плюс подпись «Стань лучшей версией себя» (футер);
+     logo-dark.png — версия для светлого фона.
+   Если появится исходник в SVG — достаточно заменить src, размеры заданы по высоте. */
+.logo{display:inline-flex;align-items:center}
+.logo img{height:32px;width:auto;display:block}
 
 .nav{display:none}
 .nav a{font-size:.9rem;font-weight:500;color:var(--on-dark);transition:color .2s}
@@ -593,6 +621,7 @@ section[id]{scroll-margin-top:80px}
 /* ---------- 11. Футер ---------------------------------------------------- */
 .footer{background:var(--wine-950);color:var(--cream);padding-block:clamp(2.5rem,8vw,4rem) 2rem;border-top:1px solid var(--line-dark)}
 .footer__top{display:grid;gap:2rem}
+.logo--full img{height:68px}   /* полный локап: на меньшей высоте слоган не читается */
 .footer__desc{font-size:.88rem;color:var(--on-dark);max-width:38ch;margin-top:.9rem}
 .footer__col h4{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;font-weight:600}
 .footer__col li + li{margin-top:.55rem}
@@ -712,6 +741,8 @@ section[id]{scroll-margin-top:80px}
   .header__cta{display:inline-flex}
   .header__phone{display:inline-flex}
   .header__in{min-height:82px;gap:2rem}
+  .logo img{height:38px}
+  .logo--full img{height:80px}
   .hero{align-items:center;padding-top:104px;padding-bottom:clamp(2rem,5vh,3.5rem)}
   .hero__grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:3.5rem}
   .hero__media{display:block}
@@ -739,7 +770,7 @@ section[id]{scroll-margin-top:80px}
 <header class="header" id="header">
   <div class="wrap header__in">
     <a href="#top" class="logo" aria-label="Slim Code Lab — на главную">
-      <b>SLIM CODE</b><span>Lab</span>
+      <img src="assets/logo.png" alt="Slim Code Lab" width="541" height="154">
     </a>
 
     <nav class="nav" aria-label="Основная навигация">
@@ -1207,7 +1238,9 @@ section[id]{scroll-margin-top:80px}
   <div class="wrap">
     <div class="footer__top">
       <div class="footer__col">
-        <a href="#top" class="logo"><b>SLIM CODE</b><span>Lab</span></a>
+        <a href="#top" class="logo logo--full">
+          <img src="assets/logo-full.png" alt="Slim Code Lab — стань лучшей версией себя" width="541" height="154">
+        </a>
         <p class="footer__desc">Сеть салонов аппаратной коррекции фигуры в Санкт-Петербурге. Работаем с 2001 года.</p>
         <div class="socials">
           <!-- ЗАМЕНИТЬ: ссылки на реальные аккаунты -->
