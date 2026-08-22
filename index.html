@@ -649,17 +649,8 @@ section[id]{scroll-margin-top:80px}
 .maps__score{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
 .maps__src{font-size:.86rem;font-weight:600;color:var(--ink-soft);display:inline-flex;align-items:center;gap:.35rem}
 .maps__rating:hover .maps__src{color:var(--accent)}
-.maps__rating .arw,.maps__item .arw{transition:transform .3s var(--ease)}
+.maps__rating .arw{transition:transform .3s var(--ease)}
 .maps__rating:hover .arw{transform:translateX(4px)}
-.maps__item{
-  display:inline-flex;align-items:center;gap:.35rem;
-  font-size:.86rem;font-weight:600;color:var(--ink-soft);
-  transition:color .2s;
-}
-.maps__item:hover{color:var(--accent)}
-
-.maps__item .arw{transition:transform .3s var(--ease)}
-.maps__item:hover .arw{transform:translateX(4px)}
 
 .salons{display:grid;gap:.9rem}
 .salon{
@@ -1452,10 +1443,9 @@ section[id]{scroll-margin-top:80px}
       <p class="lead">Записаться можно по телефону или онлайн — у каждого салона своя страница записи.</p>
     </div>
 
-    <!-- Вместо отзывов на сайте — переход на карточки в картах, где отзывы
-         настоящие и обновляются сами.
-         ЗАМЕНИТЬ: ссылки на ваши карточки (сейчас ведут на поиск по названию)
-         и оценки, когда пришлёте — покажем цифру рядом с названием. -->
+    <!-- Вместо отзывов на сайте — переход на карточку в Яндекс.Картах, где
+         отзывы настоящие и обновляются сами. Оценку в разметку страницы не
+         выносим: это чужие данные, размечать их как свои нельзя. -->
     <div class="maps reveal">
       <a class="maps__rating" href="https://yandex.ru/maps/org/slim_code/158923555044/reviews/" target="_blank" rel="noopener"
          aria-label="Рейтинг 5,0 из 5 на Яндекс.Картах — открыть отзывы">
@@ -1788,19 +1778,25 @@ section[id]{scroll-margin-top:80px}
   });
 
   /* ---------- 4. Появление блоков при скролле ---------------------------- */
-  var revealables = document.querySelectorAll('.reveal');
-  if (reduced || !('IntersectionObserver' in window)) {
-    revealables.forEach(function (el) { el.classList.add('is-in'); });
-  } else {
-    var io = new IntersectionObserver(function (entries) {
+  var io = null;
+  if (!reduced && 'IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('is-in');
         io.unobserve(entry.target);            // анимируем один раз
       });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
-    revealables.forEach(function (el) { io.observe(el); });
   }
+
+  /* Ставит блок в очередь на появление. Без наблюдателя (или при отключённой
+     анимации) показываем сразу. Через неё же проходят блоки, которые скрипт
+     создаёт позже — иначе они остались бы прозрачными навсегда. */
+  function watchReveal(el) {
+    if (io) io.observe(el); else el.classList.add('is-in');
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.reveal'), watchReveal);
 
   /* ---------- 5. Счётчики ------------------------------------------------ */
   var counters = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
@@ -2034,6 +2030,7 @@ section[id]{scroll-margin-top:80px}
         img.parentNode.classList.add('is-broken');
       });
       starsGrid.appendChild(card);
+      watchReveal(card);            // карточку создали после обхода .reveal
     });
 
     function openVideo(id, name, opener) {
