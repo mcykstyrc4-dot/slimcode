@@ -587,6 +587,47 @@ section[id]{scroll-margin-top:80px}
 }
 
 
+/* ---------- 8. Звёздные клиенты ------------------------------------------ */
+.stars{background:var(--cream);color:var(--ink)}
+.stars__grid{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr)}
+
+.star{
+  display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
+  width:100%;text-align:left;padding:0;background:none;border:0;
+  cursor:pointer;transition:transform .35s var(--ease);
+}
+.star:hover{transform:translateY(-3px)}
+.star__thumb{
+  display:block;position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;
+  background:var(--wine-800);box-shadow:var(--shadow-soft);
+}
+.star__thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.star__play{
+  position:absolute;inset:0;display:grid;place-items:center;
+  background:linear-gradient(to top,rgba(21,6,9,.45),transparent 55%);
+}
+.star__play span{
+  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:var(--accent);color:#fff;box-shadow:0 10px 24px -10px rgba(224,57,63,.8);
+  transition:transform .3s var(--ease);
+}
+.star:hover .star__play span{transform:scale(1.09)}
+.star__play svg{width:18px;height:18px;margin-left:2px}
+.star__name{display:block;font-weight:700;font-size:.98rem;margin-top:.7rem;letter-spacing:-.01em}
+.star__role{display:block;font-size:.79rem;color:var(--ink-soft);margin-top:.15rem}
+/* Если обложка не загрузилась, прячем битую картинку: под ней тёмная
+   подложка с кнопкой воспроизведения, карточка остаётся аккуратной */
+.star__thumb.is-broken img{display:none}
+
+/* Окно с роликом. Селектор через .modal--video: у одиночного класса
+   специфичность та же, что у .modal__box, а объявлен тот ниже и побеждал. */
+.modal--video .modal__box{max-width:min(920px,94vw);background:var(--wine-950);color:var(--cream);padding:1rem}
+.modal--video .modal__close{color:var(--on-dark)}
+.modal--video .modal__close:hover{background:rgba(248,242,236,.12);color:var(--cream)}
+.video{position:relative;aspect-ratio:16/9;border-radius:calc(var(--radius) - 4px);overflow:hidden;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video__caption{margin-top:.8rem;font-size:.92rem;font-weight:700;padding-inline:.25rem}
+
 /* ---------- 9. Команда --------------------------------------------------- */
 .team{background:var(--wine-950);color:var(--cream)}
 .team__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 1rem;align-items:start}
@@ -771,6 +812,7 @@ section[id]{scroll-margin-top:80px}
   .card--feature .btn--ghost{grid-column:2;grid-row:3}
   .card--feature .card__title{font-size:clamp(1.5rem,3.4vw,2.1rem)}
   .team__grid{grid-template-columns:repeat(3,1fr)}
+  .stars__grid{grid-template-columns:repeat(3,1fr)}
   .salons{grid-template-columns:repeat(2,1fr)}
   .footer__bottom{grid-template-columns:1fr auto;align-items:center}
   .modal{place-items:center}
@@ -797,6 +839,7 @@ section[id]{scroll-margin-top:80px}
   .promos__grid{grid-template-columns:repeat(3,1fr)}
   .salons{grid-template-columns:repeat(3,1fr)}
   .team__grid{grid-template-columns:repeat(5,1fr);gap:1.25rem 1rem}
+  .stars__grid{grid-template-columns:repeat(4,1fr);gap:1.25rem 1.15rem}
   .contact-cta{grid-template-columns:1.1fr auto;align-items:center;padding:2.25rem 2.5rem;gap:2rem}
   .footer__top{grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
   .fab{display:none}          /* на десктопе достаточно кнопок в секции контактов */
@@ -1276,6 +1319,23 @@ section[id]{scroll-margin-top:80px}
   </div>
 </section>
 
+<!-- ======================= 5. ЗВЁЗДНЫЕ КЛИЕНТЫ =======================
+     Карточки строит скрипт из списка STARS. Пока список пуст, секция
+     удаляется целиком — на странице не остаётся пустого блока. -->
+<section class="section section--light stars" id="stars" hidden>
+  <div class="wrap">
+    <div class="section-head section-head--split reveal">
+      <div>
+        <p class="eyebrow">Видеоотзывы</p>
+        <h2 class="h2">Отзывы <em>звёздных клиентов</em></h2>
+      </div>
+      <p class="lead">Нажмите на карточку — видео откроется прямо на странице.</p>
+    </div>
+
+    <div class="stars__grid" id="starsGrid"></div>
+  </div>
+</section>
+
 <!-- ======================= 6. КОМАНДА =======================
      Плейсхолдеры фото: заменить блок .ph на
      <img src="assets/team-1.jpg" alt="Имя, специализация" loading="lazy"> -->
@@ -1528,6 +1588,20 @@ section[id]{scroll-margin-top:80px}
 <a class="fab" id="fab" href="https://wa.clck.bar/79112979428" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg>
 </a>
+
+<!-- ======================= ОКНО С ВИДЕООТЗЫВОМ =======================
+     Ролик подгружается только при открытии: до этого на странице нет ни
+     одного кадра с YouTube, и он не тянет свои скрипты и cookie. -->
+<div class="modal modal--video" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoTitle" hidden>
+  <div class="modal__bg" data-close-video></div>
+  <div class="modal__box modal__box--video">
+    <button class="modal__close" data-close-video aria-label="Закрыть видео">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="video"><div id="videoSlot"></div></div>
+    <p class="video__caption" id="videoTitle"></p>
+  </div>
+</div>
 
 <!-- ======================= МОДАЛЬНОЕ ОКНО ЗАПИСИ =======================
      Форма без бэкенда: подставьте action/fetch на свою CRM или отправку в Telegram. -->
@@ -1898,7 +1972,94 @@ section[id]{scroll-margin-top:80px}
     if (onlyDigits(phoneField.value).length <= 1) phoneField.value = '';
   });
 
-  /* ---------- 8. Бизнес-мессенджер Jivo -----------------------------------
+  /* ---------- 8. Отзывы звёздных клиентов ---------------------------------
+     ЗАМЕНИТЬ: список ниже. Для каждого отзыва нужны три вещи:
+       id   — код ролика из ссылки YouTube. Из https://youtu.be/dQw4w9WgXcQ
+              или https://www.youtube.com/watch?v=dQw4w9WgXcQ берём dQw4w9WgXcQ;
+       name — имя;
+       role — чем известна (необязательно, можно пустую строку).
+     Пока список пуст, секция удаляется со страницы целиком.
+
+     Обложки берём из YouTube автоматически. Если пришлёте свои фотографии,
+     заменим на них — тогда добавьте в запись поле cover: 'assets/stars/имя.jpg'. */
+  var STARS = [
+    // { id: 'dQw4w9WgXcQ', name: 'Имя Фамилия', role: 'актриса' },
+  ];
+
+  var starsSection = document.getElementById('stars');
+  var starsGrid = document.getElementById('starsGrid');
+  var videoModal = document.getElementById('videoModal');
+  var videoSlot = document.getElementById('videoSlot');
+  var videoTitle = document.getElementById('videoTitle');
+  var videoOpener = null;
+
+  if (!STARS.length) {
+    if (starsSection) starsSection.remove();          // пустого блока на странице не будет
+    if (videoModal) videoModal.remove();
+  } else {
+    starsSection.hidden = false;
+
+    STARS.forEach(function (star, i) {
+      var cover = star.cover || 'https://i.ytimg.com/vi/' + star.id + '/hqdefault.jpg';
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'star reveal';
+      if (i) card.setAttribute('data-d', String(Math.min(i, 4)));
+      card.setAttribute('aria-label', 'Смотреть видеоотзыв: ' + star.name);
+      card.dataset.video = star.id;
+      card.dataset.name = star.name;
+      card.innerHTML =
+        '<span class="star__thumb">' +
+          '<img src="' + cover + '" alt="" loading="lazy" decoding="async" width="480" height="270">' +
+          '<span class="star__play"><span>' +
+            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>' +
+          '</span></span>' +
+        '</span>' +
+        '<span class="star__name">' + star.name + '</span>' +
+        (star.role ? '<span class="star__role">' + star.role + '</span>' : '');
+      var img = card.querySelector('img');
+      img.addEventListener('error', function () {
+        img.parentNode.classList.add('is-broken');
+      });
+      starsGrid.appendChild(card);
+    });
+
+    function openVideo(id, name, opener) {
+      videoOpener = opener || null;
+      videoTitle.textContent = name || '';
+      // Домен без cookie: YouTube не ставит их до начала просмотра
+      videoSlot.innerHTML =
+        '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
+        '?autoplay=1&rel=0&modestbranding=1" title="' + (name || 'Видеоотзыв') + '" ' +
+        'allow="accelerometer; autoplay; encrypted-media; picture-in-picture" ' +
+        'allowfullscreen></iframe>';
+      videoModal.hidden = false;
+      requestAnimationFrame(function () { videoModal.classList.add('is-open'); });
+      document.body.classList.add('is-locked');
+      videoModal.querySelector('.modal__close').focus();
+    }
+
+    function closeVideo() {
+      videoModal.classList.remove('is-open');
+      document.body.classList.remove('is-locked');
+      videoSlot.innerHTML = '';        // выгружаем плеер, иначе звук продолжит играть
+      window.setTimeout(function () { videoModal.hidden = true; }, 320);
+      if (videoOpener) videoOpener.focus();
+    }
+
+    starsGrid.addEventListener('click', function (e) {
+      var card = e.target.closest('.star');
+      if (card) openVideo(card.dataset.video, card.dataset.name, card);
+    });
+    videoModal.addEventListener('click', function (e) {
+      if (e.target.closest('[data-close-video]')) closeVideo();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && videoModal.classList.contains('is-open')) closeVideo();
+    });
+  }
+
+  /* ---------- 9. Бизнес-мессенджер Jivo -----------------------------------
      Виджет весит несколько сотен килобайт и тянет за собой соединения.
      Если грузить его сразу, страдает скорость первого экрана — а у нас
      почти все посетители с телефонов. Поэтому подключаем отложенно: при
@@ -1932,7 +2093,7 @@ section[id]{scroll-margin-top:80px}
     window.setTimeout(loadJivo, 8000);
   }
 
-  /* ---------- 9. Плавное раскрытие прайса ---------------------------------
+  /* ---------- 10. Плавное раскрытие прайса --------------------------------
      Родной <details> открывается рывком. Анимируем высоту и внутренние
      отступы: открытие чуть медленнее закрытия — так ощущается естественнее.
      Без JS и при отключённых анимациях остаётся обычное поведение. */
@@ -1984,7 +2145,7 @@ section[id]{scroll-margin-top:80px}
     });
   });
 
-  /* ---------- 10. Валидация и отправка заявки ----------------------------- */
+  /* ---------- 11. Валидация и отправка заявки ----------------------------- */
   var submitBtn = document.getElementById('submitBtn');
   var formErr = document.getElementById('formErr');
   var openedAt = 0;                 // когда открыли форму — быстрая отправка = бот
