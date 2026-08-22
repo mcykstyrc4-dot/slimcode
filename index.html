@@ -727,6 +727,24 @@ section[id]{scroll-margin-top:80px}
 .form .btn--primary{width:100%;margin-top:.35rem}
 .form__note{font-size:.72rem;color:var(--ink-soft);line-height:1.5}
 .form__note a{text-decoration:underline;text-underline-offset:2px}
+.btn__wa{flex:0 0 auto}
+.btn.is-loading .btn__wa{display:none}
+
+/* Запасной путь: прямая запись в Dikidi для тех, кто не хочет ждать звонка */
+.form__alt{
+  margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid var(--line-light);
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;
+}
+.form__alt-label{
+  width:100%;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:700;
+}
+.form__alt a{
+  font-size:.84rem;font-weight:600;color:var(--ink);
+  border-bottom:1px solid var(--line-light);transition:border-color .2s,color .2s;
+}
+.form__alt a:hover{color:var(--accent);border-bottom-color:currentColor}
+
 .form__ok{display:none;text-align:center;padding:1.5rem 0}
 .form__ok svg{width:52px;height:52px;color:var(--accent);margin:0 auto 1rem}
 .modal.is-done .form{display:none}
@@ -1498,8 +1516,8 @@ section[id]{scroll-margin-top:80px}
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
 
-    <h2 class="modal__title" id="modalTitle">Запись на консультацию</h2>
-    <p class="modal__text">Перезвоним в течение 15 минут в рабочее время и подберём удобное время визита.</p>
+    <h2 class="modal__title" id="modalTitle">Оставить заявку</h2>
+    <p class="modal__text">Заполните — откроем WhatsApp с готовым сообщением, вам останется нажать «отправить». Перезвоним и подберём удобное время.</p>
 
     <form class="form" id="bookForm" novalidate>
       <div class="field">
@@ -1543,7 +1561,8 @@ section[id]{scroll-margin-top:80px}
 
       <button class="btn btn--primary" id="submitBtn" type="submit">
         <span class="btn__spin" aria-hidden="true"></span>
-        <span class="btn__label">Отправить заявку</span>
+        <svg class="btn__wa" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg>
+        <span class="btn__label">Отправить в WhatsApp</span>
       </button>
 
       <p class="form__err" id="formErr" role="alert" hidden>
@@ -1553,13 +1572,20 @@ section[id]{scroll-margin-top:80px}
       </p>
 
       <p class="form__note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a> и обработкой персональных данных.</p>
+
+      <div class="form__alt">
+        <p class="form__alt-label">Или выберите время сами</p>
+        <a href="https://dikidi.net/158455" target="_blank" rel="noopener">Петергофское шоссе, 53</a>
+        <a href="https://dikidi.net/584557" target="_blank" rel="noopener">Проспект Героев, 33</a>
+        <a href="https://dikidi.net/696805" target="_blank" rel="noopener">Проспект Королёва, 61</a>
+      </div>
     </form>
 
     <!-- Экран «спасибо» -->
     <div class="form__ok" id="formOk" role="status" tabindex="-1">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
-      <h3 class="modal__title">Заявка принята</h3>
-      <p class="modal__text">Спасибо! Администратор свяжется с вами в ближайшее время.</p>
+      <h3 class="modal__title">Открыли WhatsApp</h3>
+      <p class="modal__text">Сообщение уже набрано — отправьте его, и администратор ответит вам в чате.</p>
     </div>
   </div>
 </div>
@@ -1579,6 +1605,19 @@ section[id]{scroll-margin-top:80px}
   'use strict';
 
   /* =======================================================================
+     КУДА УХОДИТ ЗАЯВКА
+     -----------------------------------------------------------------------
+     Сейчас режим 'whatsapp': форма собирает данные и открывает чат с уже
+     набранным сообщением — клиенту остаётся нажать «отправить». Ни сервера,
+     ни бота для этого не нужно.
+
+     Если появится телеграм-бот, достаточно указать endpoint ниже — форма
+     сама переключится на отправку на сервер, а WhatsApp останется запасным
+     вариантом при сбое. Готовые обработчики лежат в репозитории
+     (telegram-proxy.php и telegram-worker.js), см. README.
+     ======================================================================= */
+
+  /* =======================================================================
      НАСТРОЙКИ ОТПРАВКИ ЗАЯВОК
      -----------------------------------------------------------------------
      Вариант 1 (рекомендуется). endpoint — адрес вашего обработчика, который
@@ -1594,7 +1633,8 @@ section[id]{scroll-margin-top:80px}
      придётся отзывать. Используйте только как временное решение.
      ======================================================================= */
   var CONFIG = {
-    endpoint: '/api/lead',        // ЗАМЕНИТЬ: адрес обработчика ('' — выключить)
+    whatsapp: '79112979428',      // номер WhatsApp для режима без сервера
+    endpoint: '',                 // адрес обработчика; пусто — уходим в WhatsApp
     telegram: {
       token: '',                  // запасной режим: токен бота от @BotFather
       chatId: ''                  // запасной режим: id чата или канала
@@ -1864,7 +1904,19 @@ section[id]{scroll-margin-top:80px}
     return ok;
   }
 
-  // Текст заявки — одинаковый и для сервера, и для прямого режима
+  // Сообщение, которое клиент отправляет сам из WhatsApp
+  function clientText(data) {
+    return [
+      'Здравствуйте! Хочу записаться.',
+      '',
+      'Имя: ' + data.name,
+      'Телефон: ' + data.phone,
+      'Услуга: ' + data.service,
+      'Салон: ' + data.salon
+    ].join('\n');
+  }
+
+  // Текст заявки для сервера или бота
   function leadText(data) {
     return [
       '🔔 Новая заявка с сайта',
@@ -1930,6 +1982,17 @@ section[id]{scroll-margin-top:80px}
     data.text = leadText(data);       // готовая строка для Telegram
 
     if (isBot) { modal.classList.add('is-done'); return; }
+
+    // Без сервера: открываем WhatsApp с готовым сообщением.
+    // window.open вызываем синхронно, внутри обработчика нажатия, иначе
+    // браузер посчитает это всплывающим окном и заблокирует.
+    if (!CONFIG.endpoint && !CONFIG.telegram.token) {
+      window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' +
+                  encodeURIComponent(clientText(data)), '_blank', 'noopener');
+      modal.classList.add('is-done');
+      document.getElementById('formOk').focus();
+      return;
+    }
 
     formErr.hidden = true;
     submitBtn.classList.add('is-loading');
