@@ -722,6 +722,11 @@ section[id]{scroll-margin-top:80px}
 .maps__rating .arw{transition:transform .3s var(--ease)}
 .maps__rating:hover .arw{transform:translateX(4px)}
 
+/* Сведения об исполнителе под карточками салонов: читается, но не спорит с CTA */
+.legal-note{
+  margin:1.5rem 0 0;font-size:.78rem;line-height:1.6;color:var(--ink-soft);max-width:70ch;
+}
+
 .salons{display:grid;gap:.9rem}
 .salon{
   display:grid;gap:.5rem;padding:1.35rem 1.4rem;border-radius:var(--radius);
@@ -1666,6 +1671,16 @@ section[id]{scroll-margin-top:80px}
         </a>
       </article>
     </div>
+
+    <!-- Сведения об исполнителе: услуги медицинские, посетитель вправе видеть,
+         кто и по какой лицензии их оказывает, не открывая юридические страницы. -->
+    <p class="legal-note reveal">
+      Медицинские услуги оказывает ООО «Слим Код», ИНН 7807280704, ОГРН 1247800095542.
+      Лицензия на осуществление медицинской деятельности
+      <span class="nowrap">Л041-01148-78/03316215</span> выдана Комитетом по здравоохранению
+      Санкт-Петербурга 6 октября 2025 года. Имеются противопоказания, необходима консультация
+      специалиста.
+    </p>
 
     <!-- Итоговый блок контактов: одна основная CTA + WhatsApp + телефон -->
     <div class="contact-cta reveal">
