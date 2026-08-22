@@ -652,6 +652,31 @@ section[id]{scroll-margin-top:80px}
   transition:border-color .2s,box-shadow .2s;
 }
 .field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(224,57,63,.14)}
+.field input.is-invalid{border-color:var(--accent);background:rgba(224,57,63,.04)}
+.field__err{font-size:.76rem;color:var(--accent);font-weight:600}
+.field__err:empty{display:none}
+
+/* Ловушка для спам-ботов: человек её не видит и не может сфокусировать */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0}
+
+/* Кнопка в состоянии отправки */
+.btn.is-loading{pointer-events:none}
+.btn.is-loading .btn__label{opacity:.55}
+.btn__spin{
+  width:17px;height:17px;border-radius:50%;flex:0 0 auto;
+  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;
+  animation:spin .7s linear infinite;display:none;
+}
+.btn.is-loading .btn__spin{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Сообщение о неудачной отправке */
+.form__err{
+  font-size:.85rem;line-height:1.55;color:var(--ink);
+  padding:.85rem 1rem;border-radius:12px;
+  background:rgba(224,57,63,.08);border:1px solid rgba(224,57,63,.3);
+}
+.form__err a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .form .btn--primary{width:100%;margin-top:.35rem}
 .form__note{font-size:.72rem;color:var(--ink-soft);line-height:1.5}
 .form__note a{text-decoration:underline;text-underline-offset:2px}
@@ -1261,11 +1286,16 @@ section[id]{scroll-margin-top:80px}
     <form class="form" id="bookForm" novalidate>
       <div class="field">
         <label for="fName">Как вас зовут</label>
-        <input id="fName" name="name" type="text" autocomplete="name" placeholder="Имя" required>
+        <input id="fName" name="name" type="text" autocomplete="name" placeholder="Имя" required
+               aria-describedby="errName">
+        <p class="field__err" id="errName" aria-live="polite"></p>
       </div>
       <div class="field">
         <label for="fPhone">Телефон</label>
-        <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
+        <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+               placeholder="+7 (___) ___-__-__" required
+               aria-describedby="errPhone">
+        <p class="field__err" id="errPhone" aria-live="polite"></p>
       </div>
       <div class="field">
         <label for="fService">Услуга</label>
@@ -1287,7 +1317,22 @@ section[id]{scroll-margin-top:80px}
           <option>м. Проспект Просвещения</option>
         </select>
       </div>
-      <button class="btn btn--primary" type="submit">Отправить заявку</button>
+      <!-- Ловушка для ботов: настоящий человек это поле не заполнит -->
+      <div class="hp" aria-hidden="true">
+        <label>Компания<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <button class="btn btn--primary" id="submitBtn" type="submit">
+        <span class="btn__spin" aria-hidden="true"></span>
+        <span class="btn__label">Отправить заявку</span>
+      </button>
+
+      <p class="form__err" id="formErr" role="alert" hidden>
+        Не удалось отправить заявку. Позвоните нам —
+        <a href="tel:+78120000000">+7 (812) 000-00-00</a> — или напишите в
+        <a href="https://wa.me/78120000000" target="_blank" rel="noopener">WhatsApp</a>.
+      </p>
+
       <p class="form__note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a> и обработкой персональных данных.</p>
     </form>
 
@@ -1313,6 +1358,30 @@ section[id]{scroll-margin-top:80px}
    ========================================================================= */
 (function () {
   'use strict';
+
+  /* =======================================================================
+     НАСТРОЙКИ ОТПРАВКИ ЗАЯВОК
+     -----------------------------------------------------------------------
+     Вариант 1 (рекомендуется). endpoint — адрес вашего обработчика, который
+     сам передаёт заявку в Telegram. Готовые обработчики лежат в репозитории:
+       • telegram-proxy.php      — для обычного хостинга с PHP;
+       • telegram-worker.js      — для Cloudflare Workers.
+     Токен бота хранится на сервере и остаётся в секрете.
+
+     Вариант 2 (запасной). Если сервера нет совсем — заполните telegram.token
+     и telegram.chatId, и страница будет обращаться к API Telegram напрямую.
+     ВНИМАНИЕ: в этом режиме токен бота виден любому, кто откроет исходный код
+     страницы. Его смогут использовать для рассылки спама в ваш чат, и токен
+     придётся отзывать. Используйте только как временное решение.
+     ======================================================================= */
+  var CONFIG = {
+    endpoint: '/api/lead',        // ЗАМЕНИТЬ: адрес обработчика ('' — выключить)
+    telegram: {
+      token: '',                  // запасной режим: токен бота от @BotFather
+      chatId: ''                  // запасной режим: id чата или канала
+    },
+    timeout: 12000                // сколько ждём ответ сервера, мс
+  };
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1472,6 +1541,7 @@ section[id]{scroll-margin-top:80px}
         if (o.value === service || o.textContent === service) serviceSelect.value = o.value;
       });
     }
+    openedAt = Date.now();
     window.setTimeout(function () { document.getElementById('fName').focus(); }, 260);
   }
 
@@ -1482,6 +1552,9 @@ section[id]{scroll-margin-top:80px}
       modal.hidden = true;
       modal.classList.remove('is-done');
       form.reset();
+      formErr.hidden = true;
+      clearError(nameField);
+      clearError(phoneField);
     }, 320);
     if (lastFocused) lastFocused.focus();
   }
@@ -1513,21 +1586,194 @@ section[id]{scroll-margin-top:80px}
     }
   });
 
-  /* Отправка формы.
-     ЗАМЕНИТЬ: здесь имитация — подставьте fetch на свой обработчик/CRM. */
+  /* ---------- 8. Маска телефона ------------------------------------------
+     Формат +7 (999) 123-45-67. Обрабатывает ввод, вставку из буфера,
+     8 в начале, Backspace по разделителям и правку в середине строки. */
+  var phoneField = form.elements.phone;
+  var nameField = form.elements.name;
+
+  function onlyDigits(v) { return (v || '').replace(/\D/g, ''); }
+
+  // Приводим к российскому номеру: 8… и 9… превращаем в 7…
+  function normalizePhone(d) {
+    if (!d) return '';
+    if (d[0] === '8') d = '7' + d.slice(1);
+    else if (d[0] !== '7') d = '7' + d;
+    return d.slice(0, 11);
+  }
+
+  function formatPhone(d) {
+    if (!d) return '';
+    var out = '+7';
+    if (d.length > 1) out += ' (' + d.slice(1, 4);
+    if (d.length >= 5) out += ') ' + d.slice(4, 7);
+    if (d.length >= 8) out += '-' + d.slice(7, 9);
+    if (d.length >= 10) out += '-' + d.slice(9, 11);
+    return out;
+  }
+
+  // Позиция каретки после n-й цифры отформатированной строки
+  function caretAfter(str, n) {
+    var seen = 0;
+    for (var i = 0; i < str.length; i++) {
+      if (/\d/.test(str[i]) && ++seen === n) return i + 1;
+    }
+    return str.length;
+  }
+
+  function applyMask(digitsBeforeCaret) {
+    var raw = onlyDigits(phoneField.value);
+    var norm = normalizePhone(raw);
+    var lead = norm.length - raw.length;          // 1, если добавили «7» в начало
+    phoneField.value = formatPhone(norm);
+    var target = Math.max(1, digitsBeforeCaret + (lead > 0 ? lead : 0));
+    var pos = caretAfter(phoneField.value, target);
+    try { phoneField.setSelectionRange(pos, pos); } catch (err) { /* поле вне фокуса */ }
+  }
+
+  phoneField.addEventListener('input', function () {
+    var before = onlyDigits(phoneField.value.slice(0, phoneField.selectionStart)).length;
+    applyMask(before);
+    clearError(phoneField);
+  });
+
+  // Backspace на разделителе должен удалять ближайшую цифру слева, а не «залипать»
+  phoneField.addEventListener('keydown', function (e) {
+    if (e.key !== 'Backspace') return;
+    var v = phoneField.value, pos = phoneField.selectionStart;
+    if (pos === 0 || pos !== phoneField.selectionEnd || /\d/.test(v[pos - 1])) return;
+    e.preventDefault();
+    var i = pos - 1;
+    while (i >= 0 && !/\d/.test(v[i])) i--;
+    if (i < 0) return;
+    var kept = onlyDigits(v.slice(0, i));
+    phoneField.value = formatPhone(normalizePhone(kept + onlyDigits(v.slice(i + 1))));
+    var p = caretAfter(phoneField.value, Math.max(1, kept.length));
+    phoneField.setSelectionRange(p, p);
+  });
+
+  // По фокусу подставляем +7, чтобы не гадать, с чего начинать
+  phoneField.addEventListener('focus', function () {
+    if (!phoneField.value) {
+      phoneField.value = '+7 ';
+      var p = phoneField.value.length;
+      phoneField.setSelectionRange(p, p);
+    }
+  });
+  phoneField.addEventListener('blur', function () {
+    if (onlyDigits(phoneField.value).length <= 1) phoneField.value = '';
+  });
+
+  /* ---------- 9. Валидация и отправка заявки ------------------------------ */
+  var submitBtn = document.getElementById('submitBtn');
+  var formErr = document.getElementById('formErr');
+  var openedAt = 0;                 // когда открыли форму — быстрая отправка = бот
+
+  function setError(field, msg) {
+    field.classList.add('is-invalid');
+    var box = document.getElementById(field === nameField ? 'errName' : 'errPhone');
+    if (box) box.textContent = msg;
+  }
+  function clearError(field) {
+    field.classList.remove('is-invalid');
+    var box = document.getElementById(field === nameField ? 'errName' : 'errPhone');
+    if (box) box.textContent = '';
+  }
+  nameField.addEventListener('input', function () { clearError(nameField); });
+
+  function validate() {
+    var ok = true;
+    if (nameField.value.trim().length < 2) {
+      setError(nameField, 'Напишите, как к вам обращаться'); ok = false;
+    }
+    if (onlyDigits(phoneField.value).length !== 11) {
+      setError(phoneField, 'Введите номер полностью'); ok = false;
+    }
+    if (!ok) (nameField.classList.contains('is-invalid') ? nameField : phoneField).focus();
+    return ok;
+  }
+
+  // Текст заявки — одинаковый и для сервера, и для прямого режима
+  function leadText(data) {
+    return [
+      '🔔 Новая заявка с сайта',
+      '',
+      'Имя: ' + data.name,
+      'Телефон: ' + data.phone,
+      'Услуга: ' + data.service,
+      'Салон: ' + data.salon,
+      '',
+      'Страница: ' + data.page,
+      'Время: ' + data.time
+    ].join('\n');
+  }
+
+  function post(url, body) {
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = window.setTimeout(function () { if (ctrl) ctrl.abort(); }, CONFIG.timeout);
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (r) {
+      window.clearTimeout(timer);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r;
+    }, function (err) {
+      window.clearTimeout(timer);
+      throw err;
+    });
+  }
+
+  function send(data) {
+    if (CONFIG.endpoint) return post(CONFIG.endpoint, data);
+    if (CONFIG.telegram.token && CONFIG.telegram.chatId) {
+      return post('https://api.telegram.org/bot' + CONFIG.telegram.token + '/sendMessage', {
+        chat_id: CONFIG.telegram.chatId,
+        text: leadText(data),
+        disable_web_page_preview: true
+      });
+    }
+    return Promise.reject(new Error('Отправка не настроена: заполните CONFIG'));
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var nameField = form.elements.name;      // form.name — это имя формы, не поле
-    var phoneField = form.elements.phone;
-    var nameVal = nameField.value.trim();
-    var phoneVal = phoneField.value.replace(/\D/g, '');
-    if (!nameVal || phoneVal.length < 10) {
-      (!nameVal ? nameField : phoneField).focus();
-      return;
-    }
-    // fetch('/api/lead', { method:'POST', body:new FormData(form) });
-    modal.classList.add('is-done');
-    document.getElementById('formOk').focus();
+    if (submitBtn.classList.contains('is-loading')) return;   // защита от двойного клика
+    if (!validate()) return;
+
+    // Боты заполняют скрытое поле и отправляют форму мгновенно.
+    // Им показываем обычный экран «спасибо», но никуда ничего не шлём.
+    var isBot = form.elements.company.value !== '' || (Date.now() - openedAt) < 1500;
+
+    var data = {
+      name: nameField.value.trim(),
+      phone: phoneField.value,
+      service: form.elements.service.value,
+      salon: form.elements.salon.value,
+      page: location.href,
+      time: new Date().toLocaleString('ru-RU'),
+      text: ''
+    };
+    data.text = leadText(data);       // готовая строка для Telegram
+
+    if (isBot) { modal.classList.add('is-done'); return; }
+
+    formErr.hidden = true;
+    submitBtn.classList.add('is-loading');
+    submitBtn.setAttribute('aria-busy', 'true');
+
+    send(data).then(function () {
+      modal.classList.add('is-done');
+      document.getElementById('formOk').focus();
+    }).catch(function (err) {
+      formErr.hidden = false;
+      if (window.console) console.error('Заявка не отправлена:', err);
+    }).then(function () {
+      submitBtn.classList.remove('is-loading');
+      submitBtn.removeAttribute('aria-busy');
+    });
   });
 
 })();
