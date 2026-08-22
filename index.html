@@ -406,8 +406,20 @@ section[id]{scroll-margin-top:80px}
 .hero__badge b{font-size:1.5rem;letter-spacing:-.03em;line-height:1.1}
 .hero__badge-src{font-size:.74rem;color:var(--on-dark)}
 
+.hero__marks{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .7rem;
+  margin-bottom:clamp(1.25rem,4vw,1.75rem);
+}
+.hero__award{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.35rem .9rem .35rem .5rem;border-radius:100px;
+  border:1px solid var(--line-dark);background:rgba(248,242,236,.04);backdrop-filter:blur(6px);
+  font-size:.8rem;font-weight:700;color:var(--cream);white-space:nowrap;
+}
+.hero__award img{height:24px;width:auto;display:block}
+
 .hero__since{
-  display:inline-flex;align-items:center;gap:.7rem;margin-bottom:clamp(1.25rem,4vw,1.75rem);
+  display:inline-flex;align-items:center;gap:.7rem;
   padding:.5rem .95rem .5rem .6rem;border:1px solid var(--line-dark);border-radius:100px;
   background:rgba(248,242,236,.04);backdrop-filter:blur(6px);
   font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark);
@@ -585,17 +597,7 @@ section[id]{scroll-margin-top:80px}
   transition:color .2s;
 }
 .maps__item:hover{color:var(--accent)}
-/* Знак «Хорошее место» от Яндекса — рядом с оценкой, это один источник */
-.maps__award{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-size:.86rem;font-weight:700;color:var(--ink);
-}
-.maps__award img{height:26px;width:auto;display:block}
 
-/* Точка-разделитель — только когда оценка и знак стоят в одну строку */
-@media (min-width:600px){
-  .maps__award::before{content:"·";margin-right:.9rem;color:var(--line-light);font-weight:700}
-}
 .maps__item .arw{transition:transform .3s var(--ease)}
 .maps__item:hover .arw{transform:translateX(4px)}
 
@@ -835,7 +837,14 @@ section[id]{scroll-margin-top:80px}
   <div class="hero__in">
    <div class="hero__grid">
     <div class="hero__content">
-    <p class="hero__since reveal"><b>с 2001</b> Санкт-Петербург · 3 салона</p>
+    <div class="hero__marks reveal">
+      <p class="hero__since"><b>с 2001</b> Санкт-Петербург · 3 салона</p>
+      <!-- Знак Яндекса: преимущество, поэтому стоит на первом экране -->
+      <span class="hero__award">
+        <img src="assets/good-place.png" alt="" width="88" height="52" decoding="async">
+        Хорошее место 2026
+      </span>
+    </div>
 
     <h1 class="hero__title reveal" data-d="1">
       Аппаратная коррекция фигуры
@@ -1379,10 +1388,6 @@ section[id]{scroll-margin-top:80px}
         <span class="maps__score">5,0</span>
         <span class="maps__src">на Яндекс.Картах <span class="arw" aria-hidden="true">→</span></span>
       </a>
-      <span class="maps__award">
-        <img src="assets/good-place.png" alt="" width="88" height="52" loading="lazy" decoding="async">
-        Хорошее место 2026
-      </span>
     </div>
 
     <!-- Онлайн-запись ведёт в Dikidi — у каждого салона своя страница.
