@@ -389,10 +389,26 @@ section[id]{scroll-margin-top:80px}
 /* Медиа-блок хиро. На телефоне идёт под кнопками и кадрируется шире,
    чтобы не выталкивать призыв к действию за пределы экрана. */
 .hero__media{position:relative;margin-top:1.75rem}
+/* Кадр не обрывается по краю, а мягко уходит в фон: широкая рассеянная
+   тень наружу и лёгкое затемнение по краям внутри. */
+.hero__frame{
+  position:relative;display:block;
+  border-radius:calc(var(--radius-lg) + 6px);
+  box-shadow:
+    0 40px 90px -35px rgba(10,3,5,.9),
+    0 12px 40px -20px rgba(10,3,5,.6),
+    0 0 0 1px rgba(248,242,236,.12);
+}
+.hero__frame::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  border-radius:inherit;
+  background:
+    radial-gradient(120% 100% at 50% 45%,transparent 55%,rgba(21,6,9,.42) 100%),
+    linear-gradient(to top,rgba(21,6,9,.30),transparent 38%);
+}
 .hero__media img{
   display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;
-  border-radius:calc(var(--radius-lg) + 6px);
-  box-shadow:var(--shadow-card);border:1px solid rgba(248,242,236,.16);
+  border-radius:inherit;
 }
 .hero__badge{
   position:absolute;left:14px;top:14px;z-index:2;
@@ -870,7 +886,7 @@ section[id]{scroll-margin-top:80px}
     </div>
 
     <div class="hero__media reveal" data-d="2">
-      <picture>
+      <picture class="hero__frame">
         <source type="image/avif" sizes="(min-width:900px) 460px, 90vw"
                 srcset="assets/hero-480.avif 480w, assets/hero-960.avif 960w">
         <source type="image/webp" sizes="(min-width:900px) 460px, 90vw"
@@ -1266,7 +1282,7 @@ section[id]{scroll-margin-top:80px}
         <p class="eyebrow">Команда</p>
         <h2 class="h2">Специалисты,<br><em>которые ведут ваш курс</em></h2>
       </div>
-      <p class="lead">С вами работают специалисты по аппаратной коррекции фигуры — в команде есть врач-дерматолог.</p>
+      <p class="lead">Все специалисты с медицинским образованием. Программу собираем на первой встрече — под вашу задачу и состояние тканей.</p>
     </div>
 
     <div class="team__grid">
