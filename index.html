@@ -1655,6 +1655,7 @@ section[id]{scroll-margin-top:80px}
      придётся отзывать. Используйте только как временное решение.
      ======================================================================= */
   var CONFIG = {
+    jivoId: '',                   // идентификатор виджета Jivo; пусто — не подключаем
     whatsapp: '79112979428',      // номер WhatsApp для режима без сервера
     endpoint: '',                 // адрес обработчика; пусто — уходим в WhatsApp
     telegram: {
@@ -1897,7 +1898,41 @@ section[id]{scroll-margin-top:80px}
     if (onlyDigits(phoneField.value).length <= 1) phoneField.value = '';
   });
 
-  /* ---------- 8. Плавное раскрытие прайса ---------------------------------
+  /* ---------- 8. Бизнес-мессенджер Jivo -----------------------------------
+     Виджет весит несколько сотен килобайт и тянет за собой соединения.
+     Если грузить его сразу, страдает скорость первого экрана — а у нас
+     почти все посетители с телефонов. Поэтому подключаем отложенно: при
+     первом действии посетителя либо через 8 секунд, что случится раньше.
+     На поведение виджета это не влияет, он всё равно появляется до того,
+     как человек до него доберётся.
+
+     ЗАМЕНИТЬ: идентификатор виджета в CONFIG.jivoId (см. README). */
+  if (CONFIG.jivoId) {
+    var jivoStarted = false;
+    var jivoEvents = ['pointerdown', 'touchstart', 'keydown', 'scroll'];
+
+    function loadJivo() {
+      if (jivoStarted) return;
+      jivoStarted = true;
+      jivoEvents.forEach(function (ev) {
+        window.removeEventListener(ev, loadJivo, { passive: true });
+      });
+      var tag = document.createElement('script');
+      tag.src = 'https://code.jivo.ru/widget/' + CONFIG.jivoId;
+      tag.async = true;
+      document.body.appendChild(tag);
+      // Кнопка Jivo встаёт в тот же угол, что и наша кнопка WhatsApp,
+      // поэтому свою убираем — иначе они наезжают друг на друга.
+      if (fab) fab.style.display = 'none';
+    }
+
+    jivoEvents.forEach(function (ev) {
+      window.addEventListener(ev, loadJivo, { passive: true, once: true });
+    });
+    window.setTimeout(loadJivo, 8000);
+  }
+
+  /* ---------- 9. Плавное раскрытие прайса ---------------------------------
      Родной <details> открывается рывком. Анимируем высоту и внутренние
      отступы: открытие чуть медленнее закрытия — так ощущается естественнее.
      Без JS и при отключённых анимациях остаётся обычное поведение. */
@@ -1949,7 +1984,7 @@ section[id]{scroll-margin-top:80px}
     });
   });
 
-  /* ---------- 9. Валидация и отправка заявки ------------------------------ */
+  /* ---------- 10. Валидация и отправка заявки ----------------------------- */
   var submitBtn = document.getElementById('submitBtn');
   var formErr = document.getElementById('formErr');
   var openedAt = 0;                 // когда открыли форму — быстрая отправка = бот
