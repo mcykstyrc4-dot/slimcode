@@ -395,7 +395,7 @@ section[id]{scroll-margin-top:80px}
   box-shadow:var(--shadow-card);border:1px solid rgba(248,242,236,.16);
 }
 .hero__badge{
-  position:absolute;left:14px;bottom:14px;z-index:2;
+  position:absolute;left:14px;top:14px;z-index:2;
   display:flex;flex-direction:column;gap:.15rem;
   padding:.85rem 1.1rem;border-radius:var(--radius);
   background:rgba(21,6,9,.82);backdrop-filter:blur(10px);
@@ -768,8 +768,8 @@ section[id]{scroll-margin-top:80px}
   .hero{align-items:center;padding-top:104px;padding-bottom:clamp(2rem,5vh,3.5rem)}
   .hero__grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:3.5rem}
   .hero__media{margin-top:0}
-  .hero__media img{aspect-ratio:4/5}
-  .hero__badge{left:20px;bottom:20px}
+  .hero__media img{aspect-ratio:3/2}
+  .hero__badge{left:20px;top:20px}
   .hero__scroll{display:flex}
   .section-head--split{grid-template-columns:1.05fr .95fr;align-items:end;gap:2.5rem}
   .cards{grid-template-columns:repeat(4,1fr);gap:1.15rem}
@@ -877,7 +877,7 @@ section[id]{scroll-margin-top:80px}
                 srcset="assets/hero-480.webp 480w, assets/hero-960.webp 960w">
         <img src="assets/hero-960.jpg" sizes="(min-width:900px) 460px, 90vw"
              srcset="assets/hero-480.jpg 480w, assets/hero-960.jpg 960w"
-             width="502" height="628" fetchpriority="high" decoding="async"
+             width="1152" height="768" fetchpriority="high" decoding="async"
              alt="Аппаратная коррекция фигуры на RSL Beautylizer в салоне Slim Code Lab">
       </picture>
       <div class="hero__badge">

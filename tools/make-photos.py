@@ -25,8 +25,8 @@ OUT = os.path.join(ROOT, 'assets', 'team')
 
 WIDTHS = [320, 640]           # карточка занимает максимум ~280 CSS-пикселей
 HERO_WIDTHS = [480, 960]      # блок первого экрана — примерно 460 CSS-пикселей
-HERO_RATIO = 4 / 5            # вертикальный кадр под колонку справа
-HERO_FOCUS = 0.65             # сдвиг кадра вправо: так в кадр попадает рука мастера
+HERO_RATIO = 3 / 2            # горизонтальный кадр: обрезаем снимок минимально
+HERO_FOCUS = 0.5              # кадр по центру: аппарат и мастер и так в середине
 QUALITY = {'avif': 55, 'webp': 78, 'jpg': 82}
 
 
@@ -45,6 +45,8 @@ def photo_box(path):
 
 def save_variants(img, prefix, widths):
     total = 0
+    # Апскейл запрещён: вариант шире исходника выглядит мыльным
+    widths = [w for w in widths if w <= img.width] or [img.width]
     for w in widths:
         h = round(img.height * w / img.width)
         small = img.resize((w, h), Image.LANCZOS)
