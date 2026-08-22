@@ -576,40 +576,6 @@ section[id]{scroll-margin-top:80px}
   color:#7fd6a2;                       /* выгода — единственный зелёный акцент на странице */
 }
 
-/* ---------- 8. Отзывы ---------------------------------------------------- */
-.reviews{background:var(--cream);color:var(--ink)}
-/* Карусель на scroll-snap: нативный свайп на телефоне, стрелки на десктопе */
-.rev__track{
-  display:grid;grid-auto-flow:column;grid-auto-columns:88%;
-  gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;
-  padding:.35rem var(--pad) 1.5rem;margin-inline:calc(var(--pad) * -1);
-  scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior-x:contain;
-}
-.rev__track::-webkit-scrollbar{display:none}
-.rev{
-  scroll-snap-align:center;display:flex;flex-direction:column;gap:1rem;
-  padding:1.6rem 1.5rem;border-radius:var(--radius);background:#fff;
-  border:1px solid var(--line-light);
-}
-.rev__stars{display:flex;gap:.18rem;color:var(--accent)}
-.rev__stars svg{width:15px;height:15px}
-.rev__text{font-size:.96rem;line-height:1.65;color:var(--ink);flex:1}
-.rev__who{display:flex;align-items:center;gap:.8rem;padding-top:.9rem;border-top:1px solid var(--line-light)}
-.rev__ava{width:42px;height:42px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;
-  background:linear-gradient(150deg,var(--wine-700),var(--wine-950));color:var(--gold);font-weight:700;font-size:.9rem}
-.rev__name{font-weight:700;font-size:.92rem}
-.rev__meta{font-size:.78rem;color:var(--ink-soft)}
-
-.rev__nav{display:flex;align-items:center;gap:.6rem;margin-top:.25rem}
-.rev__btn{
-  width:46px;height:46px;border-radius:50%;border:1px solid var(--line-light);
-  display:grid;place-items:center;transition:background-color .25s,border-color .25s,opacity .25s;
-}
-.rev__btn:hover{background:var(--ink);border-color:var(--ink);color:var(--cream)}
-.rev__btn[disabled]{opacity:.3;pointer-events:none}
-.rev__dots{display:flex;gap:.4rem;margin-left:auto}
-.rev__dot{width:7px;height:7px;border-radius:50%;background:rgba(28,10,14,.18);transition:width .3s var(--ease),background-color .3s}
-.rev__dot.is-on{width:22px;border-radius:100px;background:var(--accent)}
 
 /* ---------- 9. Команда --------------------------------------------------- */
 .team{background:var(--wine-950);color:var(--cream)}
@@ -622,6 +588,19 @@ section[id]{scroll-margin-top:80px}
 
 /* ---------- 10. Адреса и контакты ---------------------------------------- */
 .contacts{background:var(--cream);color:var(--ink)}
+/* Строка со ссылками на карточки в картах — там живут настоящие отзывы.
+   Когда пришлют оценки, рядом с названием добавится цифра: <b>4,9</b> */
+.maps{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem 1.5rem;margin-bottom:1.6rem}
+.maps__label{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+.maps__item{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:.95rem;font-weight:700;color:var(--accent);
+  border-bottom:1px solid transparent;transition:border-color .2s;
+}
+.maps__item:hover{border-bottom-color:currentColor}
+.maps__item .arw{transition:transform .3s var(--ease)}
+.maps__item:hover .arw{transform:translateX(4px)}
+
 .salons{display:grid;gap:.9rem}
 .salon{
   display:grid;gap:.5rem;padding:1.35rem 1.4rem;border-radius:var(--radius);
@@ -753,7 +732,6 @@ section[id]{scroll-margin-top:80px}
   .card--feature .card__meta{grid-column:2;grid-row:2}
   .card--feature .btn--ghost{grid-column:2;grid-row:3}
   .card--feature .card__title{font-size:clamp(1.5rem,3.4vw,2.1rem)}
-  .rev__track{grid-auto-columns:52%}
   .team__grid{grid-template-columns:repeat(3,1fr)}
   .salons{grid-template-columns:repeat(2,1fr)}
   .footer__bottom{grid-template-columns:1fr auto;align-items:center}
@@ -777,7 +755,6 @@ section[id]{scroll-margin-top:80px}
   .cards{grid-template-columns:repeat(4,1fr);gap:1.15rem}
   .promos__grid{gap:1.15rem}
   .promos__grid{grid-template-columns:repeat(3,1fr)}
-  .rev__track{grid-auto-columns:calc(33.333% - .8rem)}
   .salons{grid-template-columns:repeat(3,1fr)}
   .team__grid{grid-template-columns:repeat(5,1fr);gap:1.25rem 1rem}
   .contact-cta{grid-template-columns:1.1fr auto;align-items:center;padding:2.25rem 2.5rem;gap:2rem}
@@ -803,7 +780,6 @@ section[id]{scroll-margin-top:80px}
     <nav class="nav" aria-label="Основная навигация">
       <a href="#services">Услуги</a>
       <a href="#promos">Акции</a>
-      <a href="#reviews">Отзывы</a>
       <a href="#team">Команда</a>
       <a href="#contacts">Адреса</a>
     </nav>
@@ -823,7 +799,6 @@ section[id]{scroll-margin-top:80px}
   <nav class="menu__list" aria-label="Мобильная навигация">
     <a href="#services">Услуги</a>
     <a href="#promos">Акции</a>
-    <a href="#reviews">Отзывы</a>
     <a href="#team">Команда</a>
     <a href="#contacts">Адреса и контакты</a>
   </nav>
@@ -1242,94 +1217,6 @@ section[id]{scroll-margin-top:80px}
   </div>
 </section>
 
-<!-- ======================= 5. ОТЗЫВЫ =======================
-     Горизонтальная карусель на scroll-snap: свайп на телефоне,
-     стрелки и точки на десктопе. Без библиотек. -->
-<section class="section section--light reviews" id="reviews">
-  <div class="wrap">
-    <div class="section-head section-head--split reveal">
-      <div>
-        <p class="eyebrow">Отзывы</p>
-        <h2 class="h2">Что говорят <em>наши клиенты</em></h2>
-      </div>
-      <p class="lead">Реальные отзывы из карточек салонов. Фотографии «до/после» показываем на консультации.</p>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <div class="rev__track" id="revTrack" tabindex="0" role="group" aria-label="Отзывы клиентов, прокрутка по горизонтали">
-
-      <!-- ВНИМАНИЕ: это демо-тексты, их нельзя публиковать как настоящие отзывы.
-           Варианты замены: виджет отзывов Яндекс.Карт или 2ГИС (тянет реальные
-           отзывы автоматически) либо ваши тексты с согласия авторов. -->
-      <article class="rev">
-        <div class="rev__stars" aria-label="Оценка 5 из 5"></div>
-        <p class="rev__text">«Ходила курсом RSL — 12 процедур. Ушли объёмы в бёдрах, но главное — кожа стала ровнее. Мастер каждый раз замеряла и показывала динамику, это очень мотивирует.»</p>
-        <div class="rev__who">
-          <div class="rev__ava" aria-hidden="true">АМ</div>
-          <div><div class="rev__name">Анна М.</div><div class="rev__meta">RSL-скульптурирование · март 2025</div></div>
-        </div>
-      </article>
-
-      <article class="rev">
-        <div class="rev__stars" aria-label="Оценка 5 из 5"></div>
-        <p class="rev__text">«Была на LPG в других местах, здесь впервые объяснили, зачем именно такой режим и что делать между процедурами. Чувствуется, что работают давно.»</p>
-        <div class="rev__who">
-          <div class="rev__ava" aria-hidden="true">ЕК</div>
-          <div><div class="rev__name">Екатерина К.</div><div class="rev__meta">LPG-массаж · февраль 2025</div></div>
-        </div>
-      </article>
-
-      <article class="rev">
-        <div class="rev__stars" aria-label="Оценка 5 из 5"></div>
-        <p class="rev__text">«Брала прессомассаж из-за отёков после работы на ногах. Эффект с первого сеанса, а после курса тяжесть ушла совсем. Записываюсь снова.»</p>
-        <div class="rev__who">
-          <div class="rev__ava" aria-hidden="true">ОС</div>
-          <div><div class="rev__name">Ольга С.</div><div class="rev__meta">Прессомассаж · январь 2025</div></div>
-        </div>
-      </article>
-
-      <article class="rev">
-        <div class="rev__stars" aria-label="Оценка 5 из 5"></div>
-        <p class="rev__text">«Салон рядом с домом, всегда чисто, аппараты новые. Нравится, что не навязывают лишние процедуры — сказали честно, что мне хватит 8 сеансов.»</p>
-        <div class="rev__who">
-          <div class="rev__ava" aria-hidden="true">ИЛ</div>
-          <div><div class="rev__name">Ирина Л.</div><div class="rev__meta">Миостимуляция · апрель 2025</div></div>
-        </div>
-      </article>
-
-      <article class="rev">
-        <div class="rev__stars" aria-label="Оценка 5 из 5"></div>
-        <p class="rev__text">«Готовилась к отпуску, взяла комбинированный курс: кавитация + прессомассаж. Минус 6 см в талии за месяц, без диет и спортзала.»</p>
-        <div class="rev__who">
-          <div class="rev__ava" aria-hidden="true">МД</div>
-          <div><div class="rev__name">Мария Д.</div><div class="rev__meta">Кавитация · май 2025</div></div>
-        </div>
-      </article>
-
-      <article class="rev">
-        <div class="rev__stars" aria-label="Оценка 5 из 5"></div>
-        <p class="rev__text">«Хожу больше трёх лет, знаю всех мастеров по именам. Это тот случай, когда возвращаешься не только за результатом, но и за отношением.»</p>
-        <div class="rev__who">
-          <div class="rev__ava" aria-hidden="true">НВ</div>
-          <div><div class="rev__name">Наталья В.</div><div class="rev__meta">Постоянный клиент · 2022–2025</div></div>
-        </div>
-      </article>
-
-    </div>
-
-    <div class="rev__nav">
-      <button class="rev__btn" id="revPrev" aria-label="Предыдущий отзыв">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-      </button>
-      <button class="rev__btn" id="revNext" aria-label="Следующий отзыв">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-      </button>
-      <div class="rev__dots" id="revDots" aria-hidden="true"></div>
-    </div>
-  </div>
-</section>
-
 <!-- ======================= 6. КОМАНДА =======================
      Плейсхолдеры фото: заменить блок .ph на
      <img src="assets/team-1.jpg" alt="Имя, специализация" loading="lazy"> -->
@@ -1442,7 +1329,23 @@ section[id]{scroll-margin-top:80px}
         <p class="eyebrow">Адреса</p>
         <h2 class="h2">Три салона <em>в Санкт-Петербурге</em></h2>
       </div>
-      <p class="lead">Все салоны — в шаговой доступности от метро. Работаем без выходных, запись — по телефону или онлайн.</p>
+      <p class="lead">Записаться можно по телефону или онлайн — у каждого салона своя страница записи.</p>
+    </div>
+
+    <!-- Вместо отзывов на сайте — переход на карточки в картах, где отзывы
+         настоящие и обновляются сами.
+         ЗАМЕНИТЬ: ссылки на ваши карточки (сейчас ведут на поиск по названию)
+         и оценки, когда пришлёте — покажем цифру рядом с названием. -->
+    <div class="maps reveal">
+      <p class="maps__label">Отзывы и оценки — на картах</p>
+      <a class="maps__item" href="https://yandex.ru/maps/?text=Slim%20Code%20Lab%20%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3"
+         target="_blank" rel="noopener">
+        Яндекс.Карты <span class="arw" aria-hidden="true">→</span>
+      </a>
+      <a class="maps__item" href="https://2gis.ru/spb/search/Slim%20Code%20Lab"
+         target="_blank" rel="noopener">
+        2ГИС <span class="arw" aria-hidden="true">→</span>
+      </a>
     </div>
 
     <!-- Онлайн-запись ведёт в Dikidi — у каждого салона своя страница.
@@ -1505,9 +1408,9 @@ section[id]{scroll-margin-top:80px}
         </a>
         <p class="footer__desc">Сеть салонов аппаратной коррекции фигуры в Санкт-Петербурге. Работаем с 2001 года.</p>
         <div class="socials">
-          <!-- ЗАМЕНИТЬ: ссылки на реальные аккаунты -->
-          <a href="https://vk.com/" target="_blank" rel="noopener" aria-label="ВКонтакте">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 17.5c-5.4 0-8.7-3.8-8.8-10h2.7c.1 4.6 2.2 6.6 3.8 7V7.5h2.6v3.9c1.6-.2 3.2-2 3.8-3.9h2.5c-.4 2.3-2 4.1-3.2 4.9 1.2.6 3 2.2 3.7 5.1h-2.8c-.5-1.7-2-3-3.9-3.2v3.2H13z"/></svg>
+          <!-- ЗАМЕНИТЬ: сюда же вернётся ВКонтакте, когда пришлёте ссылку -->
+          <a href="https://t.me/+79112979428" target="_blank" rel="noopener" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 4.3 2.9 11.5c-1 .4-1 1.8.1 2.1l4.6 1.4 1.8 5.4c.3.8 1.3 1 1.9.4l2.5-2.4 4.6 3.4c.7.5 1.7.1 1.9-.7l3.1-14.6c.2-1-.8-1.8-1.7-1.2zM9.6 14.3l8.1-5-6.6 6.4-.3 3.1-1.2-4.5z"/></svg>
           </a>
           <a href="https://instagram.com/slim_code_lab" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
@@ -1649,8 +1552,8 @@ section[id]{scroll-margin-top:80px}
      3. Мобильное меню
      4. Появление блоков при скролле (IntersectionObserver)
      5. Анимация счётчиков в блоке цифр
-     6. Карусель отзывов (scroll-snap + стрелки + точки)
-     7. Модальное окно записи (открытие с подстановкой услуги, фокус-ловушка)
+     6. Модальное окно записи (открытие с подстановкой услуги, фокус-ловушка)
+     7. Маска телефона и отправка заявки
    ========================================================================= */
 (function () {
   'use strict';
@@ -1684,11 +1587,6 @@ section[id]{scroll-margin-top:80px}
   /* ---------- 1. Мелочи ------------------------------------------------- */
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Звёзды рисуем скриптом, чтобы не дублировать SVG шесть раз в разметке
-  var STAR = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>';
-  document.querySelectorAll('.rev__stars').forEach(function (box) {
-    box.innerHTML = STAR.repeat(5);
-  });
 
   /* ---------- 2. Шапка и плавающая кнопка ------------------------------- */
   var header = document.getElementById('header');
@@ -1775,50 +1673,7 @@ section[id]{scroll-margin-top:80px}
 
   onScroll();   // первичная синхронизация шапки, кнопки и счётчиков
 
-  /* ---------- 6. Карусель отзывов ---------------------------------------- */
-  var track = document.getElementById('revTrack');
-  var prev = document.getElementById('revPrev');
-  var next = document.getElementById('revNext');
-  var dotsBox = document.getElementById('revDots');
-  var slides = Array.prototype.slice.call(track.children);
-
-  // Точки: по одной на карточку
-  slides.forEach(function (_, i) {
-    var d = document.createElement('span');
-    d.className = 'rev__dot' + (i === 0 ? ' is-on' : '');
-    dotsBox.appendChild(d);
-  });
-  var dots = Array.prototype.slice.call(dotsBox.children);
-
-  function step() {
-    // Ширина карточки + отступ — шаг прокрутки
-    var a = slides[0].getBoundingClientRect();
-    var b = slides[1] ? slides[1].getBoundingClientRect() : a;
-    return (slides[1] ? b.left - a.left : a.width) || a.width;
-  }
-  function scrollByCard(dir) {
-    track.scrollBy({ left: dir * step(), behavior: reduced ? 'auto' : 'smooth' });
-  }
-  prev.addEventListener('click', function () { scrollByCard(-1); });
-  next.addEventListener('click', function () { scrollByCard(1); });
-
-  // Подсветка активной точки и блокировка стрелок на краях
-  function syncNav() {
-    var i = Math.round(track.scrollLeft / step());
-    i = Math.max(0, Math.min(i, slides.length - 1));
-    dots.forEach(function (d, n) { d.classList.toggle('is-on', n === i); });
-    prev.disabled = track.scrollLeft < 4;
-    next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 4;
-  }
-  var raf;
-  track.addEventListener('scroll', function () {
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(syncNav);
-  }, { passive: true });
-  window.addEventListener('resize', syncNav);
-  syncNav();
-
-  /* ---------- 7. Модальное окно ------------------------------------------ */
+  /* ---------- 6. Модальное окно ------------------------------------------ */
   var modal = document.getElementById('modal');
   var form = document.getElementById('bookForm');
   var serviceSelect = document.getElementById('fService');
@@ -1882,7 +1737,7 @@ section[id]{scroll-margin-top:80px}
     }
   });
 
-  /* ---------- 8. Маска телефона ------------------------------------------
+  /* ---------- 7. Маска телефона ------------------------------------------
      Формат +7 (999) 123-45-67. Обрабатывает ввод, вставку из буфера,
      8 в начале, Backspace по разделителям и правку в середине строки. */
   var phoneField = form.elements.phone;
@@ -1960,7 +1815,7 @@ section[id]{scroll-margin-top:80px}
     if (onlyDigits(phoneField.value).length <= 1) phoneField.value = '';
   });
 
-  /* ---------- 9. Валидация и отправка заявки ------------------------------ */
+  /* ---------- 8. Валидация и отправка заявки ------------------------------ */
   var submitBtn = document.getElementById('submitBtn');
   var formErr = document.getElementById('formErr');
   var openedAt = 0;                 // когда открыли форму — быстрая отправка = бот
