@@ -27,6 +27,9 @@ WIDTHS = [320, 640]           # карточка занимает максиму
 HERO_WIDTHS = [480, 960]      # блок первого экрана — примерно 460 CSS-пикселей
 HERO_RATIO = 3 / 2            # горизонтальный кадр: обрезаем снимок минимально
 HERO_FOCUS = 0.5              # кадр по центру: аппарат и мастер и так в середине
+FOUNDER_WIDTHS = [480, 750]   # портрет основателя; 750 — вся ширина кадра, больше исходник не даёт
+FOUNDER_RATIO = 4 / 5         # вертикальный кадр под колонку с текстом
+FOUNDER_FOCUS = 0.5
 QUALITY = {'avif': 55, 'webp': 78, 'jpg': 82}
 
 
@@ -61,22 +64,25 @@ def save_variants(img, prefix, widths):
     return total
 
 
-def make_hero():
-    """Кадр для первого экрана: обрезаем горизонтальный снимок под вертикальный блок."""
-    src = os.path.join(ROOT, 'assets', 'source', 'hero.jpg')
+def make_shot(name, ratio, focus, widths):
+    """Отдельный снимок из assets/source: обрезаем под нужные пропорции.
+
+    ratio — ширина к высоте, focus — куда смещать кадр по длинной стороне
+    (0 — к левому краю или к верху, 1 — к правому или к низу)."""
+    src = os.path.join(ROOT, 'assets', 'source', name + '.jpg')
     if not os.path.isfile(src):
         return 0
     img = Image.open(src).convert('RGB')
     w, h = img.size
-    if w / h > HERO_RATIO:
-        nw, nh = round(h * HERO_RATIO), h
+    if w / h > ratio:
+        nw, nh = round(h * ratio), h
+        x, y = round((w - nw) * focus), 0
     else:
-        nw, nh = w, round(w / HERO_RATIO)
-    x = round((w - nw) * HERO_FOCUS)
-    y = round((h - nh) * 0.5)
+        nw, nh = w, round(w / ratio)
+        x, y = 0, round((h - nh) * focus)
     img = img.crop((x, y, x + nw, y + nh))
-    print('%-12s кадр %dx%d → %d вариантов' % ('hero', img.width, img.height, len(HERO_WIDTHS) * 3))
-    return save_variants(img, os.path.join(os.path.dirname(OUT), 'hero'), HERO_WIDTHS)
+    print('%-12s кадр %dx%d' % (name, img.width, img.height))
+    return save_variants(img, os.path.join(os.path.dirname(OUT), name), widths)
 
 
 def main():
@@ -91,10 +97,14 @@ def main():
         total += save_variants(img, os.path.join(OUT, name), WIDTHS)
         print('%-12s исходник %dx%d → %d вариантов' % (name, img.width, img.height, len(WIDTHS) * 3))
 
-    total += make_hero()
+    total += make_shot('hero', HERO_RATIO, HERO_FOCUS, HERO_WIDTHS)
+    total += make_shot('founder', FOUNDER_RATIO, FOUNDER_FOCUS, FOUNDER_WIDTHS)
     print('\nВсего фотографий: %.0f КБ' % (total / 1024))
     for f in sorted(os.listdir(OUT)):
         print('  %-22s %5.1f КБ' % (f, os.path.getsize(os.path.join(OUT, f)) / 1024))
+    for f in sorted(os.listdir(os.path.dirname(OUT))):
+        if f.startswith(('hero-', 'founder-')):
+            print('  %-22s %5.1f КБ' % (f, os.path.getsize(os.path.join(os.path.dirname(OUT), f)) / 1024))
 
 
 if __name__ == '__main__':

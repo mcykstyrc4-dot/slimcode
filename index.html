@@ -44,7 +44,12 @@
       "logo": "https://slimcodelab.ru/assets/logo-full.png",
       "image": "https://slimcodelab.ru/assets/og-cover.jpg",
       "telephone": "+7-911-297-94-28",
-      "foundingDate": "2001",
+      "foundingDate": "2001-10-01",
+      "founder": {
+        "@type": "Person",
+        "name": "Татьяна Строгая",
+        "jobTitle": "Руководитель и основатель сети Slim Code"
+      },
       "currenciesAccepted": "RUB",
       "areaServed": { "@type": "City", "name": "Санкт-Петербург" },
       "sameAs": [
@@ -638,6 +643,68 @@ section[id]{scroll-margin-top:80px}
 .person__role{font-size:.79rem;color:var(--on-dark);margin-top:.2rem;line-height:1.4;text-wrap:pretty}
 .person__exp{font-size:.74rem;color:var(--gold);margin-top:.4rem;letter-spacing:.04em}
 
+/* ---------- 9б. О сети: письмо основателя ---------------------------------
+   Две колонки на большом экране, на телефоне — портрет сверху, письмо ниже.
+   Портрет обрамлён так же, как кадр первого экрана: широкая рассеянная тень
+   и лёгкое затемнение по краям, чтобы фотография уходила в фон, а не
+   обрывалась по прямоугольнику. */
+.about__in{display:grid;gap:clamp(1.6rem,5vw,2.4rem)}
+.about__portrait{
+  /* figure по умолчанию имеет отступы браузера — обнуляем */
+  position:relative;display:block;align-self:start;margin:0;
+  border-radius:calc(var(--radius-lg) + 6px);
+  box-shadow:
+    0 40px 90px -35px rgba(10,3,5,.9),
+    0 12px 40px -20px rgba(10,3,5,.6),
+    0 0 0 1px rgba(248,242,236,.12);
+}
+.about__portrait::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:
+    radial-gradient(120% 100% at 50% 40%,transparent 58%,rgba(21,6,9,.40) 100%),
+    linear-gradient(to top,rgba(21,6,9,.32),transparent 40%);
+}
+.about__portrait img{
+  display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;
+  border-radius:inherit;
+}
+.about__who{margin:.9rem 0 1.4rem}
+.about__name{font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
+.about__role{font-size:.86rem;color:var(--on-dark);margin-top:.3rem;max-width:24em}
+
+/* Короткие факты вместо пересказа письма: их читают те, кто письмо не читает */
+.about__facts{display:grid;gap:.6rem;margin:1.5rem 0 1.75rem}
+.about__fact{
+  display:flex;align-items:baseline;gap:.7rem;
+  padding:.75rem .95rem;border-radius:var(--radius);
+  background:rgba(248,242,236,.05);border:1px solid var(--line-dark);
+}
+.about__fact b{font-size:1.05rem;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.about__fact span{font-size:.84rem;color:var(--on-dark)}
+
+.letter p{margin:0 0 .95rem;color:var(--on-dark);line-height:1.7}
+.letter p:last-child{margin-bottom:0}
+.letter__hi{font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--cream)!important}
+
+/* Раскрытие письма — та же плавная механика, что у прайса */
+.letter__more{margin-top:.4rem}
+.letter__more>summary{
+  list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;
+  font-weight:700;font-size:.92rem;color:var(--cream);
+  padding:.7rem 0;
+}
+.letter__more>summary::-webkit-details-marker{display:none}
+.letter__more>summary .arw{transition:transform .3s var(--ease)}
+.letter__more[open]:not(.is-closing)>summary .arw{transform:rotate(180deg)}
+.letter__more[open]:not(.is-closing)>summary .letter__label--open{display:inline}
+.letter__more[open]:not(.is-closing)>summary .letter__label--shut{display:none}
+.letter__label--open{display:none}
+.letter__body{overflow:hidden;padding-top:.35rem}
+.about__sign{
+  font-family:var(--serif);font-style:italic;font-size:1.15rem;
+  color:var(--cream);margin-top:1.4rem;
+}
+
 /* ---------- 10. Адреса и контакты ---------------------------------------- */
 .contacts{background:var(--cream);color:var(--ink)}
 /* Оценка и ссылки на карточки в картах — там живут настоящие отзывы.
@@ -832,6 +899,10 @@ section[id]{scroll-margin-top:80px}
   .salons{grid-template-columns:repeat(3,1fr)}
   .team__grid{grid-template-columns:repeat(5,1fr);gap:1.25rem 1rem}
   .stars__grid{grid-template-columns:repeat(4,1fr);gap:1.25rem 1.15rem}
+  /* Портрет держится рядом с письмом, пока его листают */
+  .about__in{grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:3rem;align-items:start}
+  .about__portrait{position:sticky;top:96px}   /* шапка 70px плюс воздух */
+  .about__facts{grid-template-columns:1fr 1fr}
   .contact-cta{grid-template-columns:1.1fr auto;align-items:center;padding:2.25rem 2.5rem;gap:2rem}
   .footer__top{grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
   .fab{display:none}          /* на десктопе достаточно кнопок в секции контактов */
@@ -855,6 +926,7 @@ section[id]{scroll-margin-top:80px}
     <nav class="nav" aria-label="Основная навигация">
       <a href="#services">Услуги</a>
       <a href="#promos">Акции</a>
+      <a href="#about">О сети</a>
       <a href="#team">Команда</a>
       <a href="#contacts">Адреса</a>
     </nav>
@@ -874,6 +946,7 @@ section[id]{scroll-margin-top:80px}
   <nav class="menu__list" aria-label="Мобильная навигация">
     <a href="#services">Услуги</a>
     <a href="#promos">Акции</a>
+    <a href="#about">О сети</a>
     <a href="#team">Команда</a>
     <a href="#contacts">Адреса и контакты</a>
   </nav>
@@ -1331,6 +1404,94 @@ section[id]{scroll-margin-top:80px}
 <!-- ======================= 6. КОМАНДА =======================
      Плейсхолдеры фото: заменить блок .ph на
      <img src="assets/team-1.jpg" alt="Имя, специализация" loading="lazy"> -->
+<!-- ======================= О СЕТИ =======================
+     Письмо основателя. Текст авторский, дан клиентом целиком: правим только
+     типографику. Сразу видно приветствие и первый абзац, остальное — под
+     «Читать письмо целиком», иначе секция вытесняет всё остальное. -->
+<section class="section section--dark about" id="about">
+  <div class="wrap">
+    <div class="section-head section-head--split reveal">
+      <p class="eyebrow">О сети Slim Code</p>
+      <h2 class="h2">24 года <em>в beauty-сфере</em></h2>
+    </div>
+
+    <div class="about__in">
+      <figure class="about__portrait reveal">
+        <picture>
+          <source type="image/avif" srcset="assets/founder-480.avif 480w, assets/founder-750.avif 750w"
+                  sizes="(min-width:1000px) 38vw, 100vw">
+          <source type="image/webp" srcset="assets/founder-480.webp 480w, assets/founder-750.webp 750w"
+                  sizes="(min-width:1000px) 38vw, 100vw">
+          <img src="assets/founder-750.jpg"
+               srcset="assets/founder-480.jpg 480w, assets/founder-750.jpg 750w"
+               sizes="(min-width:1000px) 38vw, 100vw"
+               alt="Татьяна Строгая — основатель сети Slim Code"
+               loading="lazy" decoding="async" width="750" height="937">
+        </picture>
+      </figure>
+
+      <div class="about__text reveal" data-d="1">
+        <div class="about__who">
+          <p class="about__name">Татьяна Строгая</p>
+          <p class="about__role">Руководитель и основатель сети лабораторий коррекции фигуры Slim Code</p>
+        </div>
+
+        <!-- Короткие факты из письма — для тех, кто читать письмо не станет -->
+        <div class="about__facts">
+          <p class="about__fact"><b>24 года</b><span>с 1 октября 2001 года</span></p>
+          <p class="about__fact"><b>8 мастеров</b><span>подобраны и обучены лично</span></p>
+          <p class="about__fact"><b>3 лаборатории</b><span>в Санкт-Петербурге</span></p>
+          <p class="about__fact"><b>Лицензия</b><span>медицинская, Л041-01148-78/03316215</span></p>
+        </div>
+
+        <div class="letter">
+          <p class="letter__hi">Здравствуй, дорогой гость!</p>
+          <p>1 октября 2025 года сети лабораторий коррекции фигуры «Slim Code» исполнилось
+            24 года. Вот и ещё год в мою копилочку профессиональной деятельности.
+            Постаралась проанализировать, подняла старые записи, не всё сохранилось, но
+            многое цело. Не могу их выбросить, рука не поднимается. По общим подсчётам
+            около 10 000 девушек и женщин стали прекраснее с «Slim Code» за это время.</p>
+
+          <details class="letter__more">
+            <summary>
+              <span class="letter__label--shut">Читать письмо целиком</span>
+              <span class="letter__label--open">Свернуть письмо</span>
+              <span class="arw" aria-hidden="true">⌄</span>
+            </summary>
+            <div class="letter__body">
+              <p>Не сразу появилось это название. Конечно, 23 года назад и кабинетов по
+                коррекции фигуры было «на пальцах пересчитать». Первым клиентам, чтобы
+                записаться, приходилось приходить лично, потом появились пейджеры, а уж
+                потом сотовые телефоны, ну а ещё позднее и социальные сети. Поменялось
+                оборудование и техники: от баночного вакуумного массажа до современного
+                RSL-скульптурирования на аппарате Beautylizer. Но одно останется НАВСЕГДА —
+                это моя любовь и преданность работе, моё желание быть 100 % вовлечённой
+                в процесс.</p>
+              <p>Сейчас со мной в команде творят 8 мастеров, которых я сама долго подбирала
+                и обучала. На сегодня сеть «Slim Code» насчитывает 3 лаборатории в
+                г. Санкт-Петербурге. Для осуществления деятельности получена медицинская
+                лицензия (Л041-01148-78/03316215). В салонах меня часто можно увидеть в
+                качестве руководителя и специалиста. Да, я также принимаю наших дорогих
+                пациентов).</p>
+              <p>Безмерно я счастлива, что знаю каждого клиента, со многими знакома лично,
+                что могу общаться, делать разборы и давать рекомендации в процессе и в
+                завершении курса. Всегда искренне радуюсь нашим новым встречам и совместным
+                результатам.</p>
+              <p>Заявляю 100 %, что в любом возрасте можно стать «лучшей версией себя» —
+                стройнее, подтянутей, глаже, здоровее, с ровной осанкой, желанной, любимой
+                и уверенной в себе. Я счастлива быть причастной к этому чудесному процессу
+                преображения!</p>
+              <p>Дорогие мои, очень жду вас у нас в гостях!</p>
+            </div>
+          </details>
+
+          <p class="about__sign">Ваша, Татьяна Строгая</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section section--deep team" id="team">
   <div class="wrap">
     <div class="section-head section-head--split reveal">
@@ -2181,8 +2342,8 @@ section[id]{scroll-margin-top:80px}
      Без JS и при отключённых анимациях остаётся обычное поведение. */
   var EASING = 'cubic-bezier(.2,.7,.25,1)';
 
-  Array.prototype.forEach.call(document.querySelectorAll('.price'), function (block) {
-    var body = block.querySelector('.price__body');
+  Array.prototype.forEach.call(document.querySelectorAll('.price, .letter__more'), function (block) {
+    var body = block.querySelector('.price__body, .letter__body');
     var summary = block.querySelector('summary');
     if (!body || !summary || !body.animate) return;
     var running = null;
