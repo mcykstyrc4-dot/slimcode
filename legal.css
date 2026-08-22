@@ -111,6 +111,8 @@ p,ul,ol{margin:0}
 /* --- Футер --- */
 .foot{background:var(--wine-950);color:rgba(248,242,236,.55);padding-block:2rem;font-size:.82rem}
 .foot__in{display:grid;gap:.7rem}
+.foot__copy{max-width:52ch;line-height:1.6}
+.nowrap{white-space:nowrap}
 .foot a{color:rgba(248,242,236,.72);text-decoration:none}
 .foot a:hover{color:var(--cream)}
 .foot__links{display:flex;flex-wrap:wrap;gap:.4rem 1.25rem}
