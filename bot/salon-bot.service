@@ -1,0 +1,17 @@
+# Автозапуск бота на сервере (Ubuntu/Debian).
+# Куда положить и что делать дальше — написано в README.md, раздел «Круглосуточная работа».
+[Unit]
+Description=Telegram-бот салона красоты
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/salon-bot
+ExecStart=/usr/bin/python3 /opt/salon-bot/bot.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/salon-bot.log
+StandardError=append:/var/log/salon-bot.log
+
+[Install]
+WantedBy=multi-user.target

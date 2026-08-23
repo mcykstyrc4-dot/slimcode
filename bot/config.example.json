@@ -1,0 +1,6 @@
+{
+  "token": "ВСТАВЬТЕ_СЮДА_ТОКЕН_ОТ_BOTFATHER",
+  "admin_chat_id": 0,
+  "reminder_after_minutes": 30,
+  "followup_after_hours": 24
+}
