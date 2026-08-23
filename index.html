@@ -1,0 +1,2598 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Slim Code Lab — сеть салонов аппаратной коррекции фигуры в Санкт-Петербурге</title>
+<meta name="description" content="Slim Code Lab — сеть салонов аппаратной коррекции фигуры с 2001 года. RSL-скульптурирование, LPG-массаж, миостимуляция, прессомассаж, кавитация. 3 салона, 8000+ клиентов.">
+<meta name="theme-color" content="#24090F">
+
+<!-- Open Graph (заменить URL и og:image на реальные) -->
+<link rel="canonical" href="https://slimcodelab.ru/">
+<meta property="og:url" content="https://slimcodelab.ru/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Slim Code Lab">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Slim Code Lab — аппаратная коррекция фигуры">
+<meta property="og:description" content="Сеть салонов с 2001 года. Программы коррекции фигуры на сертифицированном оборудовании.">
+<meta property="og:image" content="assets/og-cover.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<!-- Шрифты: заголовки — гротеск с характером, текст — нейтральный гротеск.
+     Есть системные фолбэки, страница не «прыгает» если шрифты не загрузились. -->
+<script>document.documentElement.classList.add('js');</script>
+
+
+<!-- Микроразметка Schema.org для поисковиков и карточек в выдаче.
+     ЗАМЕНИТЬ: реквизиты, адреса, телефоны, координаты, часы, соцсети. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HealthAndBeautyBusiness",
+      "@id": "https://slimcodelab.ru/#organization",
+      "name": "Slim Code Lab",
+      "alternateName": "Слим Код Лаб",
+      "slogan": "Стань лучшей версией себя",
+      "description": "Сеть салонов аппаратной коррекции фигуры в Санкт-Петербурге: RSL-скульптурирование, LPG-массаж, миостимуляция, прессомассаж, кавитация.",
+      "url": "https://slimcodelab.ru/",
+      "logo": "https://slimcodelab.ru/assets/logo-full.png",
+      "image": "https://slimcodelab.ru/assets/og-cover.jpg",
+      "telephone": "+7-911-297-94-28",
+      "legalName": "ООО «Слим Код»",
+      "taxID": "7807280704",
+      "foundingDate": "2001-10-01",
+      "founder": {
+        "@type": "Person",
+        "name": "Татьяна Строгая",
+        "jobTitle": "Руководитель и основатель сети Slim Code"
+      },
+      "currenciesAccepted": "RUB",
+      "areaServed": { "@type": "City", "name": "Санкт-Петербург" },
+      "sameAs": [
+        "https://vk.com/slim_code_lab",
+        "https://instagram.com/slim_code_lab",
+        "https://yandex.ru/maps/org/slim_code/158923555044/"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Услуги аппаратной коррекции фигуры",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "RSL-скульптурирование" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "LPG-массаж" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Миостимуляция" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Прессомассаж" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Кавитация" } }
+        ]
+      },
+      "department": [
+        { "@id": "https://slimcodelab.ru/#salon-petergofskoe" },
+        { "@id": "https://slimcodelab.ru/#salon-geroev" },
+        { "@id": "https://slimcodelab.ru/#salon-koroleva" }
+      ]
+    },
+    {
+      "@type": "BeautySalon",
+      "@id": "https://slimcodelab.ru/#salon-petergofskoe",
+      "name": "Slim Code Lab — Петергофское шоссе",
+      "parentOrganization": { "@id": "https://slimcodelab.ru/#organization" },
+      "telephone": "+7-911-297-94-28",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Петергофское шоссе, д. 53",
+        "addressLocality": "Санкт-Петербург",
+        "addressCountry": "RU"
+      }
+    },
+    {
+      "@type": "BeautySalon",
+      "@id": "https://slimcodelab.ru/#salon-geroev",
+      "name": "Slim Code Lab — Проспект Героев",
+      "parentOrganization": { "@id": "https://slimcodelab.ru/#organization" },
+      "telephone": "+7-911-297-94-28",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Проспект Героев, д. 33",
+        "addressLocality": "Санкт-Петербург",
+        "addressCountry": "RU"
+      }
+    },
+    {
+      "@type": "BeautySalon",
+      "@id": "https://slimcodelab.ru/#salon-koroleva",
+      "name": "Slim Code Lab — Проспект Королёва",
+      "parentOrganization": { "@id": "https://slimcodelab.ru/#organization" },
+      "telephone": "+7-911-297-94-28",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Проспект Королёва, д. 61",
+        "addressLocality": "Санкт-Петербург",
+        "addressCountry": "RU"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://slimcodelab.ru/#website",
+      "url": "https://slimcodelab.ru/",
+      "name": "Slim Code Lab",
+      "inLanguage": "ru-RU",
+      "publisher": { "@id": "https://slimcodelab.ru/#organization" }
+    }
+  ]
+}
+</script>
+
+<!-- Шрифты лежат на своём домене: к сторонним серверам страница
+     не обращается, IP посетителя никуда не уходит. Файлы собирает
+     tools/fetch-fonts.py. -->
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+/* =========================================================================
+   SLIM CODE LAB — одностраничный лендинг
+   Структура файла:
+     1. Токены и базовые стили
+     2. Утилиты (контейнер, секции, заголовки, кнопки, анимации)
+     3. Шапка и навигация
+     4. Хиро
+     5. Цифры доверия
+     6. Услуги
+     7. Акции
+     8. Отзывы
+     9. Команда
+    10. Адреса и контакты
+    11. Футер
+    12. Модальное окно записи
+    13. Адаптив (mobile-first: базовые стили = мобильные, медиа = вверх)
+   ========================================================================= */
+
+/* ---------- 1. Токены ---------------------------------------------------- */
+:root{
+  /* Палитра: глубокий винный как основа, кремовый — текст и светлые секции,
+     один яркий красный — только кнопки и ключевые акценты, золото — тонкие детали. */
+  --wine-950:#150609;
+  --wine-900:#24090f;
+  --wine-800:#33101a;
+  --wine-700:#471624;
+  --wine-600:#5d1f2f;
+
+  --cream:#f8f2ec;
+  --cream-2:#efe5db;
+  --ink:#1c0a0e;            /* тёмный текст на светлом фоне */
+  --ink-soft:#6b5257;
+
+  --accent:#e0393f;         /* яркий красный — CTA */
+  --accent-hi:#f2545a;      /* его hover */
+  --gold:#c9a15c;           /* волосяные линии, надзаголовки */
+
+  --on-dark:rgba(248,242,236,.72);
+  --line-dark:rgba(248,242,236,.14);
+  --line-light:rgba(28,10,14,.12);
+
+  /* Типографика: плавные размеры без брейкпоинтов */
+  --f-display:clamp(2.4rem,8.4vw,4.3rem);
+  --f-h2:clamp(1.75rem,5.6vw,3.1rem);
+  --f-h3:clamp(1.15rem,3.2vw,1.4rem);
+  --f-body:clamp(.975rem,2.6vw,1.0625rem);
+
+  --sans:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  /* Фирменный шрифт логотипа. Пока не подключён — см. блок @font-face ниже. */
+  --brand:var(--sans);
+
+  --radius:18px;
+  --radius-lg:26px;
+  --pad:clamp(1.25rem,5vw,2rem);         /* горизонтальные поля страницы */
+  --section:clamp(3.75rem,11vw,7.5rem);  /* вертикальный ритм секций */
+  --maxw:1180px;
+
+  --shadow-soft:0 18px 48px -24px rgba(21,6,9,.55);
+  --shadow-card:0 24px 60px -30px rgba(21,6,9,.75);
+  --ease:cubic-bezier(.2,.7,.25,1);
+}
+
+/* ------------------------------------------------------------------------
+   ФИРМЕННЫЙ ШРИФТ
+   Логотип набран геометрическим гротеском. Чтобы сайт совпал с ним:
+     1. положите файлы шрифта в assets/fonts/ (лучше всего .woff2);
+     2. раскомментируйте блок ниже и поправьте имена файлов;
+     3. в токенах выше замените  --brand:var(--sans)  на  --brand:"SlimCode",var(--sans)
+        — и, если нужно, --sans на то же значение, чтобы шрифт стал основным.
+   До этого момента --brand равен основному гротеску, вёрстка не ломается.
+
+@font-face{
+  font-family:"SlimCode";
+  src:url("assets/fonts/slimcode-regular.woff2") format("woff2");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"SlimCode";
+  src:url("assets/fonts/slimcode-medium.woff2") format("woff2");
+  font-weight:500 700; font-style:normal; font-display:swap;
+}
+   ------------------------------------------------------------------------ */
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html:focus-within{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--wine-900);
+  color:var(--cream);
+  font:400 var(--f-body)/1.65 var(--sans);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body.is-locked{overflow:hidden}          /* при открытом меню/модалке */
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+h1,h2,h3,h4{margin:0;line-height:1.08;font-weight:700;letter-spacing:-.02em}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+[hidden]{display:none!important}          /* важнее, чем display у .modal/.menu */
+
+/* Якорные переходы с учётом фиксированной шапки */
+section[id]{scroll-margin-top:80px}
+
+/* Видимый фокус — доступность */
+:focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:6px}
+
+::selection{background:var(--accent);color:#fff}
+
+/* ---------- 2. Утилиты --------------------------------------------------- */
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+.section{padding-block:var(--section);position:relative}
+
+/* Светлая и тёмная секции чередуются — это и создаёт глубину вместо
+   сплошной алой заливки. */
+.section--light{background:var(--cream);color:var(--ink)}
+.section--dark{background:var(--wine-900);color:var(--cream)}
+.section--deep{background:var(--wine-950);color:var(--cream)}
+
+/* Надзаголовок секции */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.6em;
+  font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.1rem;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+
+.h2{font-size:var(--f-h2);letter-spacing:-.03em}
+.h2 em{font-family:var(--serif);font-style:italic;font-weight:500;letter-spacing:-.01em}
+
+.lead{max-width:52ch;margin-top:1.1rem;font-size:1.02em;line-height:1.7}
+.section--light .lead{color:var(--ink-soft)}
+.section--dark .lead,.section--deep .lead{color:var(--on-dark)}
+
+.section-head{margin-bottom:clamp(2rem,6vw,3.25rem)}
+.section-head--split{display:grid;gap:1.25rem}
+
+/* --- Кнопки: одна основная (заливка), остальные — второстепенные --- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  min-height:52px;padding:.9rem 1.6rem;border-radius:100px;
+  font-size:.95rem;font-weight:600;letter-spacing:.01em;
+  transition:transform .25s var(--ease),background-color .25s,color .25s,box-shadow .25s,border-color .25s;
+  will-change:transform;
+}
+.btn:active{transform:translateY(1px) scale(.99)}
+
+/* Основная CTA — единственный сплошной красный элемент на экране */
+.btn--primary{
+  background:var(--accent);color:#fff;
+  box-shadow:0 12px 30px -12px rgba(224,57,63,.7);
+}
+.btn--primary:hover{background:var(--accent-hi);box-shadow:0 18px 38px -14px rgba(224,57,63,.8)}
+
+/* Второстепенная — текстовая, со стрелкой, без «ещё одной рамки» */
+.btn--ghost{
+  padding-inline:.25rem;min-height:44px;color:inherit;
+  border-bottom:1px solid transparent;border-radius:0;
+}
+.btn--ghost .arw{transition:transform .3s var(--ease)}
+.btn--ghost:hover .arw{transform:translateX(5px)}
+.btn--ghost:hover{border-bottom-color:currentColor}
+
+/* Кнопка WhatsApp — единственная «обводочная» кнопка на странице */
+.btn--line{border:1px solid var(--line-light);background:rgba(0,0,0,.02)}
+.section--light .btn--line:hover{border-color:var(--ink);background:rgba(0,0,0,.05)}
+
+.btn-row{display:flex;flex-wrap:wrap;align-items:center;gap:1.15rem 1.75rem;margin-top:2rem}
+
+/* --- Аккуратные анимации появления при скролле --- */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .reveal.is-in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+.reveal[data-d="4"]{transition-delay:.32s}
+
+@media (prefers-reduced-motion:reduce){
+  html:focus-within{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* Только для скринридеров */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- 3. Шапка ----------------------------------------------------- */
+.header{
+  position:fixed;inset:0 0 auto;z-index:60;
+  transition:background-color .35s var(--ease),backdrop-filter .35s,border-color .35s;
+  border-bottom:1px solid transparent;
+}
+.header.is-stuck{
+  background:rgba(21,6,9,.82);backdrop-filter:blur(14px) saturate(140%);
+  border-bottom-color:var(--line-dark);
+}
+.header__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:70px}
+
+/* Фирменный логотип. Файлы в assets/:
+     logo.png      — знак + «Slim Code» (шапка, компактный);
+     logo-full.png — то же плюс подпись «Стань лучшей версией себя» (футер);
+     logo-dark.png — версия для светлого фона.
+   Если появится исходник в SVG — достаточно заменить src, размеры заданы по высоте. */
+.logo{display:inline-flex;align-items:center}
+.logo img{height:32px;width:auto;display:block}
+
+.nav{display:none}
+.nav a{font-size:.9rem;font-weight:500;color:var(--on-dark);transition:color .2s}
+.nav a:hover{color:var(--cream)}
+
+.header__cta{display:none}
+.header__phone{display:none;font-weight:600;font-size:.92rem;white-space:nowrap}
+
+/* Бургер */
+.burger{width:46px;height:46px;display:grid;place-items:center;margin-right:-8px}
+.burger span{display:block;width:22px;height:1.5px;background:var(--cream);position:relative;transition:transform .3s var(--ease),background-color .3s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:22px;height:1.5px;background:var(--cream);transition:transform .3s var(--ease),top .3s var(--ease)}
+.burger span::before{top:-7px}
+.burger span::after{top:7px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+.burger[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+
+/* Мобильное меню */
+.menu{
+  position:fixed;inset:0;z-index:55;background:var(--wine-950);
+  padding:96px var(--pad) 2.5rem;
+  display:flex;flex-direction:column;justify-content:space-between;gap:2rem;
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease),visibility .35s;
+}
+.menu.is-open{opacity:1;visibility:visible;transform:none}
+.menu__list{display:grid;gap:.35rem}
+.menu__list a{
+  display:block;padding:.7rem 0;font-size:1.6rem;font-weight:700;letter-spacing:-.02em;
+  border-bottom:1px solid var(--line-dark);
+}
+.menu__foot{display:grid;gap:1rem}
+.menu__foot .tel{font-size:1.25rem;font-weight:700}
+
+/* ---------- 4. Хиро ------------------------------------------------------ */
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:100svh;display:flex;align-items:flex-end;
+  padding-top:110px;padding-bottom:clamp(2.5rem,8vw,4.5rem);
+  background:var(--wine-950);
+}
+/* Глубина фона: два мягких радиальных свечения + виньетка. Никакой плоской заливки. */
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(90% 65% at 78% 12%,rgba(224,57,63,.34),transparent 62%),
+    radial-gradient(70% 55% at 8% 92%,rgba(93,31,47,.75),transparent 65%),
+    linear-gradient(175deg,var(--wine-800) 0%,var(--wine-950) 72%);
+}
+.hero::after{ /* тонкая сетка-текстура */
+  content:"";position:absolute;inset:0;z-index:-1;opacity:.35;
+  background-image:linear-gradient(var(--line-dark) 1px,transparent 1px),linear-gradient(90deg,var(--line-dark) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(75% 65% at 50% 35%,#000,transparent 78%);
+}
+.hero__in{position:relative;width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+
+/* Медиа-блок хиро. На телефоне идёт под кнопками и кадрируется шире,
+   чтобы не выталкивать призыв к действию за пределы экрана. */
+.hero__media{position:relative;margin-top:1.75rem}
+/* Кадр не обрывается по краю, а мягко уходит в фон: широкая рассеянная
+   тень наружу и лёгкое затемнение по краям внутри. */
+.hero__frame{
+  position:relative;display:block;
+  border-radius:calc(var(--radius-lg) + 6px);
+  box-shadow:
+    0 40px 90px -35px rgba(10,3,5,.9),
+    0 12px 40px -20px rgba(10,3,5,.6),
+    0 0 0 1px rgba(248,242,236,.12);
+}
+.hero__frame::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  border-radius:inherit;
+  background:
+    radial-gradient(120% 100% at 50% 45%,transparent 55%,rgba(21,6,9,.42) 100%),
+    linear-gradient(to top,rgba(21,6,9,.30),transparent 38%);
+}
+.hero__media img{
+  display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;
+  border-radius:inherit;
+}
+.hero__badge{
+  position:absolute;left:14px;top:14px;z-index:2;
+  display:flex;flex-direction:column;gap:.15rem;
+  padding:.85rem 1.1rem;border-radius:var(--radius);
+  background:rgba(21,6,9,.82);backdrop-filter:blur(10px);
+  border:1px solid var(--line-dark);box-shadow:var(--shadow-card);
+}
+.hero__badge-stars{display:flex;gap:.1rem;color:var(--gold)}
+.hero__badge-stars svg{width:13px;height:13px}
+.hero__badge b{font-size:1.5rem;letter-spacing:-.03em;line-height:1.1}
+.hero__badge-src{font-size:.74rem;color:var(--on-dark)}
+
+.hero__marks{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .7rem;
+  margin-bottom:clamp(1.25rem,4vw,1.75rem);
+}
+.hero__award{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.35rem .9rem .35rem .5rem;border-radius:100px;
+  border:1px solid var(--line-dark);background:rgba(248,242,236,.04);backdrop-filter:blur(6px);
+  font-size:.8rem;font-weight:700;color:var(--cream);white-space:nowrap;
+}
+.hero__award img{height:24px;width:auto;display:block}
+
+.hero__since{
+  display:inline-flex;align-items:center;gap:.7rem;
+  padding:.5rem .95rem .5rem .6rem;border:1px solid var(--line-dark);border-radius:100px;
+  background:rgba(248,242,236,.04);backdrop-filter:blur(6px);
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark);
+}
+.hero__since b{
+  padding:.35em .7em;border-radius:100px;
+  background:var(--accent);color:#fff;font-size:.7rem;letter-spacing:.08em;font-weight:700;
+}
+
+/* Цельный сбалансированный заголовок вместо одного «разъезжающегося» слова */
+.hero__title{
+  font-size:var(--f-display);font-weight:800;letter-spacing:-.045em;line-height:.94;
+  text-wrap:balance;max-width:14ch;
+}
+.hero__title em{
+  display:block;font-size:.92em;font-family:var(--serif);font-style:italic;font-weight:500;
+  letter-spacing:-.015em;line-height:1;
+  color:transparent;background:linear-gradient(96deg,var(--cream) 15%,var(--gold));
+  -webkit-background-clip:text;background-clip:text;
+}
+.hero__sub{margin-top:1.15rem;max-width:34ch;color:var(--on-dark);font-size:clamp(1rem,3.4vw,1.15rem)}
+
+.hero__cta{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.6rem;margin-top:clamp(1.75rem,5vw,2.25rem)}
+.hero__note{font-size:.82rem;color:rgba(248,242,236,.62);margin-top:1.1rem}
+
+/* Подсказка скролла */
+.hero__scroll{display:none;align-items:center;gap:.6rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(248,242,236,.45);margin-top:2.25rem}
+.hero__scroll i{display:block;width:34px;height:1px;background:currentColor;transform-origin:left;animation:scrollLine 2.4s var(--ease) infinite}
+@keyframes scrollLine{0%{transform:scaleX(0)}50%{transform:scaleX(1)}100%{transform:scaleX(0);transform-origin:right}}
+
+/* ---------- 5. Цифры доверия --------------------------------------------- */
+.stats{background:var(--wine-950);padding-block:clamp(2.25rem,7vw,3.25rem);border-top:1px solid var(--line-dark)}
+.stats__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.75rem 1rem}
+.stat__num{font-size:clamp(1.9rem,7vw,2.9rem);font-weight:800;letter-spacing:-.04em;line-height:1}
+.stat{padding-top:1rem;border-top:1px solid var(--line-dark)}
+.stat__num i{font-style:normal;color:var(--accent)}
+.stat__cap{margin-top:.45rem;font-size:.82rem;line-height:1.4;color:var(--on-dark)}
+
+/* ---------- 6. Услуги ---------------------------------------------------- */
+.services{background:var(--cream);color:var(--ink)}
+.cards{display:grid;gap:1rem}
+
+.card{
+  position:relative;display:flex;flex-direction:column;gap:.85rem;
+  padding:1.6rem 1.5rem 1.4rem;border-radius:var(--radius);
+  background:#fff;border:1px solid var(--line-light);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-soft);border-color:transparent}
+.card__idx{font-size:.72rem;letter-spacing:.16em;color:var(--gold);font-weight:700}
+.card__title{font-size:var(--f-h3);letter-spacing:-.02em}
+.card__text{font-size:.93rem;line-height:1.6;color:var(--ink-soft);flex:1}
+.card__meta{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.1rem}
+.tag{
+  font-size:.72rem;letter-spacing:.02em;padding:.3em .7em;border-radius:100px;
+  background:rgba(224,57,63,.08);color:var(--accent);font-weight:600;
+}
+.card .btn--ghost{align-self:flex-start;color:var(--ink);font-size:.88rem}
+
+/* Цена на карточке услуги */
+.card__price{font-size:1.25rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.card__price span{display:block;font-size:.76rem;font-weight:600;letter-spacing:0;color:var(--ink-soft);margin-top:.15rem}
+.card--feature .card__price span{color:var(--on-dark)}
+
+/* ---- Полный прайс: раскрывающиеся блоки ---- */
+.prices{margin-top:clamp(2.5rem,7vw,3.5rem);display:grid;gap:.6rem}
+.prices__title{font-size:clamp(1.15rem,3.4vw,1.4rem);margin-bottom:.4rem}
+.prices__note{font-size:.85rem;color:var(--ink-soft);max-width:60ch;margin-top:.6rem}
+
+.price{background:#fff;border:1px solid var(--line-light);border-radius:var(--radius);overflow:hidden}
+.price > summary{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1.05rem 1.25rem;cursor:pointer;list-style:none;
+  font-weight:700;font-size:1rem;transition:background-color .2s;
+}
+.price > summary::-webkit-details-marker{display:none}
+.price > summary:hover{background:rgba(28,10,14,.03)}
+.price__from{
+  margin-left:auto;font-size:.85rem;font-weight:600;color:var(--ink-soft);
+  white-space:nowrap;font-variant-numeric:tabular-nums;
+}
+/* Стрелка-указатель */
+.price > summary::after{
+  content:"";width:9px;height:9px;flex:0 0 auto;
+  border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);
+  transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s var(--ease);
+}
+.price[open] > summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.price[open] > summary{border-bottom:1px solid var(--line-light)}
+.price__body{padding:.25rem 1.25rem 1.1rem;overflow:hidden}
+/* При закрытии блок ещё раскрыт, но стрелка должна повернуться сразу */
+.price.is-closing > summary::after{transform:rotate(45deg) translate(-2px,-2px)}
+
+/* Таблица цен: на узком экране прокручивается внутри себя */
+.ptable-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ptable{width:100%;border-collapse:collapse;font-size:.88rem;min-width:min(100%,520px)}
+.ptable caption{text-align:left;font-weight:700;font-size:.95rem;padding:1rem 0 .35rem}
+.ptable th{
+  font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);text-align:right;padding:.5rem .6rem;white-space:nowrap;
+}
+.ptable td{
+  padding:.6rem;border-top:1px solid var(--line-light);text-align:right;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.ptable th:first-child,.ptable td:first-child{text-align:left;white-space:normal;padding-left:0}
+.ptable th:last-child,.ptable td:last-child{padding-right:0}
+.ptable tbody tr:hover{background:rgba(28,10,14,.02)}
+.ptable__note{display:block;font-size:.78rem;color:var(--ink-soft);font-weight:400;margin-top:.15rem}
+.ptable__old{color:var(--ink-soft);text-decoration:line-through}
+
+/* Первая карточка — флагманская услуга, тёмная и на всю ширину */
+.card--feature{
+  background:linear-gradient(155deg,var(--wine-700),var(--wine-950));
+  color:var(--cream);border-color:transparent;overflow:hidden;
+}
+.card--feature .card__text{color:var(--on-dark)}
+.card--feature .card__idx{color:var(--gold)}
+.card--feature .tag{background:rgba(248,242,236,.1);color:var(--cream)}
+.card--feature .btn--ghost{color:var(--cream)}
+.card--feature::after{ /* мягкий блик */
+  content:"";position:absolute;right:-60px;top:-70px;width:230px;height:230px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,57,63,.5),transparent 68%);
+}
+.card--feature > *{position:relative;z-index:1}
+
+/* ---------- 7. Акции ----------------------------------------------------- */
+.promos{background:var(--wine-900);color:var(--cream);overflow:hidden}
+.promo{
+  position:relative;display:flex;flex-direction:column;gap:.7rem;
+  padding:1.5rem;border-radius:var(--radius);
+  background:rgba(248,242,236,.045);border:1px solid var(--line-dark);
+  transition:transform .4s var(--ease),background-color .3s,border-color .3s;
+}
+.promo:hover{transform:translateY(-4px);background:rgba(248,242,236,.07);border-color:rgba(248,242,236,.24)}
+.promo__badge{
+  align-self:flex-start;font-size:.74rem;font-weight:700;letter-spacing:.06em;
+  padding:.35em .75em;border-radius:100px;background:var(--accent);color:#fff;
+}
+.promo__title{font-size:var(--f-h3)}
+.promo__text{font-size:.92rem;color:var(--on-dark);flex:1}
+.promo__what{font-size:.8rem;color:rgba(248,242,236,.55);line-height:1.45}
+.promo__foot{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;padding-top:.4rem;border-top:1px solid var(--line-dark)}
+.promo__price{font-size:1.45rem;font-weight:800;letter-spacing:-.02em}
+.promo__old{font-size:.95rem;color:rgba(248,242,236,.42);text-decoration:line-through}
+.promo__save{
+  margin-left:auto;font-size:.78rem;font-weight:700;white-space:nowrap;
+  color:#7fd6a2;                       /* выгода — единственный зелёный акцент на странице */
+}
+
+
+/* ---------- 8. Звёздные клиенты ------------------------------------------ */
+.stars{background:var(--cream);color:var(--ink)}
+.stars__grid{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr)}
+
+.star{
+  display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
+  width:100%;text-align:left;padding:0;background:none;border:0;
+  cursor:pointer;transition:transform .35s var(--ease);
+}
+.star:hover{transform:translateY(-3px)}
+.star__thumb{
+  display:block;position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;
+  background:var(--wine-800);box-shadow:var(--shadow-soft);
+}
+.star__thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.star__play{
+  position:absolute;inset:0;display:grid;place-items:center;
+  background:linear-gradient(to top,rgba(21,6,9,.45),transparent 55%);
+}
+.star__play span{
+  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:var(--accent);color:#fff;box-shadow:0 10px 24px -10px rgba(224,57,63,.8);
+  transition:transform .3s var(--ease);
+}
+.star:hover .star__play span{transform:scale(1.09)}
+.star__play svg{width:18px;height:18px;margin-left:2px}
+.star__name{display:block;font-weight:700;font-size:.98rem;margin-top:.7rem;letter-spacing:-.01em}
+.star__role{display:block;font-size:.79rem;color:var(--ink-soft);margin-top:.15rem}
+/* Если обложка не загрузилась, прячем битую картинку: под ней тёмная
+   подложка с кнопкой воспроизведения, карточка остаётся аккуратной */
+.star__thumb.is-broken img{display:none}
+
+/* Окно с роликом. Селектор через .modal--video: у одиночного класса
+   специфичность та же, что у .modal__box, а объявлен тот ниже и побеждал. */
+.modal--video .modal__box{max-width:min(920px,94vw);background:var(--wine-950);color:var(--cream);padding:1rem}
+.modal--video .modal__close{color:var(--on-dark)}
+.modal--video .modal__close:hover{background:rgba(248,242,236,.12);color:var(--cream)}
+.video{position:relative;aspect-ratio:16/9;border-radius:calc(var(--radius) - 4px);overflow:hidden;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video__caption{margin-top:.8rem;font-size:.92rem;font-weight:700;padding-inline:.25rem}
+
+/* ---------- 9. Команда --------------------------------------------------- */
+.team{background:var(--wine-950);color:var(--cream)}
+.team__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 1rem;align-items:start}
+.person__photo{display:block;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;margin-bottom:.85rem;background:var(--wine-800)}
+.person__photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.person__name{font-size:1.02rem;font-weight:700}
+.person__role{font-size:.79rem;color:var(--on-dark);margin-top:.2rem;line-height:1.4;text-wrap:pretty}
+.person__exp{font-size:.74rem;color:var(--gold);margin-top:.4rem;letter-spacing:.04em}
+
+/* ---------- 9б. О сети: письмо основателя ---------------------------------
+   Две колонки на большом экране, на телефоне — портрет сверху, письмо ниже.
+   Портрет обрамлён так же, как кадр первого экрана: широкая рассеянная тень
+   и лёгкое затемнение по краям, чтобы фотография уходила в фон, а не
+   обрывалась по прямоугольнику. */
+.about__in{display:grid;gap:clamp(1.6rem,5vw,2.4rem)}
+.about__portrait{
+  /* figure по умолчанию имеет отступы браузера — обнуляем */
+  position:relative;display:block;align-self:start;margin:0;
+  border-radius:calc(var(--radius-lg) + 6px);
+  box-shadow:
+    0 40px 90px -35px rgba(10,3,5,.9),
+    0 12px 40px -20px rgba(10,3,5,.6),
+    0 0 0 1px rgba(248,242,236,.12);
+}
+.about__portrait::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:
+    radial-gradient(120% 100% at 50% 40%,transparent 58%,rgba(21,6,9,.40) 100%),
+    linear-gradient(to top,rgba(21,6,9,.32),transparent 40%);
+}
+.about__portrait img{
+  display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;
+  border-radius:inherit;
+}
+.about__who{margin:.9rem 0 1.4rem}
+.about__name{font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
+.about__role{font-size:.86rem;color:var(--on-dark);margin-top:.3rem;max-width:24em}
+
+/* Короткие факты вместо пересказа письма: их читают те, кто письмо не читает */
+.about__facts{display:grid;gap:.6rem;margin:1.5rem 0 1.75rem}
+.about__fact{
+  display:flex;align-items:baseline;gap:.7rem;
+  padding:.75rem .95rem;border-radius:var(--radius);
+  background:rgba(248,242,236,.05);border:1px solid var(--line-dark);
+}
+.about__fact b{font-size:1.05rem;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.about__fact span{font-size:.84rem;color:var(--on-dark)}
+
+.letter p{margin:0 0 .95rem;color:var(--on-dark);line-height:1.7}
+.letter p:last-child{margin-bottom:0}
+.letter__hi{font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--cream)!important}
+
+/* Раскрытие письма — та же плавная механика, что у прайса */
+.letter__more{margin-top:.4rem}
+.letter__more>summary{
+  list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;
+  font-weight:700;font-size:.92rem;color:var(--cream);
+  padding:.7rem 0;
+}
+.letter__more>summary::-webkit-details-marker{display:none}
+.letter__more>summary .arw{transition:transform .3s var(--ease)}
+.letter__more[open]:not(.is-closing)>summary .arw{transform:rotate(180deg)}
+.letter__more[open]:not(.is-closing)>summary .letter__label--open{display:inline}
+.letter__more[open]:not(.is-closing)>summary .letter__label--shut{display:none}
+.letter__label--open{display:none}
+.letter__body{overflow:hidden;padding-top:.35rem}
+.about__sign{
+  font-family:var(--serif);font-style:italic;font-size:1.15rem;
+  color:var(--cream);margin-top:1.4rem;
+}
+
+/* ---------- 10. Адреса и контакты ---------------------------------------- */
+.contacts{background:var(--cream);color:var(--ink)}
+/* Оценка и ссылки на карточки в картах — там живут настоящие отзывы.
+   Оценка ведёт на карточку организации в Яндекс.Картах. */
+.maps{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem 1rem;margin-bottom:1.75rem}
+.maps__rating{display:inline-flex;align-items:center;gap:.65rem}
+.maps__stars{display:inline-flex;gap:.12rem;color:var(--gold)}
+.maps__stars svg{width:16px;height:16px}
+.maps__score{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.maps__src{font-size:.86rem;font-weight:600;color:var(--ink-soft);display:inline-flex;align-items:center;gap:.35rem}
+.maps__rating:hover .maps__src{color:var(--accent)}
+.maps__rating .arw{transition:transform .3s var(--ease)}
+.maps__rating:hover .arw{transform:translateX(4px)}
+
+/* Сведения об исполнителе под карточками салонов: читается, но не спорит с CTA */
+.legal-note{
+  margin:1.5rem 0 0;font-size:.78rem;line-height:1.6;color:var(--ink-soft);max-width:70ch;
+}
+
+.salons{display:grid;gap:.9rem}
+.salon{
+  display:grid;gap:.5rem;padding:1.35rem 1.4rem;border-radius:var(--radius);
+  background:#fff;border:1px solid var(--line-light);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.salon:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
+.salon__addr{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+.salon__tel{font-size:.92rem;font-weight:600;color:var(--ink)}
+.salon__book{align-self:flex-start;color:var(--accent);font-size:.88rem;margin-top:.2rem}
+
+.contact-cta{
+  margin-top:1.75rem;padding:1.6rem 1.5rem;border-radius:var(--radius-lg);
+  background:linear-gradient(150deg,var(--wine-800),var(--wine-950));color:var(--cream);
+  display:grid;gap:1.1rem;box-shadow:var(--shadow-card);
+}
+.contact-cta__title{font-size:clamp(1.3rem,4.6vw,1.75rem);letter-spacing:-.02em}
+.contact-cta__text{font-size:.92rem;color:var(--on-dark)}
+.contact-cta .tel{font-size:clamp(1.35rem,5.4vw,1.9rem);font-weight:800;letter-spacing:-.02em;display:inline-block;margin-top:1rem}
+.contact-cta .btn--line{border-color:rgba(248,242,236,.28);color:var(--cream);background:transparent}
+.contact-cta .btn--line:hover{background:rgba(248,242,236,.1);border-color:var(--cream)}
+
+/* ---------- 11. Футер ---------------------------------------------------- */
+.footer{background:var(--wine-950);color:var(--cream);padding-block:clamp(2.5rem,8vw,4rem) 2rem;border-top:1px solid var(--line-dark)}
+.footer__top{display:grid;gap:2rem}
+.logo--full img{height:68px}   /* полный локап: на меньшей высоте слоган не читается */
+.footer__desc{font-size:.88rem;color:var(--on-dark);max-width:38ch;margin-top:.9rem}
+.footer__col h4{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;font-weight:600}
+.footer__col li + li{margin-top:.55rem}
+.footer__col a{font-size:.9rem;color:var(--on-dark);transition:color .2s}
+.footer__col a:hover{color:var(--cream)}
+.socials{display:flex;gap:.6rem;margin-top:1.25rem}
+.socials a{
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--line-dark);color:var(--cream);
+  transition:background-color .25s,border-color .25s,transform .25s var(--ease);
+}
+.socials a:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+.socials svg{width:18px;height:18px}
+.footer__bottom{
+  margin-top:2.5rem;padding-top:1.4rem;border-top:1px solid var(--line-dark);
+  display:grid;gap:.7rem;font-size:.78rem;color:rgba(248,242,236,.45);
+}
+.footer__copy{max-width:52ch;line-height:1.6}
+.nowrap{white-space:nowrap}
+.footer__legal{display:flex;flex-wrap:wrap;gap:.4rem 1.25rem}
+.footer__legal a{text-decoration:underline;text-underline-offset:3px}
+.footer__legal a:hover{color:var(--cream)}
+
+/* Плавающая кнопка WhatsApp (мобильные) */
+.fab{
+  position:fixed;right:16px;bottom:16px;z-index:50;
+  width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  background:#25d366;color:#fff;box-shadow:0 12px 28px -10px rgba(0,0,0,.6);
+  transform:translateY(90px);opacity:0;transition:transform .4s var(--ease),opacity .3s;
+}
+.fab.is-on{transform:none;opacity:1}
+.fab svg{width:26px;height:26px}
+
+/* ---------- 12. Модальное окно записи ------------------------------------ */
+.modal{
+  position:fixed;inset:0;z-index:80;display:grid;place-items:end center;
+  opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s;
+}
+.modal.is-open{opacity:1;visibility:visible}
+.modal__bg{position:absolute;inset:0;background:rgba(10,3,5,.72);backdrop-filter:blur(4px)}
+.modal__box{
+  position:relative;width:100%;max-width:460px;max-height:92svh;overflow-y:auto;
+  background:var(--cream);color:var(--ink);
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  padding:1.75rem var(--pad) calc(1.75rem + env(safe-area-inset-bottom));
+  transform:translateY(24px);transition:transform .35s var(--ease);
+}
+.modal.is-open .modal__box{transform:none}
+.modal__close{position:absolute;top:12px;right:12px;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;color:var(--ink-soft)}
+.modal__close:hover{background:rgba(0,0,0,.06);color:var(--ink)}
+.modal__title{font-size:1.4rem;letter-spacing:-.02em}
+.modal__text{font-size:.88rem;color:var(--ink-soft);margin-top:.5rem}
+.form{display:grid;gap:.85rem;margin-top:1.4rem}
+.field{display:grid;gap:.35rem}
+.field label{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.field input,.field select{
+  width:100%;min-height:50px;padding:.75rem .95rem;border-radius:12px;
+  border:1px solid var(--line-light);background:#fff;color:var(--ink);font:inherit;font-size:1rem;
+  transition:border-color .2s,box-shadow .2s;
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(224,57,63,.14)}
+.field input.is-invalid{border-color:var(--accent);background:rgba(224,57,63,.04)}
+.field__err{font-size:.76rem;color:var(--accent);font-weight:600}
+.field__err:empty{display:none}
+
+/* Ловушка для спам-ботов: человек её не видит и не может сфокусировать */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0}
+
+/* Кнопка в состоянии отправки */
+.btn.is-loading{pointer-events:none}
+.btn.is-loading .btn__label{opacity:.55}
+.btn__spin{
+  width:17px;height:17px;border-radius:50%;flex:0 0 auto;
+  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;
+  animation:spin .7s linear infinite;display:none;
+}
+.btn.is-loading .btn__spin{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Сообщение о неудачной отправке */
+.form__err{
+  font-size:.85rem;line-height:1.55;color:var(--ink);
+  padding:.85rem 1rem;border-radius:12px;
+  background:rgba(224,57,63,.08);border:1px solid rgba(224,57,63,.3);
+}
+.form__err a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.form .btn--primary{width:100%;margin-top:.35rem}
+/* Отметка о согласии: крупная зона нажатия, на телефоне это важно */
+.consent{
+  display:flex;gap:.65rem;align-items:flex-start;cursor:pointer;
+  font-size:.84rem;line-height:1.5;color:var(--ink-soft);
+}
+.consent input{
+  flex:none;width:20px;height:20px;margin:.1rem 0 0;
+  accent-color:var(--accent);cursor:pointer;
+}
+.consent a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.consent a:hover{color:var(--accent)}
+.consent.is-invalid span{color:var(--accent)}
+
+.form__note{font-size:.72rem;color:var(--ink-soft);line-height:1.5}
+.form__note a{text-decoration:underline;text-underline-offset:2px}
+.btn__wa{flex:0 0 auto}
+.btn.is-loading .btn__wa{display:none}
+
+/* Запасной путь: прямая запись в Dikidi для тех, кто не хочет ждать звонка */
+.form__alt{
+  margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid var(--line-light);
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;
+}
+.form__alt-label{
+  width:100%;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:700;
+}
+.form__alt a{
+  font-size:.84rem;font-weight:600;color:var(--ink);
+  border-bottom:1px solid var(--line-light);transition:border-color .2s,color .2s;
+}
+.form__alt a:hover{color:var(--accent);border-bottom-color:currentColor}
+
+.form__ok{display:none;text-align:center;padding:1.5rem 0}
+.form__ok svg{width:52px;height:52px;color:var(--accent);margin:0 auto 1rem}
+.modal.is-done .form{display:none}
+.modal.is-done .form__ok{display:block}
+
+/* ---------- 13. Адаптив (расширяем мобильную базу) ------------------------ */
+@media (min-width:600px){
+  .stats__grid{grid-template-columns:repeat(4,1fr)}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .card--feature{
+    grid-column:1/-1;display:grid;grid-template-columns:1fr 1.15fr;
+    column-gap:2.5rem;row-gap:1rem;align-items:start;padding:2.25rem 2rem;
+  }
+  .card--feature .card__head{grid-column:1;grid-row:1/4;align-self:center}
+  .card--feature .card__text{grid-column:2;grid-row:1;max-width:52ch}
+  .card--feature .card__meta{grid-column:2;grid-row:2}
+  .card--feature .btn--ghost{grid-column:2;grid-row:3}
+  .card--feature .card__title{font-size:clamp(1.5rem,3.4vw,2.1rem)}
+  .team__grid{grid-template-columns:repeat(3,1fr)}
+  .stars__grid{grid-template-columns:repeat(3,1fr)}
+  .salons{grid-template-columns:repeat(2,1fr)}
+  .footer__bottom{grid-template-columns:1fr auto;align-items:center}
+  .modal{place-items:center}
+  .modal__box{border-radius:var(--radius-lg);padding:2rem}
+}
+
+@media (min-width:900px){
+  .nav{display:flex;gap:1.9rem}
+  .burger{display:none}
+  .header__cta{display:inline-flex}
+  .header__phone{display:inline-flex}
+  .header__in{min-height:82px;gap:2rem}
+  .logo img{height:38px}
+  .logo--full img{height:80px}
+  .hero{align-items:center;padding-top:104px;padding-bottom:clamp(2rem,5vh,3.5rem)}
+  .hero__grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:3.5rem}
+  .hero__media{margin-top:0}
+  .hero__media img{aspect-ratio:3/2}
+  .hero__badge{left:20px;top:20px}
+  .hero__scroll{display:flex}
+  .section-head--split{grid-template-columns:1.05fr .95fr;align-items:end;gap:2.5rem}
+  .cards{grid-template-columns:repeat(4,1fr);gap:1.15rem}
+  .promos__grid{gap:1.15rem}
+  .promos__grid{grid-template-columns:repeat(3,1fr)}
+  .salons{grid-template-columns:repeat(3,1fr)}
+  .team__grid{grid-template-columns:repeat(5,1fr);gap:1.25rem 1rem}
+  .stars__grid{grid-template-columns:repeat(4,1fr);gap:1.25rem 1.15rem}
+  /* Портрет держится рядом с письмом, пока его листают */
+  .about__in{grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:3rem;align-items:start}
+  .about__portrait{position:sticky;top:96px}   /* шапка 70px плюс воздух */
+  .about__facts{grid-template-columns:1fr 1fr}
+  .contact-cta{grid-template-columns:1.1fr auto;align-items:center;padding:2.25rem 2.5rem;gap:2rem}
+  .footer__top{grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
+  .fab{display:none}          /* на десктопе достаточно кнопок в секции контактов */
+}
+
+@media (min-width:1100px){
+  .hero__title{max-width:16ch}
+  .card{padding:1.9rem 1.75rem 1.6rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= ШАПКА ======================= -->
+<header class="header" id="header">
+  <div class="wrap header__in">
+    <a href="#top" class="logo" aria-label="Slim Code Lab — на главную">
+      <img src="assets/logo.png" alt="Slim Code Lab" width="544" height="154">
+    </a>
+
+    <nav class="nav" aria-label="Основная навигация">
+      <a href="#services">Услуги</a>
+      <a href="#promos">Акции</a>
+      <a href="#about">О сети</a>
+      <a href="#team">Команда</a>
+      <a href="#contacts">Адреса</a>
+    </nav>
+
+    <!-- ЗАМЕНИТЬ: реальный номер телефона -->
+    <a class="header__phone" href="tel:+79112979428">+7 (911) 297-94-28</a>
+    <button class="btn btn--primary header__cta" data-open-modal>Записаться онлайн</button>
+
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Меню">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Мобильное меню -->
+<div class="menu" id="menu" hidden>
+  <nav class="menu__list" aria-label="Мобильная навигация">
+    <a href="#services">Услуги</a>
+    <a href="#promos">Акции</a>
+    <a href="#about">О сети</a>
+    <a href="#team">Команда</a>
+    <a href="#contacts">Адреса и контакты</a>
+  </nav>
+  <div class="menu__foot">
+    <a class="tel" href="tel:+79112979428">+7 (911) 297-94-28</a>
+    <button class="btn btn--primary" data-open-modal>Записаться онлайн</button>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ======================= 1. ХИРО =======================
+     Один цельный заголовок: две строки гротеска + акцентная строка антиквой.
+     Никаких «разъезжающихся» слов и параллакс-трюков. -->
+<section class="hero">
+  <div class="hero__in">
+   <div class="hero__grid">
+    <div class="hero__content">
+    <div class="hero__marks reveal">
+      <p class="hero__since"><b>с 2001</b> Санкт-Петербург · 3 салона</p>
+      <!-- Знак Яндекса: преимущество, поэтому стоит на первом экране -->
+      <span class="hero__award">
+        <img src="assets/good-place.png" alt="" width="88" height="52" decoding="async">
+        Хорошее место 2026
+      </span>
+    </div>
+
+    <h1 class="hero__title reveal" data-d="1">
+      Аппаратная коррекция фигуры
+      <em>с доказанным результатом</em>
+    </h1>
+
+    <p class="hero__sub reveal" data-d="2">
+      Сеть салонов Slim Code Lab в Санкт-Петербурге. Индивидуальные программы
+      на сертифицированном оборудовании — без операций и жёстких диет.
+    </p>
+
+    <div class="hero__cta reveal" data-d="3">
+      <!-- Единственная основная CTA на первом экране -->
+      <button class="btn btn--primary" data-open-modal>Записаться онлайн</button>
+      <a class="btn btn--ghost" href="#services">
+        Смотреть услуги <span class="arw" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <p class="hero__note reveal" data-d="4">Ответим на вопросы и подберём программу под вашу задачу</p>
+
+    <p class="hero__scroll" aria-hidden="true"><i></i> Листайте вниз</p>
+    </div>
+
+    <div class="hero__media reveal" data-d="2">
+      <picture class="hero__frame">
+        <source type="image/avif" sizes="(min-width:900px) 460px, 90vw"
+                srcset="assets/hero-480.avif 480w, assets/hero-960.avif 960w">
+        <source type="image/webp" sizes="(min-width:900px) 460px, 90vw"
+                srcset="assets/hero-480.webp 480w, assets/hero-960.webp 960w">
+        <img src="assets/hero-960.jpg" sizes="(min-width:900px) 460px, 90vw"
+             srcset="assets/hero-480.jpg 480w, assets/hero-960.jpg 960w"
+             width="1152" height="768" fetchpriority="high" decoding="async"
+             alt="Аппаратная коррекция фигуры на RSL Beautylizer в салоне Slim Code Lab">
+      </picture>
+      <div class="hero__badge">
+        <span class="hero__badge-stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+        </span>
+        <b>5,0</b>
+        <span class="hero__badge-src">оценка на Яндекс.Картах</span>
+      </div>
+    </div>
+   </div>
+  </div>
+</section>
+
+<!-- ======================= 2. ЦИФРЫ ДОВЕРИЯ =======================
+     data-count — целевое число для анимации счётчика (см. JS). -->
+<section class="stats" aria-label="Ключевые цифры">
+  <div class="wrap">
+    <div class="stats__grid">
+      <div class="stat reveal">
+        <div class="stat__num"><span data-count="8000">8 000</span><i>+</i></div>
+        <div class="stat__cap">довольных клиентов<br>с 2001 года</div>
+      </div>
+      <div class="stat reveal" data-d="1">
+        <div class="stat__num"><span data-count="3">3</span></div>
+        <div class="stat__cap">салона<br>в Санкт-Петербурге</div>
+      </div>
+      <div class="stat reveal" data-d="2">
+        <div class="stat__num"><span data-count="24">24</span></div>
+        <div class="stat__cap">года<br>в индустрии</div>
+      </div>
+      <div class="stat reveal" data-d="3">
+        <div class="stat__num"><span data-count="5">5</span></div>
+        <div class="stat__cap">аппаратных<br>методик</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 3. УСЛУГИ ======================= -->
+<section class="section section--light services" id="services">
+  <div class="wrap">
+    <div class="section-head section-head--split reveal">
+      <div>
+        <p class="eyebrow">Услуги и цены</p>
+        <h2 class="h2">Шесть методик,<br><em>одна программа под вас</em></h2>
+      </div>
+      <p class="lead">
+        На первой встрече специалист оценивает состояние тканей и собирает
+        курс из методик, которые работают вместе, а не по отдельности.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <article class="card card--feature reveal">
+        <div class="card__head">
+          <p class="card__idx">01 — ФЛАГМАН</p>
+          <h3 class="card__title">RSL Beautylizer</h3>
+        </div>
+        <p class="card__text">Вакуумно-роликовая проработка с лимфодренажем: моделирует силуэт, выравнивает рельеф кожи и убирает отёчность.</p>
+        <p class="card__price">от 3 600 ₽ <span>пробный сеанс 60 минут</span></p>
+        <div class="card__meta">
+          <span class="tag">60 мин</span>
+          <span class="tag">75 мин</span>
+          <span class="tag">90 мин</span>
+        </div>
+        <button class="btn btn--ghost" data-open-modal data-service="RSL Beautylizer">
+          Записаться <span class="arw" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="card reveal" data-d="1">
+        <div class="card__head">
+          <p class="card__idx">02</p>
+          <h3 class="card__title">FaceLift Beautylizer</h3>
+        </div>
+        <p class="card__text">Та же технология для лица, шеи и декольте — отдельно или в комплексе с проработкой тела.</p>
+        <p class="card__price">от 2 200 ₽ <span>пробный сеанс 30 минут</span></p>
+        <div class="card__meta">
+          <span class="tag">30 мин</span>
+          <span class="tag">комплекс с телом</span>
+        </div>
+        <button class="btn btn--ghost" data-open-modal data-service="FaceLift Beautylizer">
+          Записаться <span class="arw" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="card reveal" data-d="2">
+        <div class="card__head">
+          <p class="card__idx">03</p>
+          <h3 class="card__title">LPG-массаж</h3>
+        </div>
+        <p class="card__text">Классика аппаратной коррекции: запускает лимфоток, работает с локальными жировыми отложениями и «апельсиновой коркой».</p>
+        <p class="card__price">от 2 000 ₽ <span>пробный сеанс 50 минут</span></p>
+        <div class="card__meta">
+          <span class="tag">50 мин</span>
+          <span class="tag">60 мин</span>
+        </div>
+        <button class="btn btn--ghost" data-open-modal data-service="LPG-массаж">
+          Записаться <span class="arw" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="card reveal" data-d="3">
+        <div class="card__head">
+          <p class="card__idx">04</p>
+          <h3 class="card__title">Миостимуляция</h3>
+        </div>
+        <p class="card__text">Импульсная тренировка глубоких мышц: подтягивает живот, бёдра и руки там, где обычная нагрузка почти не достаёт.</p>
+        <p class="card__price">от 1 900 ₽ <span>в курсе от 10 сеансов</span></p>
+        <div class="card__meta">
+          <span class="tag">40 мин</span>
+          <span class="tag">50 мин</span>
+        </div>
+        <button class="btn btn--ghost" data-open-modal data-service="Миостимуляция">
+          Записаться <span class="arw" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="card reveal" data-d="4">
+        <div class="card__head">
+          <p class="card__idx">05</p>
+          <h3 class="card__title">Прессомассаж</h3>
+        </div>
+        <p class="card__text">Мягкая лимфодренажная программа в костюме-прессотерапии: снимает тяжесть в ногах и отёки уже после первого сеанса.</p>
+        <p class="card__price">от 1 200 ₽ <span>в курсе от 10 сеансов</span></p>
+        <div class="card__meta">
+          <span class="tag">30 мин</span>
+          <span class="tag">40 мин</span>
+        </div>
+        <button class="btn btn--ghost" data-open-modal data-service="Прессомассаж">
+          Записаться <span class="arw" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+      <article class="card reveal" data-d="4">
+        <div class="card__head">
+          <p class="card__idx">06</p>
+          <h3 class="card__title">Кавитация</h3>
+        </div>
+        <p class="card__text">Ультразвук точечно работает с локальными зонами — там, где объёмы не уходят ни от питания, ни от спорта.</p>
+        <p class="card__price">от 1 800 ₽ <span>в курсе от 5 сеансов</span></p>
+        <div class="card__meta">
+          <span class="tag">30 мин</span>
+          <span class="tag">40 мин</span>
+        </div>
+        <button class="btn btn--ghost" data-open-modal data-service="Кавитация">
+          Записаться <span class="arw" aria-hidden="true">→</span>
+        </button>
+      </article>
+
+    </div>
+
+    <!-- Полный прайс: раскрывающиеся блоки, чтобы цены были на странице,
+         но не перегружали первый экран секции. -->
+    <div class="prices reveal" id="prices">
+      <h3 class="prices__title">Полный прайс</h3>
+
+        <details class="price" id="price-rsl">
+          <summary>
+            <span class="price__name">RSL Beautylizer</span>
+            <span class="price__from">от 3 600 ₽</span>
+          </summary>
+          <div class="price__body">
+            <div class="ptable-wrap">
+              <table class="ptable">
+                <thead><tr><th>Длительность</th><th>Пробный</th><th>Разовый</th><th>От 6 сеансов</th><th>От 10 сеансов</th><th>От 15 сеансов</th></tr></thead>
+                <tbody>
+              <tr><td>90 минут</td><td>4 800 ₽</td><td>5 800 ₽</td><td>5 500 ₽</td><td>5 100 ₽</td><td>4 800 ₽</td></tr>
+              <tr><td>75 минут</td><td>4 200 ₽</td><td>5 200 ₽</td><td>4 900 ₽</td><td>4 500 ₽</td><td>4 200 ₽</td></tr>
+              <tr><td>60 минут</td><td>3 600 ₽</td><td>4 700 ₽</td><td>4 300 ₽</td><td>3 900 ₽</td><td>3 600 ₽</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <details class="price" id="price-facelift">
+          <summary>
+            <span class="price__name">FaceLift Beautylizer</span>
+            <span class="price__from">от 2 200 ₽</span>
+          </summary>
+          <div class="price__body">
+            <div class="ptable-wrap">
+              <table class="ptable">
+                <thead><tr><th>Длительность</th><th>Пробный</th><th>От 6 сеансов</th><th>От 10 сеансов</th><th>От 15 сеансов</th></tr></thead>
+                <tbody>
+              <tr><td>30 минут — шея, лицо, декольте</td><td>2 200 ₽</td><td>2 600 ₽</td><td>2 400 ₽</td><td>2 200 ₽</td></tr>
+              <tr><td>Комплекс 30 + 30 — RSL тело 30 мин и FaceLift 30 мин</td><td>3 900 ₽</td><td>4 600 ₽</td><td>4 200 ₽</td><td>3 900 ₽</td></tr>
+              <tr><td>Комплекс 60 + 30 — RSL тело 60 мин и FaceLift 30 мин</td><td>5 800 ₽</td><td>6 900 ₽</td><td>6 300 ₽</td><td>5 900 ₽</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <details class="price" id="price-lpg">
+          <summary>
+            <span class="price__name">LPG-массаж</span>
+            <span class="price__from">от 2 000 ₽</span>
+          </summary>
+          <div class="price__body">
+            <div class="ptable-wrap">
+              <table class="ptable">
+                <thead><tr><th>Длительность</th><th>Пробный</th><th>Разовый</th><th>От 6 сеансов</th><th>От 10 сеансов</th></tr></thead>
+                <tbody>
+              <tr><td>50 минут</td><td>2 000 ₽</td><td>2 500 ₽</td><td>2 200 ₽</td><td>2 000 ₽</td></tr>
+              <tr><td>60 минут</td><td>2 300 ₽</td><td>2 800 ₽</td><td>2 500 ₽</td><td>2 300 ₽</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <details class="price" id="price-mio">
+          <summary>
+            <span class="price__name">Миостимуляция</span>
+            <span class="price__from">от 1 900 ₽</span>
+          </summary>
+          <div class="price__body">
+            <div class="ptable-wrap">
+              <table class="ptable">
+                <thead><tr><th>Длительность</th><th>Разовый</th><th>От 10 сеансов</th></tr></thead>
+                <tbody>
+              <tr><td>40 минут</td><td>2 200 ₽</td><td>1 900 ₽</td></tr>
+              <tr><td>50 минут</td><td>2 500 ₽</td><td>2 200 ₽</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <details class="price" id="price-presso">
+          <summary>
+            <span class="price__name">Прессомассаж</span>
+            <span class="price__from">от 1 200 ₽</span>
+          </summary>
+          <div class="price__body">
+            <div class="ptable-wrap">
+              <table class="ptable">
+                <thead><tr><th>Длительность</th><th>Разовый</th><th>От 10 сеансов</th></tr></thead>
+                <tbody>
+              <tr><td>30 минут</td><td>1 500 ₽</td><td>1 200 ₽</td></tr>
+              <tr><td>40 минут</td><td>1 800 ₽</td><td>1 500 ₽</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <details class="price" id="price-cav">
+          <summary>
+            <span class="price__name">Кавитация</span>
+            <span class="price__from">от 1 800 ₽</span>
+          </summary>
+          <div class="price__body">
+            <div class="ptable-wrap">
+              <table class="ptable">
+                <thead><tr><th>Длительность</th><th>Разовый</th><th>От 5 сеансов</th></tr></thead>
+                <tbody>
+              <tr><td>30 минут</td><td>2 100 ₽</td><td>1 800 ₽</td></tr>
+              <tr><td>40 минут</td><td>2 500 ₽</td><td>2 200 ₽</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+        <details class="price" id="price-courses">
+          <summary>
+            <span class="price__name">Курсы и пакеты</span>
+            <span class="price__from">от 5 500 ₽</span>
+          </summary>
+          <div class="price__body">
+            <div class="ptable-wrap">
+              <table class="ptable">
+                <caption>Пробные пакеты</caption>
+                <thead><tr><th>Пакет</th><th>Цена</th><th>Без пакета</th></tr></thead>
+                <tbody>
+              <tr><td><b>Пакет S</b><span class="ptable__note">RSL 45 мин + LPG 40 мин + прессомассаж 30 мин</span></td><td>5 500 ₽</td><td class="ptable__old">8 000 ₽</td></tr>
+              <tr><td><b>Пакет M</b><span class="ptable__note">RSL 60 мин + LPG 40 мин + прессомассаж 30 мин</span></td><td>5 900 ₽</td><td class="ptable__old">8 400 ₽</td></tr>
+              <tr><td><b>Пакет L</b><span class="ptable__note">RSL 60 мин + LPG 50 мин + прессомассаж 30 мин</span></td><td>6 200 ₽</td><td class="ptable__old">8 700 ₽</td></tr>
+              <tr><td><b>Пакет XL</b><span class="ptable__note">RSL 75 мин + LPG 50 мин + прессомассаж 30 мин</span></td><td>6 800 ₽</td><td class="ptable__old">9 200 ₽</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ptable-wrap">
+              <table class="ptable">
+                <caption>Комбинированные курсы</caption>
+                <thead><tr><th>Курс</th><th>Цена</th><th>Без курса</th></tr></thead>
+                <tbody>
+              <tr><td><b>Express Light</b><span class="ptable__note">6 сеансов RSL по 45 мин и 6 LPG по 40 мин</span></td><td>34 800 ₽</td><td class="ptable__old">39 000 ₽</td></tr>
+              <tr><td><b>Express</b><span class="ptable__note">6 сеансов RSL по 60 мин и 6 LPG по 40 мин</span></td><td>37 200 ₽</td><td class="ptable__old">41 400 ₽</td></tr>
+              <tr><td><b>Express+</b><span class="ptable__note">6 сеансов RSL по 60 мин и 6 LPG по 50 мин</span></td><td>39 000 ₽</td><td class="ptable__old">43 200 ₽</td></tr>
+              <tr><td><b>Express Optima</b><span class="ptable__note">6 сеансов RSL по 60 мин и 6 LPG по 60 мин</span></td><td>40 800 ₽</td><td class="ptable__old">45 000 ₽</td></tr>
+              <tr><td><b>Express Big</b><span class="ptable__note">6 сеансов RSL по 75 мин и 6 LPG по 50 мин</span></td><td>42 600 ₽</td><td class="ptable__old">46 200 ₽</td></tr>
+              <tr><td><b>Maxi Light</b><span class="ptable__note">10 сеансов RSL по 45 мин и 10 LPG по 40 мин</span></td><td>52 000 ₽</td><td class="ptable__old">65 000 ₽</td></tr>
+              <tr><td><b>Maxi</b><span class="ptable__note">10 сеансов RSL по 60 мин и 10 LPG по 40 мин</span></td><td>56 000 ₽</td><td class="ptable__old">69 000 ₽</td></tr>
+              <tr><td><b>Maxi+</b><span class="ptable__note">10 сеансов RSL по 60 мин и 10 LPG по 50 мин</span></td><td>59 000 ₽</td><td class="ptable__old">72 000 ₽</td></tr>
+              <tr><td><b>Maxi Optima</b><span class="ptable__note">10 сеансов RSL по 60 мин и 10 LPG по 60 мин</span></td><td>62 000 ₽</td><td class="ptable__old">75 000 ₽</td></tr>
+              <tr><td><b>Maxi Big</b><span class="ptable__note">10 сеансов RSL по 75 мин и 10 LPG по 50 мин</span></td><td>65 000 ₽</td><td class="ptable__old">77 000 ₽</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+      <p class="prices__note">
+        Цена за сеанс в курсе зависит от количества сеансов. Курс подбирается
+        на консультации — итоговую стоимость назовём после осмотра.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 4. АКЦИИ ======================= -->
+<section class="section section--dark promos" id="promos">
+  <div class="wrap">
+    <div class="section-head section-head--split reveal">
+      <div>
+        <p class="eyebrow">Выгодные пакеты</p>
+        <h2 class="h2">Курсы <em>дешевле разовых</em></h2>
+      </div>
+      <p class="lead">Цена указана за весь курс. Полный список пакетов — в прайсе выше.</p>
+    </div>
+
+    <div class="cards promos__grid">
+
+      <article class="promo reveal">
+        <span class="promo__badge">−31%</span>
+        <h3 class="promo__title">Пакет S</h3>
+        <p class="promo__text">Три методики за один визит: RSL, LPG и прессомассаж. Хороший способ познакомиться с курсом.</p>
+        <p class="promo__what">RSL 45 мин + LPG 40 мин + прессомассаж 30 мин</p>
+        <div class="promo__foot">
+          <span class="promo__price">5 500 ₽</span>
+          <span class="promo__old">8 000 ₽</span>
+          <span class="promo__save">выгода 2 500 ₽</span>
+        </div>
+      </article>
+
+      <article class="promo reveal" data-d="1">
+        <span class="promo__badge">−11%</span>
+        <h3 class="promo__title">Express Light</h3>
+        <p class="promo__text">Шесть сеансов RSL и шесть LPG. Курс, на котором обычно виден первый результат.</p>
+        <p class="promo__what">6 сеансов RSL по 45 мин и 6 LPG по 40 мин</p>
+        <div class="promo__foot">
+          <span class="promo__price">34 800 ₽</span>
+          <span class="promo__old">39 000 ₽</span>
+          <span class="promo__save">выгода 4 200 ₽</span>
+        </div>
+      </article>
+
+      <article class="promo reveal" data-d="2">
+        <span class="promo__badge">−20%</span>
+        <h3 class="promo__title">Maxi Light</h3>
+        <p class="promo__text">Десять сеансов RSL и десять LPG. Максимальная выгода за сеанс.</p>
+        <p class="promo__what">10 сеансов RSL по 45 мин и 10 LPG по 40 мин</p>
+        <div class="promo__foot">
+          <span class="promo__price">52 000 ₽</span>
+          <span class="promo__old">65 000 ₽</span>
+          <span class="promo__save">выгода 13 000 ₽</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="btn-row reveal">
+      <button class="btn btn--primary" data-open-modal data-service="Курс процедур">Записаться на курс</button>
+      <a class="btn btn--ghost" href="#prices">Смотреть все цены <span class="arw" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 5. ЗВЁЗДНЫЕ КЛИЕНТЫ =======================
+     Карточки строит скрипт из списка STARS. Пока список пуст, секция
+     удаляется целиком — на странице не остаётся пустого блока. -->
+<section class="section section--light stars" id="stars" hidden>
+  <div class="wrap">
+    <div class="section-head section-head--split reveal">
+      <div>
+        <p class="eyebrow">Видеоотзывы</p>
+        <h2 class="h2">Отзывы <em>звёздных клиентов</em></h2>
+      </div>
+      <p class="lead">Нажмите на карточку — видео откроется прямо на странице.</p>
+    </div>
+
+    <div class="stars__grid" id="starsGrid"></div>
+  </div>
+</section>
+
+<!-- ======================= 6. КОМАНДА =======================
+     Плейсхолдеры фото: заменить блок .ph на
+     <img src="assets/team-1.jpg" alt="Имя, специализация" loading="lazy"> -->
+<!-- ======================= О СЕТИ =======================
+     Письмо основателя. Текст авторский, дан клиентом целиком: правим только
+     типографику. Сразу видно приветствие и первый абзац, остальное — под
+     «Читать письмо целиком», иначе секция вытесняет всё остальное. -->
+<section class="section section--dark about" id="about">
+  <div class="wrap">
+    <div class="section-head section-head--split reveal">
+      <p class="eyebrow">О сети Slim Code</p>
+      <h2 class="h2">24 года <em>в beauty-сфере</em></h2>
+    </div>
+
+    <div class="about__in">
+      <figure class="about__portrait reveal">
+        <picture>
+          <source type="image/avif" srcset="assets/founder-480.avif 480w, assets/founder-750.avif 750w"
+                  sizes="(min-width:1000px) 38vw, 100vw">
+          <source type="image/webp" srcset="assets/founder-480.webp 480w, assets/founder-750.webp 750w"
+                  sizes="(min-width:1000px) 38vw, 100vw">
+          <img src="assets/founder-750.jpg"
+               srcset="assets/founder-480.jpg 480w, assets/founder-750.jpg 750w"
+               sizes="(min-width:1000px) 38vw, 100vw"
+               alt="Татьяна Строгая — основатель сети Slim Code"
+               loading="lazy" decoding="async" width="750" height="937">
+        </picture>
+      </figure>
+
+      <div class="about__text reveal" data-d="1">
+        <div class="about__who">
+          <p class="about__name">Татьяна Строгая</p>
+          <p class="about__role">Руководитель и основатель сети лабораторий коррекции фигуры Slim Code</p>
+        </div>
+
+        <!-- Короткие факты из письма — для тех, кто читать письмо не станет -->
+        <div class="about__facts">
+          <p class="about__fact"><b>24 года</b><span>с 1 октября 2001 года</span></p>
+          <p class="about__fact"><b>8 мастеров</b><span>подобраны и обучены лично</span></p>
+          <p class="about__fact"><b>3 лаборатории</b><span>в Санкт-Петербурге</span></p>
+          <p class="about__fact"><b>Лицензия</b><span>медицинская, Л041-01148-78/03316215</span></p>
+        </div>
+
+        <div class="letter">
+          <p class="letter__hi">Здравствуй, дорогой гость!</p>
+          <p>1 октября 2025 года сети лабораторий коррекции фигуры «Slim Code» исполнилось
+            24 года. Вот и ещё год в мою копилочку профессиональной деятельности.
+            Постаралась проанализировать, подняла старые записи, не всё сохранилось, но
+            многое цело. Не могу их выбросить, рука не поднимается. По общим подсчётам
+            около 10 000 девушек и женщин стали прекраснее с «Slim Code» за это время.</p>
+
+          <details class="letter__more">
+            <summary>
+              <span class="letter__label--shut">Читать письмо целиком</span>
+              <span class="letter__label--open">Свернуть письмо</span>
+              <span class="arw" aria-hidden="true">⌄</span>
+            </summary>
+            <div class="letter__body">
+              <p>Не сразу появилось это название. Конечно, 23 года назад и кабинетов по
+                коррекции фигуры было «на пальцах пересчитать». Первым клиентам, чтобы
+                записаться, приходилось приходить лично, потом появились пейджеры, а уж
+                потом сотовые телефоны, ну а ещё позднее и социальные сети. Поменялось
+                оборудование и техники: от баночного вакуумного массажа до современного
+                RSL-скульптурирования на аппарате Beautylizer. Но одно останется НАВСЕГДА —
+                это моя любовь и преданность работе, моё желание быть 100 % вовлечённой
+                в процесс.</p>
+              <p>Сейчас со мной в команде творят 8 мастеров, которых я сама долго подбирала
+                и обучала. На сегодня сеть «Slim Code» насчитывает 3 лаборатории в
+                г. Санкт-Петербурге. Для осуществления деятельности получена медицинская
+                лицензия (Л041-01148-78/03316215). В салонах меня часто можно увидеть в
+                качестве руководителя и специалиста. Да, я также принимаю наших дорогих
+                пациентов).</p>
+              <p>Безмерно я счастлива, что знаю каждого клиента, со многими знакома лично,
+                что могу общаться, делать разборы и давать рекомендации в процессе и в
+                завершении курса. Всегда искренне радуюсь нашим новым встречам и совместным
+                результатам.</p>
+              <p>Заявляю 100 %, что в любом возрасте можно стать «лучшей версией себя» —
+                стройнее, подтянутей, глаже, здоровее, с ровной осанкой, желанной, любимой
+                и уверенной в себе. Я счастлива быть причастной к этому чудесному процессу
+                преображения!</p>
+              <p>Дорогие мои, очень жду вас у нас в гостях!</p>
+            </div>
+          </details>
+
+          <p class="about__sign">Ваша, Татьяна Строгая</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--deep team" id="team">
+  <div class="wrap">
+    <div class="section-head section-head--split reveal">
+      <div>
+        <p class="eyebrow">Команда</p>
+        <h2 class="h2">Специалисты,<br><em>которые ведут ваш курс</em></h2>
+      </div>
+      <p class="lead">Все специалисты с медицинским образованием. Программу собираем на первой встрече — под вашу задачу и состояние тканей.</p>
+    </div>
+
+    <div class="team__grid">
+
+      <figure class="person reveal">
+        <picture class="person__photo">
+          <source type="image/avif" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/usok-320.avif 320w, assets/team/usok-640.avif 640w">
+          <source type="image/webp" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/usok-320.webp 320w, assets/team/usok-640.webp 640w">
+          <img src="assets/team/usok-640.jpg" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+               srcset="assets/team/usok-320.jpg 320w, assets/team/usok-640.jpg 640w"
+               width="864" height="930" loading="lazy" decoding="async"
+               alt="Анна Усок — специалист по аппаратной коррекции фигуры, врач-дерматолог">
+        </picture>
+        <figcaption>
+          <div class="person__name">Анна Усок</div>
+          <div class="person__role">Специалист по аппаратной коррекции фигуры, врач-дерматолог</div>
+        </figcaption>
+      </figure>
+
+      <figure class="person reveal" data-d="1">
+        <picture class="person__photo">
+          <source type="image/avif" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/sivtsova-320.avif 320w, assets/team/sivtsova-640.avif 640w">
+          <source type="image/webp" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/sivtsova-320.webp 320w, assets/team/sivtsova-640.webp 640w">
+          <img src="assets/team/sivtsova-640.jpg" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+               srcset="assets/team/sivtsova-320.jpg 320w, assets/team/sivtsova-640.jpg 640w"
+               width="864" height="930" loading="lazy" decoding="async"
+               alt="Виктория Сивцова — специалист по аппаратной коррекции фигуры">
+        </picture>
+        <figcaption>
+          <div class="person__name">Виктория Сивцова</div>
+          <div class="person__role">Специалист по аппаратной коррекции фигуры</div>
+        </figcaption>
+      </figure>
+
+      <figure class="person reveal" data-d="2">
+        <picture class="person__photo">
+          <source type="image/avif" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/vlasenko-320.avif 320w, assets/team/vlasenko-640.avif 640w">
+          <source type="image/webp" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/vlasenko-320.webp 320w, assets/team/vlasenko-640.webp 640w">
+          <img src="assets/team/vlasenko-640.jpg" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+               srcset="assets/team/vlasenko-320.jpg 320w, assets/team/vlasenko-640.jpg 640w"
+               width="864" height="930" loading="lazy" decoding="async"
+               alt="Анастасия Власенко — специалист по аппаратной коррекции фигуры">
+        </picture>
+        <figcaption>
+          <div class="person__name">Анастасия Власенко</div>
+          <div class="person__role">Специалист по аппаратной коррекции фигуры</div>
+        </figcaption>
+      </figure>
+
+      <figure class="person reveal" data-d="3">
+        <picture class="person__photo">
+          <source type="image/avif" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/nikolaeva-320.avif 320w, assets/team/nikolaeva-640.avif 640w">
+          <source type="image/webp" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/nikolaeva-320.webp 320w, assets/team/nikolaeva-640.webp 640w">
+          <img src="assets/team/nikolaeva-640.jpg" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+               srcset="assets/team/nikolaeva-320.jpg 320w, assets/team/nikolaeva-640.jpg 640w"
+               width="864" height="930" loading="lazy" decoding="async"
+               alt="Эвелина Николаева — специалист по аппаратной коррекции фигуры">
+        </picture>
+        <figcaption>
+          <div class="person__name">Эвелина Николаева</div>
+          <div class="person__role">Специалист по аппаратной коррекции фигуры</div>
+        </figcaption>
+      </figure>
+
+      <figure class="person reveal" data-d="4">
+        <picture class="person__photo">
+          <source type="image/avif" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/kuznetsova-320.avif 320w, assets/team/kuznetsova-640.avif 640w">
+          <source type="image/webp" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+                  srcset="assets/team/kuznetsova-320.webp 320w, assets/team/kuznetsova-640.webp 640w">
+          <img src="assets/team/kuznetsova-640.jpg" sizes="(min-width:1000px) 220px, (min-width:600px) 30vw, 45vw"
+               srcset="assets/team/kuznetsova-320.jpg 320w, assets/team/kuznetsova-640.jpg 640w"
+               width="864" height="930" loading="lazy" decoding="async"
+               alt="Анна Кузнецова — специалист по аппаратной коррекции фигуры">
+        </picture>
+        <figcaption>
+          <div class="person__name">Анна Кузнецова</div>
+          <div class="person__role">Специалист по аппаратной коррекции фигуры</div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 7. АДРЕСА И КОНТАКТЫ ======================= -->
+<section class="section section--light contacts" id="contacts">
+  <div class="wrap">
+    <div class="section-head section-head--split reveal">
+      <div>
+        <p class="eyebrow">Адреса</p>
+        <h2 class="h2">Три салона <em>в Санкт-Петербурге</em></h2>
+      </div>
+      <p class="lead">Записаться можно по телефону или онлайн — у каждого салона своя страница записи.</p>
+    </div>
+
+    <!-- Вместо отзывов на сайте — переход на карточку в Яндекс.Картах, где
+         отзывы настоящие и обновляются сами. Оценку в разметку страницы не
+         выносим: это чужие данные, размечать их как свои нельзя. -->
+    <div class="maps reveal">
+      <a class="maps__rating" href="https://yandex.ru/maps/org/slim_code/158923555044/reviews/" target="_blank" rel="noopener"
+         aria-label="Рейтинг 5,0 из 5 на Яндекс.Картах — открыть отзывы">
+        <span class="maps__stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.8L12 17.2 6.1 20.5l1.3-6.8L2.5 9.1l6.6-.8L12 2z"/></svg>
+        </span>
+        <span class="maps__score">5,0</span>
+        <span class="maps__src">на Яндекс.Картах <span class="arw" aria-hidden="true">→</span></span>
+      </a>
+    </div>
+
+    <!-- Онлайн-запись ведёт в Dikidi — у каждого салона своя страница.
+         ЗАМЕНИТЬ: часы работы, когда пришлёте (сейчас не показываем, чтобы
+         не публиковать выдуманное расписание). -->
+    <div class="salons">
+      <article class="salon reveal">
+        <p class="salon__addr">Петергофское шоссе, д. 53</p>
+        <a class="salon__tel" href="tel:+79112979428">+7 (911) 297-94-28</a>
+        <a class="btn btn--ghost salon__book" href="https://dikidi.net/158455" target="_blank" rel="noopener">
+          Выбрать время онлайн <span class="arw" aria-hidden="true">→</span>
+        </a>
+      </article>
+
+      <article class="salon reveal" data-d="1">
+        <p class="salon__addr">Проспект Героев, д. 33</p>
+        <a class="salon__tel" href="tel:+79112979428">+7 (911) 297-94-28</a>
+        <a class="btn btn--ghost salon__book" href="https://dikidi.net/584557" target="_blank" rel="noopener">
+          Выбрать время онлайн <span class="arw" aria-hidden="true">→</span>
+        </a>
+      </article>
+
+      <article class="salon reveal" data-d="2">
+        <p class="salon__addr">Проспект Королёва, д. 61</p>
+        <a class="salon__tel" href="tel:+79112979428">+7 (911) 297-94-28</a>
+        <a class="btn btn--ghost salon__book" href="https://dikidi.net/696805" target="_blank" rel="noopener">
+          Выбрать время онлайн <span class="arw" aria-hidden="true">→</span>
+        </a>
+      </article>
+    </div>
+
+    <!-- Сведения об исполнителе: услуги медицинские, посетитель вправе видеть,
+         кто и по какой лицензии их оказывает, не открывая юридические страницы. -->
+    <p class="legal-note reveal">
+      Медицинские услуги оказывает ООО «Слим Код», ИНН 7807280704, ОГРН 1247800095542,
+      адрес: 198335, Санкт-Петербург, Ленинский пр-кт, д. 64, к. 1, литера А, кв. 576.
+      Лицензия на осуществление медицинской деятельности
+      <span class="nowrap">Л041-01148-78/03316215</span> выдана Комитетом по здравоохранению
+      Санкт-Петербурга 6 октября 2025 года. Имеются противопоказания, необходима консультация
+      специалиста.
+    </p>
+
+    <!-- Итоговый блок контактов: одна основная CTA + WhatsApp + телефон -->
+    <div class="contact-cta reveal">
+      <div>
+        <h3 class="contact-cta__title">Не знаете, с чего начать?</h3>
+        <p class="contact-cta__text">Оставьте заявку — перезвоним, ответим на вопросы и подберём программу под вашу задачу.</p>
+        <a class="tel" href="tel:+79112979428">+7 (911) 297-94-28</a>
+      </div>
+      <div class="btn-row" style="margin-top:0">
+        <button class="btn btn--primary" data-open-modal data-service="Консультация">Записаться онлайн</button>
+        <!-- ЗАМЕНИТЬ: номер в ссылке WhatsApp -->
+        <a class="btn btn--line" href="https://wa.clck.bar/79112979428" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg>
+          Написать в WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= 8. ФУТЕР ======================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a href="#top" class="logo logo--full">
+          <img src="assets/logo-full.png" alt="Slim Code Lab — стань лучшей версией себя" width="544" height="154">
+        </a>
+        <p class="footer__desc">Сеть салонов аппаратной коррекции фигуры в Санкт-Петербурге. Работаем с 2001 года.</p>
+        <div class="socials">
+          <a href="https://vk.com/slim_code_lab" target="_blank" rel="noopener" aria-label="ВКонтакте">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 17.5c-5.4 0-8.7-3.8-8.8-10h2.7c.1 4.6 2.2 6.6 3.8 7V7.5h2.6v3.9c1.6-.2 3.2-2 3.8-3.9h2.5c-.4 2.3-2 4.1-3.2 4.9 1.2.6 3 2.2 3.7 5.1h-2.8c-.5-1.7-2-3-3.9-3.2v3.2H13z"/></svg>
+          </a>
+          <a href="https://instagram.com/slim_code_lab" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://t.me/+79112979428" target="_blank" rel="noopener" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 4.3 2.9 11.5c-1 .4-1 1.8.1 2.1l4.6 1.4 1.8 5.4c.3.8 1.3 1 1.9.4l2.5-2.4 4.6 3.4c.7.5 1.7.1 1.9-.7l3.1-14.6c.2-1-.8-1.8-1.7-1.2zM9.6 14.3l8.1-5-6.6 6.4-.3 3.1-1.2-4.5z"/></svg>
+          </a>
+          <a href="https://wa.clck.bar/79112979428" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Услуги</h4>
+        <ul>
+          <li><a href="#services">RSL-скульптурирование</a></li>
+          <li><a href="#services">LPG-массаж</a></li>
+          <li><a href="#services">Миостимуляция</a></li>
+          <li><a href="#services">Прессомассаж</a></li>
+          <li><a href="#services">Кавитация</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Салоны</h4>
+        <ul>
+          <li><a href="#contacts">Петергофское шоссе, 53</a></li>
+          <li><a href="#contacts">Проспект Героев, 33</a></li>
+          <li><a href="#contacts">Проспект Королёва, 61</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+79112979428">+7 (911) 297-94-28</a></li>
+          <li><a href="https://t.me/+79112979428" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://vk.com/slim_code_lab" target="_blank" rel="noopener">ВКонтакте</a></li>
+          <li><a href="https://wa.clck.bar/79112979428" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2019—<span id="year">2026</span> ООО «Слим Код». Лицензия <span class="nowrap">Л041-01148-78/03316215</span>. Все права защищены.</p>
+      <div class="footer__legal">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="terms.html">Пользовательское соглашение</a>
+      </div>
+      <p style="grid-column:1/-1;opacity:.7">Не является публичной офертой. Имеются противопоказания, необходима консультация специалиста.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Плавающая кнопка WhatsApp — появляется после первого экрана (только мобильные) -->
+<a class="fab" id="fab" href="https://wa.clck.bar/79112979428" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg>
+</a>
+
+<!-- ======================= ОКНО С ВИДЕООТЗЫВОМ =======================
+     Ролик подгружается только при открытии: до этого на странице нет ни
+     одного кадра с YouTube, и он не тянет свои скрипты и cookie. -->
+<div class="modal modal--video" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoTitle" hidden>
+  <div class="modal__bg" data-close-video></div>
+  <div class="modal__box modal__box--video">
+    <button class="modal__close" data-close-video aria-label="Закрыть видео">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="video"><div id="videoSlot"></div></div>
+    <p class="video__caption" id="videoTitle"></p>
+  </div>
+</div>
+
+<!-- ======================= МОДАЛЬНОЕ ОКНО ЗАПИСИ =======================
+     Форма без бэкенда: подставьте action/fetch на свою CRM или отправку в Telegram. -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal__bg" data-close-modal></div>
+  <div class="modal__box">
+    <button class="modal__close" data-close-modal aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <h2 class="modal__title" id="modalTitle">Оставить заявку</h2>
+    <p class="modal__text">Заполните — откроем WhatsApp с готовым сообщением, вам останется нажать «отправить». Перезвоним и подберём удобное время.</p>
+
+    <form class="form" id="bookForm" novalidate>
+      <div class="field">
+        <label for="fName">Как вас зовут</label>
+        <input id="fName" name="name" type="text" autocomplete="name" placeholder="Имя" required
+               aria-describedby="errName">
+        <p class="field__err" id="errName" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="fPhone">Телефон</label>
+        <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+               placeholder="+7 (___) ___-__-__" required
+               aria-describedby="errPhone">
+        <p class="field__err" id="errPhone" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="fService">Услуга</label>
+        <select id="fService" name="service">
+          <option>Консультация</option>
+          <option>RSL Beautylizer</option>
+          <option>FaceLift Beautylizer</option>
+          <option>LPG-массаж</option>
+          <option>Миостимуляция</option>
+          <option>Прессомассаж</option>
+          <option>Кавитация</option>
+          <option>Курс процедур</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fSalon">Салон</label>
+        <select id="fSalon" name="salon">
+          <option>Петергофское шоссе, 53</option>
+          <option>Проспект Героев, 33</option>
+          <option>Проспект Королёва, 61</option>
+        </select>
+      </div>
+      <!-- Ловушка для ботов: настоящий человек это поле не заполнит -->
+      <div class="hp" aria-hidden="true">
+        <label>Компания<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <!-- Согласие даётся активным действием: отметка не проставлена заранее,
+           без неё форма не отправляется. Это требование к сбору персональных данных. -->
+      <label class="consent" for="fAgree">
+        <input type="checkbox" id="fAgree" name="agree" required aria-describedby="errAgree">
+        <span>Согласен на обработку персональных данных в соответствии с
+          <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a></span>
+      </label>
+      <p class="field__err" id="errAgree" aria-live="polite"></p>
+      <button class="btn btn--primary" id="submitBtn" type="submit">
+        <span class="btn__spin" aria-hidden="true"></span>
+        <svg class="btn__wa" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.7-.1 1.3z"/></svg>
+        <span class="btn__label">Отправить в WhatsApp</span>
+      </button>
+
+      <p class="form__err" id="formErr" role="alert" hidden>
+        Не удалось отправить заявку. Позвоните нам —
+        <a href="tel:+79112979428">+7 (911) 297-94-28</a> — или напишите в
+        <a href="https://wa.clck.bar/79112979428" target="_blank" rel="noopener">WhatsApp</a>.
+      </p>
+
+
+      <div class="form__alt">
+        <p class="form__alt-label">Или выберите время сами</p>
+        <a href="https://dikidi.net/158455" target="_blank" rel="noopener">Петергофское шоссе, 53</a>
+        <a href="https://dikidi.net/584557" target="_blank" rel="noopener">Проспект Героев, 33</a>
+        <a href="https://dikidi.net/696805" target="_blank" rel="noopener">Проспект Королёва, 61</a>
+      </div>
+    </form>
+
+    <!-- Экран «спасибо» -->
+    <div class="form__ok" id="formOk" role="status" tabindex="-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+      <h3 class="modal__title">Открыли WhatsApp</h3>
+      <p class="modal__text">Сообщение уже набрано — отправьте его, и администратор ответит вам в чате.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   JS — всё на нативных API, без библиотек.
+     1. Мелочи: год в футере
+     2. Фон шапки при скролле + плавающая кнопка WhatsApp
+     3. Мобильное меню
+     4. Появление блоков при скролле (IntersectionObserver)
+     5. Анимация цифр в блоке статистики
+     6. Модальное окно записи (открытие с подстановкой услуги, фокус-ловушка)
+     7. Маска телефона
+     8. Отзывы звёздных клиентов и окно с роликом
+     9. Бизнес-мессенджер Jivo
+    10. Счётчики статистики и цели
+    11. Плавное раскрытие прайса
+    12. Проверка и отправка заявки
+   ========================================================================= */
+(function () {
+  'use strict';
+
+  /* =======================================================================
+     КУДА УХОДИТ ЗАЯВКА
+     -----------------------------------------------------------------------
+     Сейчас режим 'whatsapp': форма собирает данные и открывает чат с уже
+     набранным сообщением — клиенту остаётся нажать «отправить». Ни сервера,
+     ни бота для этого не нужно.
+
+     Если появится телеграм-бот, достаточно указать endpoint ниже — форма
+     сама переключится на отправку на сервер, а WhatsApp останется запасным
+     вариантом при сбое. Готовые обработчики лежат в репозитории
+     (telegram-proxy.php и telegram-worker.js), см. README.
+     ======================================================================= */
+
+  /* =======================================================================
+     НАСТРОЙКИ ОТПРАВКИ ЗАЯВОК
+     -----------------------------------------------------------------------
+     Вариант 1 (рекомендуется). endpoint — адрес вашего обработчика, который
+     сам передаёт заявку в Telegram. Готовые обработчики лежат в репозитории:
+       • telegram-proxy.php      — для обычного хостинга с PHP;
+       • telegram-worker.js      — для Cloudflare Workers.
+     Токен бота хранится на сервере и остаётся в секрете.
+
+     Вариант 2 (запасной). Если сервера нет совсем — заполните telegram.token
+     и telegram.chatId, и страница будет обращаться к API Telegram напрямую.
+     ВНИМАНИЕ: в этом режиме токен бота виден любому, кто откроет исходный код
+     страницы. Его смогут использовать для рассылки спама в ваш чат, и токен
+     придётся отзывать. Используйте только как временное решение.
+     ======================================================================= */
+  var CONFIG = {
+    metrika: '',                  // номер счётчика Яндекс Метрики; пусто — не подключаем
+    ga: '',                       // идентификатор Google Analytics 4 (G-XXXXXXX); пусто — не подключаем
+    jivoId: '',                   // идентификатор виджета Jivo; пусто — не подключаем
+    whatsapp: '79112979428',      // номер WhatsApp для режима без сервера
+    endpoint: '',                 // адрес обработчика; пусто — уходим в WhatsApp
+    telegram: {
+      token: '',                  // запасной режим: токен бота от @BotFather
+      chatId: ''                  // запасной режим: id чата или канала
+    },
+    timeout: 12000                // сколько ждём ответ сервера, мс
+  };
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 1. Мелочи ------------------------------------------------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+
+  /* ---------- 2. Шапка и плавающая кнопка ------------------------------- */
+  var header = document.getElementById('header');
+  var fab = document.getElementById('fab');
+  var onScroll = function () {
+    var y = window.scrollY;
+    header.classList.toggle('is-stuck', y > 24);
+    fab.classList.toggle('is-on', y > window.innerHeight * 0.6);
+    checkCounters();
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', checkCounters);
+
+  /* ---------- 3. Мобильное меню ----------------------------------------- */
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+
+  function setMenu(open) {
+    burger.setAttribute('aria-expanded', String(open));
+    menu.hidden = false;                       // hidden снимаем до анимации
+    requestAnimationFrame(function () {
+      menu.classList.toggle('is-open', open);
+    });
+    document.body.classList.toggle('is-locked', open);
+    if (!open) {
+      // прячем от скринридеров после завершения анимации
+      window.setTimeout(function () {
+        if (!menu.classList.contains('is-open')) menu.hidden = true;
+      }, 380);
+    }
+  }
+  burger.addEventListener('click', function () {
+    setMenu(burger.getAttribute('aria-expanded') !== 'true');
+  });
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setMenu(false);  // клик по пункту — закрыть
+  });
+
+  /* ---------- 4. Появление блоков при скролле ---------------------------- */
+  var io = null;
+  if (!reduced && 'IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);            // анимируем один раз
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+  }
+
+  /* Ставит блок в очередь на появление. Без наблюдателя (или при отключённой
+     анимации) показываем сразу. Через неё же проходят блоки, которые скрипт
+     создаёт позже — иначе они остались бы прозрачными навсегда. */
+  function watchReveal(el) {
+    if (io) io.observe(el); else el.classList.add('is-in');
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.reveal'), watchReveal);
+
+  /* ---------- 5. Счётчики ------------------------------------------------ */
+  var counters = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+
+  function finalValue(el) {
+    return parseInt(el.dataset.count, 10).toLocaleString('ru-RU');
+  }
+
+  function runCounter(el) {
+    var target = parseInt(el.dataset.count, 10);
+    if (reduced) { el.textContent = finalValue(el); return; }
+    var start = performance.now(), dur = 1400;
+    (function step(now) {
+      var p = Math.min((now - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);      // easeOutCubic
+      el.textContent = Math.round(target * eased).toLocaleString('ru-RU');
+      if (p < 1) requestAnimationFrame(step);
+    })(start);
+  }
+
+  // Запускаем, когда блок появился в видимой части экрана;
+  // если его «проскочили» (якорь, восстановление позиции) — сразу ставим итог.
+  function checkCounters() {
+    if (!counters.length) return;
+    counters = counters.filter(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.bottom <= 0) { el.textContent = finalValue(el); return false; }
+      if (r.top < window.innerHeight * 0.9) { runCounter(el); return false; }
+      return true;
+    });
+  }
+
+  onScroll();   // первичная синхронизация шапки, кнопки и счётчиков
+
+  /* ---------- 6. Модальное окно ------------------------------------------ */
+  var modal = document.getElementById('modal');
+  var form = document.getElementById('bookForm');
+  var serviceSelect = document.getElementById('fService');
+  var lastFocused = null;
+
+  function openModal(service) {
+    lastFocused = document.activeElement;
+    modal.hidden = false;
+    modal.classList.remove('is-done');
+    requestAnimationFrame(function () { modal.classList.add('is-open'); });
+    document.body.classList.add('is-locked');
+
+    // Подставляем услугу из кнопки, по которой кликнули
+    if (service) {
+      Array.prototype.forEach.call(serviceSelect.options, function (o) {
+        if (o.value === service || o.textContent === service) serviceSelect.value = o.value;
+      });
+    }
+    openedAt = Date.now();
+    window.setTimeout(function () { document.getElementById('fName').focus(); }, 260);
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    document.body.classList.remove('is-locked');
+    window.setTimeout(function () {
+      modal.hidden = true;
+      modal.classList.remove('is-done');
+      form.reset();
+      formErr.hidden = true;
+      clearError(nameField);
+      clearError(phoneField);
+    }, 320);
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.addEventListener('click', function (e) {
+    var opener = e.target.closest('[data-open-modal]');
+    if (opener) {
+      e.preventDefault();
+      if (menu.classList.contains('is-open')) setMenu(false);
+      openModal(opener.dataset.service);
+      return;
+    }
+    if (e.target.closest('[data-close-modal]')) closeModal();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (modal.classList.contains('is-open')) closeModal();
+      else if (menu.classList.contains('is-open')) setMenu(false);
+      return;
+    }
+    // Фокус-ловушка внутри модалки
+    if (e.key === 'Tab' && modal.classList.contains('is-open')) {
+      var f = modal.querySelectorAll('button, input, select, a[href]');
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  /* ---------- 7. Маска телефона ------------------------------------------
+     Формат +7 (999) 123-45-67. Обрабатывает ввод, вставку из буфера,
+     8 в начале, Backspace по разделителям и правку в середине строки. */
+  var phoneField = form.elements.phone;
+  var nameField = form.elements.name;
+
+  function onlyDigits(v) { return (v || '').replace(/\D/g, ''); }
+
+  // Приводим к российскому номеру: 8… и 9… превращаем в 7…
+  function normalizePhone(d) {
+    if (!d) return '';
+    if (d[0] === '8') d = '7' + d.slice(1);
+    else if (d[0] !== '7') d = '7' + d;
+    return d.slice(0, 11);
+  }
+
+  function formatPhone(d) {
+    if (!d) return '';
+    var out = '+7';
+    if (d.length > 1) out += ' (' + d.slice(1, 4);
+    if (d.length >= 5) out += ') ' + d.slice(4, 7);
+    if (d.length >= 8) out += '-' + d.slice(7, 9);
+    if (d.length >= 10) out += '-' + d.slice(9, 11);
+    return out;
+  }
+
+  // Позиция каретки после n-й цифры отформатированной строки
+  function caretAfter(str, n) {
+    var seen = 0;
+    for (var i = 0; i < str.length; i++) {
+      if (/\d/.test(str[i]) && ++seen === n) return i + 1;
+    }
+    return str.length;
+  }
+
+  function applyMask(digitsBeforeCaret) {
+    var raw = onlyDigits(phoneField.value);
+    var norm = normalizePhone(raw);
+    var lead = norm.length - raw.length;          // 1, если добавили «7» в начало
+    phoneField.value = formatPhone(norm);
+    var target = Math.max(1, digitsBeforeCaret + (lead > 0 ? lead : 0));
+    var pos = caretAfter(phoneField.value, target);
+    try { phoneField.setSelectionRange(pos, pos); } catch (err) { /* поле вне фокуса */ }
+  }
+
+  phoneField.addEventListener('input', function () {
+    var before = onlyDigits(phoneField.value.slice(0, phoneField.selectionStart)).length;
+    applyMask(before);
+    clearError(phoneField);
+  });
+
+  // Backspace на разделителе должен удалять ближайшую цифру слева, а не «залипать»
+  phoneField.addEventListener('keydown', function (e) {
+    if (e.key !== 'Backspace') return;
+    var v = phoneField.value, pos = phoneField.selectionStart;
+    if (pos === 0 || pos !== phoneField.selectionEnd || /\d/.test(v[pos - 1])) return;
+    e.preventDefault();
+    var i = pos - 1;
+    while (i >= 0 && !/\d/.test(v[i])) i--;
+    if (i < 0) return;
+    var kept = onlyDigits(v.slice(0, i));
+    phoneField.value = formatPhone(normalizePhone(kept + onlyDigits(v.slice(i + 1))));
+    var p = caretAfter(phoneField.value, Math.max(1, kept.length));
+    phoneField.setSelectionRange(p, p);
+  });
+
+  // По фокусу подставляем +7, чтобы не гадать, с чего начинать
+  phoneField.addEventListener('focus', function () {
+    if (!phoneField.value) {
+      phoneField.value = '+7 ';
+      var p = phoneField.value.length;
+      phoneField.setSelectionRange(p, p);
+    }
+  });
+  phoneField.addEventListener('blur', function () {
+    if (onlyDigits(phoneField.value).length <= 1) phoneField.value = '';
+  });
+
+  /* ---------- 8. Отзывы звёздных клиентов ---------------------------------
+     ЗАМЕНИТЬ: список ниже. Для каждого отзыва нужны три вещи:
+       id   — код ролика из ссылки YouTube. Из https://youtu.be/dQw4w9WgXcQ
+              или https://www.youtube.com/watch?v=dQw4w9WgXcQ берём dQw4w9WgXcQ;
+       name — имя;
+       role — чем известна (необязательно, можно пустую строку).
+     Пока список пуст, секция удаляется со страницы целиком.
+
+     Обложки берём из YouTube автоматически. Если пришлёте свои фотографии,
+     заменим на них — тогда добавьте в запись поле cover: 'assets/stars/имя.jpg'. */
+  var STARS = [
+    { id: '8-Tvqxm-Fns', name: 'Анна Семенович', role: '' },
+    { id: 'HwhOBn7mxfU', name: 'Алена Водонаева', role: '' },
+    { id: 'XUIQFmXC5Ac', name: 'Татьяна Высоцкая', role: '' },
+    { id: 'y-hM8BXdOWA', name: 'Элина Воронцова', role: '' },
+    { id: 'TBnDbbZPiqU', name: 'Софья Кравц', role: '' },
+    { id: 'uhGtWWk9H_o', name: 'Ксения Бурда', role: '' },
+    { id: 'rAx3T975gqc', name: 'Даша Чокла', role: '' },
+    { id: '3uD1Dw2Hlc4', name: 'Алина Шпак', role: '' },
+  ];
+
+  var starsSection = document.getElementById('stars');
+  var starsGrid = document.getElementById('starsGrid');
+  var videoModal = document.getElementById('videoModal');
+  var videoSlot = document.getElementById('videoSlot');
+  var videoTitle = document.getElementById('videoTitle');
+  var videoOpener = null;
+
+  if (!STARS.length) {
+    if (starsSection) starsSection.remove();          // пустого блока на странице не будет
+    if (videoModal) videoModal.remove();
+  } else {
+    starsSection.hidden = false;
+
+    STARS.forEach(function (star, i) {
+      var cover = star.cover || 'https://i.ytimg.com/vi/' + star.id + '/hqdefault.jpg';
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'star reveal';
+      if (i) card.setAttribute('data-d', String(Math.min(i, 4)));
+      card.setAttribute('aria-label', 'Смотреть видеоотзыв: ' + star.name);
+      card.dataset.video = star.id;
+      card.dataset.name = star.name;
+      card.innerHTML =
+        '<span class="star__thumb">' +
+          '<img src="' + cover + '" alt="" loading="lazy" decoding="async" width="480" height="270">' +
+          '<span class="star__play"><span>' +
+            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>' +
+          '</span></span>' +
+        '</span>' +
+        '<span class="star__name">' + star.name + '</span>' +
+        (star.role ? '<span class="star__role">' + star.role + '</span>' : '');
+      var img = card.querySelector('img');
+      img.addEventListener('error', function () {
+        img.parentNode.classList.add('is-broken');
+      });
+      starsGrid.appendChild(card);
+      watchReveal(card);            // карточку создали после обхода .reveal
+    });
+
+    function openVideo(id, name, opener) {
+      videoOpener = opener || null;
+      videoTitle.textContent = name || '';
+      // Домен без cookie: YouTube не ставит их до начала просмотра
+      videoSlot.innerHTML =
+        '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
+        '?autoplay=1&rel=0&modestbranding=1" title="' + (name || 'Видеоотзыв') + '" ' +
+        'allow="accelerometer; autoplay; encrypted-media; picture-in-picture" ' +
+        'allowfullscreen></iframe>';
+      videoModal.hidden = false;
+      requestAnimationFrame(function () { videoModal.classList.add('is-open'); });
+      document.body.classList.add('is-locked');
+      videoModal.querySelector('.modal__close').focus();
+    }
+
+    function closeVideo() {
+      videoModal.classList.remove('is-open');
+      document.body.classList.remove('is-locked');
+      videoSlot.innerHTML = '';        // выгружаем плеер, иначе звук продолжит играть
+      window.setTimeout(function () { videoModal.hidden = true; }, 320);
+      if (videoOpener) videoOpener.focus();
+    }
+
+    starsGrid.addEventListener('click', function (e) {
+      var card = e.target.closest('.star');
+      if (card) openVideo(card.dataset.video, card.dataset.name, card);
+    });
+    videoModal.addEventListener('click', function (e) {
+      if (e.target.closest('[data-close-video]')) closeVideo();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && videoModal.classList.contains('is-open')) closeVideo();
+    });
+  }
+
+  /* ---------- 9. Бизнес-мессенджер Jivo -----------------------------------
+     Виджет весит несколько сотен килобайт и тянет за собой соединения.
+     Если грузить его сразу, страдает скорость первого экрана — а у нас
+     почти все посетители с телефонов. Поэтому подключаем отложенно: при
+     первом действии посетителя либо через 8 секунд, что случится раньше.
+     На поведение виджета это не влияет, он всё равно появляется до того,
+     как человек до него доберётся.
+
+     ЗАМЕНИТЬ: идентификатор виджета в CONFIG.jivoId (см. README). */
+  if (CONFIG.jivoId) {
+    var jivoStarted = false;
+    var jivoEvents = ['pointerdown', 'touchstart', 'keydown', 'scroll'];
+
+    function loadJivo() {
+      if (jivoStarted) return;
+      jivoStarted = true;
+      jivoEvents.forEach(function (ev) {
+        window.removeEventListener(ev, loadJivo, { passive: true });
+      });
+      var tag = document.createElement('script');
+      tag.src = 'https://code.jivo.ru/widget/' + CONFIG.jivoId;
+      tag.async = true;
+      document.body.appendChild(tag);
+      // Кнопка Jivo встаёт в тот же угол, что и наша кнопка WhatsApp,
+      // поэтому свою убираем — иначе они наезжают друг на друга.
+      if (fab) fab.style.display = 'none';
+    }
+
+    jivoEvents.forEach(function (ev) {
+      window.addEventListener(ev, loadJivo, { passive: true, once: true });
+    });
+    window.setTimeout(loadJivo, 8000);
+  }
+
+  /* ---------- 10. Счётчики статистики --------------------------------------
+     Яндекс Метрика и Google Analytics подключаются только если в CONFIG выше
+     указаны номера. Оба тега грузим после события load: они не должны
+     соперничать за канал с первым экраном, а до конца загрузки уйти со
+     страницы посетитель практически не успевает.
+
+     ЗАМЕНИТЬ: CONFIG.metrika — номер счётчика из Метрики,
+               CONFIG.ga      — идентификатор ресурса GA4 вида G-XXXXXXX.
+     Политика конфиденциальности (п. 5.3) оба сервиса уже называет. */
+  function loadCounters() {
+    if (CONFIG.metrika) {
+      // Очередь вызовов и метка времени: их читает tag.js, когда загрузится
+      window.ym = window.ym || function () {
+        (window.ym.a = window.ym.a || []).push(arguments);
+      };
+      window.ym.l = 1 * new Date();
+      var m = document.createElement('script');
+      m.src = 'https://mc.yandex.ru/metrika/tag.js';
+      m.async = true;
+      document.head.appendChild(m);
+      window.ym(CONFIG.metrika, 'init', {
+        clickmap: true,             // карта кликов
+        trackLinks: true,           // переходы по внешним ссылкам
+        accurateTrackBounce: true,  // отказом считается уход раньше 15 секунд
+        webvisor: true              // запись действий на странице
+      });
+    }
+
+    if (CONFIG.ga) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      var g = document.createElement('script');
+      g.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(CONFIG.ga);
+      g.async = true;
+      document.head.appendChild(g);
+      window.gtag('js', new Date());
+      window.gtag('config', CONFIG.ga);
+    }
+  }
+
+  if (CONFIG.metrika || CONFIG.ga) {
+    if (document.readyState === 'complete') window.setTimeout(loadCounters, 0);
+    else window.addEventListener('load', function () { window.setTimeout(loadCounters, 0); });
+  }
+
+  /* Цель — событие в отчётах: заявка, звонок, переход в чат или в Dikidi.
+     Пока счётчиков нет, вызов просто ничего не делает. */
+  function goal(name) {
+    if (CONFIG.metrika && window.ym) window.ym(CONFIG.metrika, 'reachGoal', name);
+    if (CONFIG.ga && window.gtag) window.gtag('event', name);
+  }
+
+  /* У каждого салона своя страница записи в Dikidi, поэтому считаем переходы
+     по филиалам: так видно, какой салон выбирают с сайта. Общая цель booking
+     остаётся — по ней смотрим суммарные переходы на онлайн-запись.
+     ЗАМЕНИТЬ: номера страниц, если в Dikidi поменяются адреса филиалов. */
+  var DIKIDI = {
+    '158455': 'petergofskoe',   // Петергофское шоссе, 53
+    '584557': 'geroev',         // Проспект Героев, 33
+    '696805': 'koroleva'        // Проспект Королёва, 61
+  };
+
+  /* Один обработчик на всю страницу: разбираем адрес ссылки и понимаем,
+     какое действие совершил посетитель. Отдельные обработчики на каждую
+     кнопку не нужны — ссылок с одним и тем же адресом на странице много. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('tel:') === 0) goal('call');
+    else if (/wa\.me|wa\.clck\.bar|whatsapp/.test(href)) goal('whatsapp');
+    else if (href.indexOf('t.me') > -1) goal('telegram');
+    else if (href.indexOf('dikidi') > -1) {
+      goal('booking');
+      var salon = DIKIDI[(href.match(/dikidi\.net\/(\d+)/) || [])[1]];
+      if (salon) goal('booking_' + salon);
+    }
+    else if (href.indexOf('yandex.ru/maps') > -1) goal('maps');
+  });
+
+  /* ---------- 11. Плавное раскрытие прайса --------------------------------
+     Родной <details> открывается рывком. Анимируем высоту и внутренние
+     отступы: открытие чуть медленнее закрытия — так ощущается естественнее.
+     Без JS и при отключённых анимациях остаётся обычное поведение. */
+  var EASING = 'cubic-bezier(.2,.7,.25,1)';
+
+  Array.prototype.forEach.call(document.querySelectorAll('.price, .letter__more'), function (block) {
+    var body = block.querySelector('.price__body, .letter__body');
+    var summary = block.querySelector('summary');
+    if (!body || !summary || !body.animate) return;
+    var running = null;
+
+    function play(opening) {
+      var cs = window.getComputedStyle(body);
+      var pt = cs.paddingTop, pb = cs.paddingBottom;
+      // scrollHeight уже включает внутренние отступы, второй раз их не добавляем:
+      // иначе блок в конце анимации «отскакивает» на высоту отступов
+      var full = body.scrollHeight + 'px';
+      var from = opening ? ['0px', '0px', '0px', 0] : [full, pt, pb, 1];
+      var to   = opening ? [full, pt, pb, 1] : ['0px', '0px', '0px', 0];
+      return body.animate(
+        {
+          height:        [from[0], to[0]],
+          paddingTop:    [from[1], to[1]],
+          paddingBottom: [from[2], to[2]],
+          opacity:       [from[3], to[3]]
+        },
+        { duration: opening ? 300 : 240, easing: EASING }
+      );
+    }
+
+    summary.addEventListener('click', function (e) {
+      if (reduced) return;                     // системная настройка «меньше движения»
+      e.preventDefault();
+      if (running) running.cancel();
+
+      if (!block.open) {
+        block.open = true;                     // сначала показать, потом измерить высоту
+        block.classList.remove('is-closing');
+        running = play(true);
+      } else {
+        block.classList.add('is-closing');      // стрелка поворачивается сразу
+        running = play(false);
+        running.onfinish = function () {
+          block.open = false;
+          block.classList.remove('is-closing');
+        };
+      }
+      running.addEventListener('finish', function () { running = null; });
+    });
+  });
+
+  /* ---------- 12. Проверка и отправка заявки ----------------------------- */
+  var submitBtn = document.getElementById('submitBtn');
+  var formErr = document.getElementById('formErr');
+  var openedAt = 0;                 // когда открыли форму — быстрая отправка = бот
+
+  var agreeField = form.elements.agree;
+  var errBox = {};                  // поле → куда писать сообщение об ошибке
+  errBox[nameField.name] = 'errName';
+  errBox[phoneField.name] = 'errPhone';
+  errBox[agreeField.name] = 'errAgree';
+
+  function setError(field, msg) {
+    // у отметки подсвечиваем подпись целиком, сама коробочка слишком мелкая
+    (field === agreeField ? field.closest('.consent') : field).classList.add('is-invalid');
+    var box = document.getElementById(errBox[field.name]);
+    if (box) box.textContent = msg;
+  }
+  function clearError(field) {
+    (field === agreeField ? field.closest('.consent') : field).classList.remove('is-invalid');
+    var box = document.getElementById(errBox[field.name]);
+    if (box) box.textContent = '';
+  }
+  nameField.addEventListener('input', function () { clearError(nameField); });
+  agreeField.addEventListener('change', function () { clearError(agreeField); });
+
+  function validate() {
+    var ok = true;
+    if (nameField.value.trim().length < 2) {
+      setError(nameField, 'Напишите, как к вам обращаться'); ok = false;
+    }
+    if (onlyDigits(phoneField.value).length !== 11) {
+      setError(phoneField, 'Введите номер полностью'); ok = false;
+    }
+    if (!agreeField.checked) {
+      setError(agreeField, 'Без согласия мы не можем принять заявку'); ok = false;
+    }
+    if (!ok) {
+      if (nameField.classList.contains('is-invalid')) nameField.focus();
+      else if (phoneField.classList.contains('is-invalid')) phoneField.focus();
+      else agreeField.focus();
+    }
+    return ok;
+  }
+
+  // Сообщение, которое клиент отправляет сам из WhatsApp
+  function clientText(data) {
+    return [
+      'Здравствуйте! Хочу записаться.',
+      '',
+      'Имя: ' + data.name,
+      'Телефон: ' + data.phone,
+      'Услуга: ' + data.service,
+      'Салон: ' + data.salon
+    ].join('\n');
+  }
+
+  // Текст заявки для сервера или бота
+  function leadText(data) {
+    return [
+      '🔔 Новая заявка с сайта',
+      '',
+      'Имя: ' + data.name,
+      'Телефон: ' + data.phone,
+      'Услуга: ' + data.service,
+      'Салон: ' + data.salon,
+      '',
+      'Страница: ' + data.page,
+      'Время: ' + data.time
+    ].join('\n');
+  }
+
+  function post(url, body) {
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = window.setTimeout(function () { if (ctrl) ctrl.abort(); }, CONFIG.timeout);
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (r) {
+      window.clearTimeout(timer);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r;
+    }, function (err) {
+      window.clearTimeout(timer);
+      throw err;
+    });
+  }
+
+  function send(data) {
+    if (CONFIG.endpoint) return post(CONFIG.endpoint, data);
+    if (CONFIG.telegram.token && CONFIG.telegram.chatId) {
+      return post('https://api.telegram.org/bot' + CONFIG.telegram.token + '/sendMessage', {
+        chat_id: CONFIG.telegram.chatId,
+        text: leadText(data),
+        disable_web_page_preview: true
+      });
+    }
+    return Promise.reject(new Error('Отправка не настроена: заполните CONFIG'));
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (submitBtn.classList.contains('is-loading')) return;   // защита от двойного клика
+    if (!validate()) return;
+
+    // Боты заполняют скрытое поле и отправляют форму мгновенно.
+    // Им показываем обычный экран «спасибо», но никуда ничего не шлём.
+    var isBot = form.elements.company.value !== '' || (Date.now() - openedAt) < 1500;
+
+    var data = {
+      name: nameField.value.trim(),
+      phone: phoneField.value,
+      service: form.elements.service.value,
+      salon: form.elements.salon.value,
+      page: location.href,
+      time: new Date().toLocaleString('ru-RU'),
+      text: ''
+    };
+    data.text = leadText(data);       // готовая строка для Telegram
+
+    if (isBot) { modal.classList.add('is-done'); return; }
+
+    // Без сервера: открываем WhatsApp с готовым сообщением.
+    // window.open вызываем синхронно, внутри обработчика нажатия, иначе
+    // браузер посчитает это всплывающим окном и заблокирует.
+    if (!CONFIG.endpoint && !CONFIG.telegram.token) {
+      window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' +
+                  encodeURIComponent(clientText(data)), '_blank', 'noopener');
+      goal('lead');
+      modal.classList.add('is-done');
+      document.getElementById('formOk').focus();
+      return;
+    }
+
+    formErr.hidden = true;
+    submitBtn.classList.add('is-loading');
+    submitBtn.setAttribute('aria-busy', 'true');
+
+    send(data).then(function () {
+      goal('lead');
+      modal.classList.add('is-done');
+      document.getElementById('formOk').focus();
+    }).catch(function (err) {
+      formErr.hidden = false;
+      if (window.console) console.error('Заявка не отправлена:', err);
+    }).then(function () {
+      submitBtn.classList.remove('is-loading');
+      submitBtn.removeAttribute('aria-busy');
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

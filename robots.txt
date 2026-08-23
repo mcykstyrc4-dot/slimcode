@@ -1,0 +1,10 @@
+# Slim Code Lab — правила обхода для поисковых роботов.
+# ЗАМЕНИТЬ: домен в директиве Sitemap, если он отличается.
+
+User-agent: *
+Allow: /
+
+# Служебные параметры не должны плодить дубли в индексе
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&gclid
+
+Sitemap: https://slimcodelab.ru/sitemap.xml
