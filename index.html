@@ -2360,6 +2360,16 @@ section[id]{scroll-margin-top:80px}
     if (CONFIG.ga && window.gtag) window.gtag('event', name);
   }
 
+  /* У каждого салона своя страница записи в Dikidi, поэтому считаем переходы
+     по филиалам: так видно, какой салон выбирают с сайта. Общая цель booking
+     остаётся — по ней смотрим суммарные переходы на онлайн-запись.
+     ЗАМЕНИТЬ: номера страниц, если в Dikidi поменяются адреса филиалов. */
+  var DIKIDI = {
+    '158455': 'petergofskoe',   // Петергофское шоссе, 53
+    '584557': 'geroev',         // Проспект Героев, 33
+    '696805': 'koroleva'        // Проспект Королёва, 61
+  };
+
   /* Один обработчик на всю страницу: разбираем адрес ссылки и понимаем,
      какое действие совершил посетитель. Отдельные обработчики на каждую
      кнопку не нужны — ссылок с одним и тем же адресом на странице много. */
@@ -2370,7 +2380,11 @@ section[id]{scroll-margin-top:80px}
     if (href.indexOf('tel:') === 0) goal('call');
     else if (/wa\.me|wa\.clck\.bar|whatsapp/.test(href)) goal('whatsapp');
     else if (href.indexOf('t.me') > -1) goal('telegram');
-    else if (href.indexOf('dikidi') > -1) goal('booking');
+    else if (href.indexOf('dikidi') > -1) {
+      goal('booking');
+      var salon = DIKIDI[(href.match(/dikidi\.net\/(\d+)/) || [])[1]];
+      if (salon) goal('booking_' + salon);
+    }
     else if (href.indexOf('yandex.ru/maps') > -1) goal('maps');
   });
 
